@@ -1,20 +1,17 @@
-import Image from "next/image";
-import Link from "next/link";
-import { ArrowRight } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import Image from 'next/image';
+import Link from 'next/link';
+import { ArrowRight } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { PlaceHolderImages } from '@/lib/placeholder-images';
 
 export function Hero() {
-  const heroImage = {
-    imageUrl: "https://storage.googleapis.com/gemini-studio-assets/project-images%2F4a070c79-a782-4148-9f17-217983654521.jpeg",
-    description: "A cinematic, ultra-realistic 4K render of the Unik AI Agent platform dashboard displayed on a laptop screen. The screen shows advanced analytics, voice assistant controls, and live chat modules with glowing neon accents in electric purple and deep blue. The laptop is placed in a dark, sophisticated environment with dramatic lighting and ambient reflections, suggesting a futuristic enterprise setting.",
-    imageHint: "laptop dashboard"
-  };
+  const heroImage = PlaceHolderImages.find((p) => p.id === 'hero-phone');
 
   return (
     <section
       id="home"
       className="relative min-h-screen flex items-center justify-center bg-cover bg-center"
-      style={{ backgroundImage: "url('/background-hero.jpg')"}}
+      style={{ backgroundImage: "url('/background-hero.jpg')" }}
     >
       <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" />
       <div className="relative mx-auto max-w-6xl w-full px-4">
@@ -24,16 +21,23 @@ export function Hero() {
               The Ultimate AI Agent Platform for Your Business
             </h1>
             <p className="mt-4 text-lg text-white/80">
-              Integrate a powerful Chatbot and Voice Agent in minutes. Boost conversions, automate support, and manage costs with predictable pricing.
+              Integrate a powerful Chatbot and Voice Agent in minutes. Boost
+              conversions, automate support, and manage costs with predictable
+              pricing.
             </p>
             <div className="mt-6 flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
-               <Button asChild size="lg">
+              <Button asChild size="lg">
                 <Link href="/dashboard">
                   Get Started for Free
                   <ArrowRight className="ml-2" />
                 </Link>
               </Button>
-              <Button asChild variant="outline" size="lg" className="border-primary-foreground/20 text-white hover:bg-white/10 hover:text-white">
+              <Button
+                asChild
+                variant="outline"
+                size="lg"
+                className="border-primary-foreground/20 text-white hover:bg-white/10 hover:text-white"
+              >
                 <Link href="#pricing">See Pricing</Link>
               </Button>
             </div>
