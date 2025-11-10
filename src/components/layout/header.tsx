@@ -3,8 +3,9 @@ import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Menu } from "lucide-react";
 import { Logo } from "@/components/logo";
+import { cn } from "@/lib/utils";
 
-export function Header() {
+export function Header({ className }: { className?: string }) {
   const navLinks = [
     { href: "#features", label: "Features" },
     { href: "#pricing", label: "Pricing" },
@@ -12,16 +13,28 @@ export function Header() {
   ];
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <div className="mx-auto flex h-14 max-w-6xl items-center justify-between px-4">
+    <header className={cn("absolute top-0 z-50 w-full", className)}>
+      <div className="mx-auto flex h-20 max-w-6xl items-center justify-between px-4">
         <div className="flex items-center">
           <Link href="/" className="flex items-center space-x-2">
-            <Logo className="h-6 w-6 text-primary" />
-            <span className="hidden font-bold sm:inline-block font-headline">
+            <Logo className="h-6 w-6 text-primary-foreground" />
+            <span className="hidden font-bold sm:inline-block font-headline text-primary-foreground">
               Unik AI Agent
             </span>
           </Link>
         </div>
+
+        <nav className="hidden items-center justify-center gap-6 text-sm md:flex">
+          {navLinks.map((link) => (
+            <Link
+              key={link.href}
+              href={link.href}
+              className="transition-colors hover:text-foreground/80 text-foreground/60"
+            >
+              {link.label}
+            </Link>
+          ))}
+        </nav>
 
         {/* Mobile Nav */}
         <div className="flex items-center gap-4 md:hidden">
@@ -50,20 +63,8 @@ export function Header() {
           </Sheet>
         </div>
 
-        <nav className="hidden items-center gap-6 text-sm md:flex">
-            {navLinks.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className="transition-colors hover:text-foreground/80 text-foreground/60"
-              >
-                {link.label}
-              </Link>
-            ))}
-        </nav>
-
         <div className="hidden items-center space-x-2 md:flex">
-          <Button variant="ghost" asChild>
+          <Button variant="link" asChild className="text-primary-foreground">
             <Link href="/dashboard">Log In</Link>
           </Button>
           <Button asChild>

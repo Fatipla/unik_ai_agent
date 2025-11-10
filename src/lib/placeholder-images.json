@@ -3,13 +3,13 @@
     {
       "id": "hero-dashboard",
       "description": "A cinematic, ultra-realistic 4K render of the Unik AI Agent platform dashboard displayed on a laptop screen. The screen shows advanced analytics, voice assistant controls, and live chat modules with glowing neon accents in electric purple and deep blue. The laptop is placed in a dark, sophisticated environment with dramatic lighting and ambient reflections, suggesting a futuristic enterprise setting.",
-      "imageUrl": "https://images.unsplash.com/photo-1556155092-490a1ba16284?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxmdXR1cmlzdGljJTIwZGFzaGJvYXJkfGVufDB8fHx8MTcyNDQzMDY4OHww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageUrl": "https://storage.googleapis.com/gemini-studio-assets/project-images%2F4a070c79-a782-4148-9f17-217983654521.jpeg",
       "imageHint": "laptop dashboard"
     },
     {
       "id": "hero-phone",
       "description": "A hand holding a modern smartphone with a screen displaying various app icons, including Gemini, Claude, and other AI assistants.",
-      "imageUrl": "https://images.unsplash.com/photo-1718232231496-3347eb6113a3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxBSSUyMGFwcCUyMHBob25lfGVufDB8fHx8MTc2MzExNTQzNnww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageUrl": "https://storage.googleapis.com/gemini-studio-assets/project-images%2Fbf162832-4775-470a-861f-134266187884.jpeg",
       "imageHint": "AI app phone"
     },
     {
@@ -41,6 +41,12 @@
       "description": "User avatar for the dashboard",
       "imageUrl": "https://images.unsplash.com/photo-1535643302794-19c3804b874b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxMHx8cGVyc29uJTIwcG9ydHJhaXR8ZW58MHx8fHwxNzYyODA4MDUzfDA&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "person portrait"
+    },
+    {
+      "id": "hero-dashboard-v2",
+      "description": "Cinematic 4K render of a SaaS platform dashboard on a glass screen, with purple and blue glowing UI elements. Positioned on the right side of a dark hero section with a blurred futuristic city skyline.",
+      "imageUrl": "https://storage.googleapis.com/gemini-studio-assets/project-images%2F2494958f-3151-409e-9764-28490a07c91f.jpeg",
+      "imageHint": "futuristic dashboard"
     }
   ]
 }
