@@ -8,7 +8,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { CheckCircle } from "lucide-react";
+import { CircleCheckBig } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
 
 const plans = [
@@ -89,7 +89,7 @@ export default function BillingPage() {
                <ul className="space-y-4">
                  {plan.features.map((feature) => (
                    <li key={feature} className="flex items-center gap-2">
-                     <CheckCircle className="h-5 w-5 text-accent" />
+                     <CircleCheckBig className="h-5 w-5 text-accent" />
                      <span className="text-muted-foreground">{feature}</span>
                    </li>
                  ))}
