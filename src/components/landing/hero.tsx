@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/button';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
 
 export function Hero() {
-  const heroImage = PlaceHolderImages.find((p) => p.id === 'hero-phone');
+  const heroImage = PlaceHolderImages.find((p) => p.id === 'hero-dashboard');
 
   return (
     <section
@@ -13,7 +13,7 @@ export function Hero() {
       className="relative min-h-screen flex items-center justify-center bg-cover bg-center"
       style={{ backgroundImage: "url('/background-hero.jpg')" }}
     >
-      <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" />
+      <div className="absolute inset-0 bg-black/60" />
       <div className="relative mx-auto max-w-6xl w-full px-4">
         <div className="grid md:grid-cols-2 items-center gap-10">
           <div className="text-center md:text-left">
@@ -36,7 +36,7 @@ export function Hero() {
                 asChild
                 variant="outline"
                 size="lg"
-                className="border-primary-foreground/20 text-white hover:bg-white/10 hover:text-white"
+                className="border-primary-foreground/20 text-white bg-transparent hover:bg-white/10 hover:text-white"
               >
                 <Link href="#pricing">See Pricing</Link>
               </Button>
@@ -50,7 +50,7 @@ export function Hero() {
                 alt={heroImage.description}
                 width={600}
                 height={550}
-                className="w-full max-w-[600px]"
+                className="w-full max-w-[600px] object-contain"
                 data-ai-hint={heroImage.imageHint}
                 priority
               />
