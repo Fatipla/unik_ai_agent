@@ -2,7 +2,7 @@
   "placeholderImages": [
     {
       "id": "hero-dashboard",
-      "description": "A cinematic, ultra-realistic 4K render of a cutting-edge SaaS platform dashboard displayed on a laptop screen. The screen shows advanced analytics, voice assistant controls, and live chat modules with glowing neon accents in electric purple and deep blue. The laptop is placed in a dark, sophisticated environment with dramatic lighting and ambient reflections, suggesting a futuristic enterprise setting.",
+      "description": "A cinematic, ultra-realistic 4K render of the Unik AI Agent platform dashboard displayed on a laptop screen. The screen shows advanced analytics, voice assistant controls, and live chat modules with glowing neon accents in electric purple and deep blue. The laptop is placed in a dark, sophisticated environment with dramatic lighting and ambient reflections, suggesting a futuristic enterprise setting.",
       "imageUrl": "https://images.unsplash.com/photo-1556155092-490a1ba16284?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxmdXR1cmlzdGljJTIwZGFzaGJvYXJkfGVufDB8fHx8MTcyNDQzMDY4OHww&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "laptop dashboard"
     },
