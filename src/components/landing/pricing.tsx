@@ -76,7 +76,7 @@ export function Pricing() {
                 <ul className="space-y-4">
                   {plan.features.map((feature) => (
                     <li key={feature} className="flex items-center gap-2">
-                      <CircleCheckBig className="h-5 w-5 text-accent-foreground" />
+                      <CircleCheckBig className="h-5 w-5 text-primary" />
                       <span className="text-muted-foreground">{feature}</span>
                     </li>
                   ))}
