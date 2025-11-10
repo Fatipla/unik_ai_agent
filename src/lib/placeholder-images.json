@@ -2,9 +2,9 @@
   "placeholderImages": [
     {
       "id": "hero-phone",
-      "description": "Realistic photo of a hand holding a smartphone with a generic UI, set against a softly blurred background with studio lighting.",
-      "imageUrl": "https://images.unsplash.com/photo-1554941426-5eb34a5334d7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHxwaG9uZSUyMGhhbmR8ZW58MHx8fHwxNzYyODU0MDUzfDA&ixlib=rb-4.1.0&q=80&w=1080",
-      "imageHint": "phone hand"
+      "description": "A hand holding a modern smartphone with a screen displaying various app icons, including Gemini, Claude, and other AI assistants.",
+      "imageUrl": "https://images.unsplash.com/photo-1718232231496-3347eb6113a3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxBSSUyMGFwcCUyMHBob25lfGVufDB8fHx8MTc2MzExNTQzNnww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "AI app phone"
     },
     {
       "id": "chatbot-feature",
