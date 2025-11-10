@@ -17,7 +17,8 @@ export function Header({ className }: { className?: string }) {
       <div className="mx-auto flex h-20 max-w-6xl items-center justify-between px-4">
         <div className="flex items-center">
           <Link href="/" className="flex items-center space-x-2">
-            <span className="font-bold sm:inline-block font-headline text-primary-foreground">
+             <Logo className="h-6 w-6 text-primary-foreground" />
+            <span className="hidden font-bold sm:inline-block font-headline text-primary-foreground">
               Unik AI Agent
             </span>
           </Link>
@@ -28,7 +29,7 @@ export function Header({ className }: { className?: string }) {
             <Link
               key={link.href}
               href={link.href}
-              className="transition-colors text-white/80 hover:text-white"
+              className="transition-colors text-foreground/60 hover:text-foreground/80"
             >
               {link.label}
             </Link>
@@ -36,7 +37,7 @@ export function Header({ className }: { className?: string }) {
         </nav>
 
         <div className="hidden items-center space-x-2 md:flex">
-          <Button variant="link" asChild className="text-white">
+          <Button variant="link" asChild className="text-primary-foreground">
             <Link href="/dashboard">Log In</Link>
           </Button>
           <Button asChild>
@@ -46,18 +47,16 @@ export function Header({ className }: { className?: string }) {
 
         {/* Mobile Nav */}
         <div className="flex items-center gap-4 md:hidden">
-         <Button variant="link" asChild className="text-white">
-            <Link href="/dashboard">Log In</Link>
-          </Button>
           <Sheet>
             <SheetTrigger asChild>
-              <Button variant="ghost" size="icon" className="text-white hover:bg-white/10 hover:text-white">
+              <Button variant="ghost" size="icon">
                 <Menu className="h-5 w-5" />
                 <span className="sr-only">Toggle Menu</span>
               </Button>
             </SheetTrigger>
-            <SheetContent side="left" className="pr-0 bg-background">
+            <SheetContent side="left" className="pr-0">
               <Link href="/" className="flex items-center space-x-2">
+                 <Logo className="h-6 w-6 text-primary" />
                 <span className="font-bold font-headline">Unik AI Agent</span>
               </Link>
               <div className="my-4 h-[calc(100vh-8rem)] pb-10 pl-6">
@@ -67,9 +66,14 @@ export function Header({ className }: { className?: string }) {
                       {link.label}
                     </Link>
                   ))}
-                   <Button asChild className="mt-4">
-                      <Link href="/dashboard">Sign Up</Link>
-                    </Button>
+                   <div className="flex flex-col space-y-2 pt-4">
+                     <Button variant="link" asChild className="justify-start px-0">
+                        <Link href="/dashboard">Log In</Link>
+                     </Button>
+                     <Button asChild>
+                        <Link href="/dashboard">Sign Up</Link>
+                      </Button>
+                   </div>
                 </div>
               </div>
             </SheetContent>
