@@ -2,10 +2,8 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { PlaceHolderImages } from '@/lib/placeholder-images';
 
 export function Hero() {
-  const heroImage = PlaceHolderImages.find((p) => p.id === 'hero-dashboard');
 
   return (
     <section
@@ -13,14 +11,14 @@ export function Hero() {
       className="relative min-h-screen flex items-center justify-center bg-cover bg-center"
       style={{ backgroundImage: "url('/background-hero.jpg')" }}
     >
-      <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" />
+      <div className="absolute inset-0 bg-background/70 backdrop-blur-sm" />
       <div className="relative mx-auto max-w-6xl w-full px-4">
         <div className="grid md:grid-cols-2 items-center gap-10">
           <div className="text-center md:text-left">
-            <h1 className="font-headline text-4xl md:text-6xl font-extrabold leading-tight text-white">
+            <h1 className="font-headline text-4xl md:text-6xl font-extrabold leading-tight text-foreground">
               The Ultimate AI Agent Platform for Your Business
             </h1>
-            <p className="mt-4 text-lg text-white/80">
+            <p className="mt-4 text-lg text-muted-foreground">
               Integrate a powerful Chatbot and Voice Agent in minutes. Boost
               conversions, automate support, and manage costs with predictable
               pricing.
@@ -36,7 +34,6 @@ export function Hero() {
                 asChild
                 variant="outline"
                 size="lg"
-                className="border-primary-foreground/20 text-white bg-transparent hover:bg-white/10 hover:text-white"
               >
                 <Link href="#pricing">See Pricing</Link>
               </Button>
@@ -44,17 +41,15 @@ export function Hero() {
           </div>
 
           <div className="flex justify-center md:justify-end">
-            {heroImage && (
               <Image
-                src={heroImage.imageUrl}
-                alt={heroImage.description}
+                src="https://storage.googleapis.com/gemini-studio-assets/project-images%2F4a070c79-a782-4148-9f17-217983654521.jpeg"
+                alt="A cinematic, ultra-realistic 4K render of the Unik AI Agent platform dashboard displayed on a laptop screen."
                 width={600}
                 height={550}
-                className="w-full max-w-[600px]"
-                data-ai-hint={heroImage.imageHint}
+                className="w-full max-w-[600px] rounded-lg shadow-2xl"
+                data-ai-hint="laptop dashboard"
                 priority
               />
-            )}
           </div>
         </div>
       </div>
