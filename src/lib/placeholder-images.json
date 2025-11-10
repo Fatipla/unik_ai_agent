@@ -1,3 +1,40 @@
 {
-  "placeholderImages": []
+  "placeholderImages": [
+    {
+      "id": "hero",
+      "description": "Abstract AI visualization for the hero section",
+      "imageUrl": "https://images.unsplash.com/photo-1744900647430-965ccc7a6078?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxBSSUyMGludGVyZmFjZXxlbnwwfHx8fDE3NjI4MDg2MzZ8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "AI interface"
+    },
+    {
+      "id": "chatbot-feature",
+      "description": "Image illustrating a chatbot widget on a website",
+      "imageUrl": "https://images.unsplash.com/photo-1623278132336-bd316c0f9c78?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHxjaGF0Ym90JTIwd2Vic2l0ZXxlbnwwfHx8fDE3NjI4MDg2MzZ8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "chatbot website"
+    },
+    {
+      "id": "voice-agent-feature",
+      "description": "Image representing voice agent capabilities",
+      "imageUrl": "https://images.unsplash.com/photo-1558539090-4456a2cc9fba?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHx2b2ljZSUyMHdhdmV8ZW58MHx8fHwxNzYyODA4NjM2fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "voice wave"
+    },
+    {
+      "id": "cost-management-feature",
+      "description": "Image for the cost management feature",
+      "imageUrl": "https://images.unsplash.com/photo-1759661966728-4a02e3c6ed91?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw3fHxkYXNoYm9hcmQlMjBjaGFydHxlbnwwfHx8fDE3NjI3NjY1ODd8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "dashboard chart"
+    },
+    {
+      "id": "easy-install-feature",
+      "description": "Image for the easy installation feature",
+      "imageUrl": "https://images.unsplash.com/photo-1568716353609-12ddc5c67f04?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw4fHxjb2RlJTIwc25pcHBldHxlbnwwfHx8fDE3NjI3MjI2NTN8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "code snippet"
+    },
+    {
+      "id": "user-avatar-1",
+      "description": "User avatar for the dashboard",
+      "imageUrl": "https://images.unsplash.com/photo-1535643302794-19c3804b874b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxMHx8cGVyc29uJTIwcG9ydHJhaXR8ZW58MHx8fHwxNzYyODA4MDUzfDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "person portrait"
+    }
+  ]
 }
