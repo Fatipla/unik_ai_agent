@@ -45,7 +45,7 @@ function CodeBlock({ code }: { code: string }) {
 export function InstallationGuide() {
   return (
     <section id="install" className="py-20 sm:py-32">
-      <div className="container">
+      <div className="mx-auto max-w-6xl w-full px-4">
         <div className="mx-auto max-w-2xl sm:text-center">
           <h2 className="font-headline text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
             1-Minute Installation
