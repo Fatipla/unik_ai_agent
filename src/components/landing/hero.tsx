@@ -13,7 +13,7 @@ export function Hero() {
       className="relative min-h-screen flex items-center justify-center bg-cover bg-center"
       style={{ backgroundImage: "url('/background-hero.jpg')" }}
     >
-      <div className="absolute inset-0 bg-black/60" />
+      <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" />
       <div className="relative mx-auto max-w-6xl w-full px-4">
         <div className="grid md:grid-cols-2 items-center gap-10">
           <div className="text-center md:text-left">
@@ -50,7 +50,7 @@ export function Hero() {
                 alt={heroImage.description}
                 width={600}
                 height={550}
-                className="w-full max-w-[600px] object-contain"
+                className="w-full max-w-[600px]"
                 data-ai-hint={heroImage.imageHint}
                 priority
               />
