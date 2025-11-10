@@ -1,10 +1,10 @@
 {
   "placeholderImages": [
     {
-      "id": "hero",
-      "description": "Abstract AI visualization for the hero section",
-      "imageUrl": "https://images.unsplash.com/photo-1744900647430-965ccc7a6078?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxBSSUyMGludGVyZmFjZXxlbnwwfHx8fDE3NjI4MDg2MzZ8MA&ixlib=rb-4.1.0&q=80&w=1080",
-      "imageHint": "AI interface"
+      "id": "hero-phone",
+      "description": "Realistic photo of a hand holding a smartphone with a generic UI, set against a softly blurred background with studio lighting.",
+      "imageUrl": "https://images.unsplash.com/photo-1554941426-5eb34a5334d7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHxwaG9uZSUyMGhhbmR8ZW58MHx8fHwxNzYyODU0MDUzfDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "phone hand"
     },
     {
       "id": "chatbot-feature",
