@@ -2,10 +2,13 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { PlaceHolderImages } from "@/lib/placeholder-images";
 
 export function Hero() {
-  const heroImage = PlaceHolderImages.find(p => p.id === 'hero-dashboard-v2');
+  const heroImage = {
+    imageUrl: "https://storage.googleapis.com/gemini-studio-assets/project-images%2F4a070c79-a782-4148-9f17-217983654521.jpeg",
+    description: "A cinematic, ultra-realistic 4K render of the Unik AI Agent platform dashboard displayed on a laptop screen. The screen shows advanced analytics, voice assistant controls, and live chat modules with glowing neon accents in electric purple and deep blue. The laptop is placed in a dark, sophisticated environment with dramatic lighting and ambient reflections, suggesting a futuristic enterprise setting.",
+    imageHint: "laptop dashboard"
+  };
 
   return (
     <section
