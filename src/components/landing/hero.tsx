@@ -2,14 +2,10 @@ import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import Image from 'next/image';
+import { PlaceHolderImages } from '@/lib/placeholder-images';
 
 export function Hero() {
-  const heroImage = {
-      "id": "hero-dashboard-v2",
-      "description": "Cinematic 4K render of a SaaS platform dashboard on a glass screen, with purple and blue glowing UI elements. Positioned on the right side of a dark hero section with a blurred futuristic city skyline.",
-      "imageUrl": "https://storage.googleapis.com/gemini-studio-assets/project-images%2F2494958f-3151-409e-9764-28490a07c91f.jpeg",
-      "imageHint": "futuristic dashboard"
-    };
+  const heroImage = PlaceHolderImages.find((p) => p.id === 'hero-dashboard-v2');
 
   return (
     <section

@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { CheckCircle, XCircle } from "lucide-react";
+import { CheckCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -76,7 +76,7 @@ export function Pricing() {
                 <ul className="space-y-4">
                   {plan.features.map((feature) => (
                     <li key={feature} className="flex items-center gap-2">
-                      <CheckCircle className="h-5 w-5 text-accent" />
+                      <CheckCircle className="h-5 w-5 text-accent-foreground" />
                       <span className="text-muted-foreground">{feature}</span>
                     </li>
                   ))}
