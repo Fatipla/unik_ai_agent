@@ -2,8 +2,8 @@
   "placeholderImages": [
     {
       "id": "hero-dashboard",
-      "description": "A hyper-realistic 4K image of a futuristic SaaS dashboard interface displayed on a sleek glass screen, positioned on the right side of a dark-themed enterprise landing page. The dashboard features modular analytics, live chat integration, and voice assistant controls, with glowing UI elements in purple and blue tones. The background evokes ultra-enterprise sophistication—think high-rise office views, ambient lighting, and subtle tech textures. The image feels premium, modern, and instantly conveys innovation, automation, and business intelligence.",
-      "imageUrl": "https://images.unsplash.com/photo-1678099238384-28a6a66699a7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHxGdXR1cmlzdGljJTIwU2FBQVMlMjBkYXNoYm9hcmQlMjBpbnRlcmZhY2V8ZW58MHx8fHwxNzI0NDI3NTM0fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "description": "A cinematic, ultra-realistic 4K render of a cutting-edge SaaS platform dashboard floating in front of a sleek, glass-panel interface. The dashboard showcases advanced analytics, voice assistant controls, and live chat modules with glowing neon accents in electric purple and deep blue. Positioned on the right side of a dark-themed hero section, with dramatic lighting, ambient reflections, and a blurred skyline of a futuristic enterprise city in the background.",
+      "imageUrl": "https://images.unsplash.com/photo-1556155092-490a1ba16284?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxmdXR1cmlzdGljJTIwZGFzaGJvYXJkfGVufDB8fHx8MTcyNDQzMDY4OHww&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "futuristic dashboard"
     },
     {
