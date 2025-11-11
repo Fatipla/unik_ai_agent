@@ -1,16 +1,18 @@
 import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import Image from 'next/image';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
 
 export function Hero() {
-  const heroImage = PlaceHolderImages.find((p) => p.id === 'hero-dashboard-v2');
+  const heroImage = PlaceHolderImages.find((p) => p.id === 'hero-dashboard-v3');
 
   return (
     <section
       id="home"
-      className="relative min-h-screen flex items-center justify-center bg-background"
+      className="relative min-h-screen flex items-center justify-center bg-cover bg-center bg-no-repeat"
+      style={{
+        backgroundImage: heroImage ? `url(${heroImage.imageUrl})` : 'none',
+      }}
     >
       <div className="absolute inset-0 bg-black/60" />
       <div className="relative mx-auto max-w-6xl w-full px-4">
@@ -41,20 +43,10 @@ export function Hero() {
               </Button>
             </div>
           </div>
+          
+          {/* The image is now the background of the section */}
+          <div />
 
-          <div className="flex justify-center md:justify-end">
-            {heroImage && (
-                <Image
-                    src={heroImage.imageUrl}
-                    alt={heroImage.description}
-                    width={600}
-                    height={550}
-                    className="w-full max-w-[600px] rounded-lg"
-                    data-ai-hint={heroImage.imageHint}
-                    priority
-                />
-            )}
-          </div>
         </div>
       </div>
     </section>
