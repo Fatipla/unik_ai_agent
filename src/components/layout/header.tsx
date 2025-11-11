@@ -13,7 +13,7 @@ export function Header({ className }: { className?: string }) {
   ];
 
   return (
-    <header className={cn("absolute top-0 z-50 w-full", className)}>
+    <header className={cn("w-full", className)}>
       <div className="mx-auto flex h-20 max-w-6xl items-center justify-between px-4">
         <div className="flex items-center">
           <Link href="/" className="flex items-center space-x-2">
