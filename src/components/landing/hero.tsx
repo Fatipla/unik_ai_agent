@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/button';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
 
 export function Hero() {
-  const heroImage = PlaceHolderImages.find((p) => p.id === 'hero-dashboard-v3');
+  const heroImage = PlaceHolderImages.find((p) => p.id === 'hero-dashboard');
 
   return (
     <section
