@@ -1,25 +1,21 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import { ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { cn } from '@/lib/utils';
+import { PlaceHolderImages } from '@/lib/placeholder-images';
 
 export function Hero() {
+  const heroImage = PlaceHolderImages.find((p) => p.id === 'hero-dashboard');
+
   return (
-    <section
-      id="home"
-      className={cn(
-        'relative min-h-screen flex items-center justify-center bg-cover bg-center bg-no-repeat',
-        'hero-background'
-      )}
-    >
-      <div className="absolute inset-0 bg-black/60" />
-      <div className="relative mx-auto max-w-6xl w-full px-4">
+    <section id="home" className="relative bg-background">
+      <div className="mx-auto max-w-6xl w-full px-4 h-screen min-h-[700px] flex items-center">
         <div className="grid md:grid-cols-2 items-center gap-10">
           <div className="text-center md:text-left">
-            <h1 className="font-headline text-4xl md:text-6xl font-extrabold leading-tight text-white">
+            <h1 className="font-headline text-4xl md:text-6xl font-extrabold leading-tight text-foreground">
               The Ultimate AI Agent Platform for Your Business
             </h1>
-            <p className="mt-4 text-lg text-white/80">
+            <p className="mt-4 text-lg text-muted-foreground">
               Integrate a powerful Chatbot and Voice Agent in minutes. Boost
               conversions, automate support, and manage costs with predictable
               pricing.
@@ -35,14 +31,25 @@ export function Hero() {
                 asChild
                 variant="outline"
                 size="lg"
-                className="border-primary-foreground/20 text-white hover:bg-white/10 hover:text-white"
               >
                 <Link href="#pricing">See Pricing</Link>
               </Button>
             </div>
           </div>
           
-          <div />
+          <div>
+            {heroImage && (
+              <Image
+                src={heroImage.imageUrl}
+                alt={heroImage.description}
+                width={1200}
+                height={900}
+                className="rounded-xl shadow-2xl"
+                priority
+                data-ai-hint={heroImage.imageHint}
+              />
+            )}
+          </div>
 
         </div>
       </div>

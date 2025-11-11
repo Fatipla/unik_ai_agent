@@ -6,10 +6,6 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
-.hero-background {
-  background-image: url('https://storage.googleapis.com/gemini-studio-assets/project-images%2F4a070c79-a782-4148-9f17-217983654521.jpeg');
-}
-
 @layer base {
   :root {
     --background: 0 0% 4%;

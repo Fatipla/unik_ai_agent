@@ -17,8 +17,8 @@ export function Header({ className }: { className?: string }) {
       <div className="mx-auto flex h-20 max-w-6xl items-center justify-between px-4">
         <div className="flex items-center">
           <Link href="/" className="flex items-center space-x-2">
-             <Logo className="h-6 w-6 text-primary-foreground" />
-            <span className="hidden font-bold sm:inline-block font-headline text-primary-foreground">
+             <Logo className="h-6 w-6 text-primary" />
+            <span className="hidden font-bold sm:inline-block font-headline text-foreground">
               Unik AI Agent
             </span>
           </Link>
@@ -37,7 +37,7 @@ export function Header({ className }: { className?: string }) {
         </nav>
 
         <div className="hidden items-center space-x-2 md:flex">
-          <Button variant="link" asChild className="text-primary-foreground">
+          <Button variant="link" asChild>
             <Link href="/dashboard">Log In</Link>
           </Button>
           <Button asChild>
