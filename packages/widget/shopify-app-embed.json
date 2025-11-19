@@ -1,0 +1,51 @@
+{
+  "name": "Unik AI Agent",
+  "target": "body_end",
+  "type": "app_embed",
+  "uuid": "unik-ai-agent-widget",
+  "settings": [
+    {
+      "type": "text",
+      "id": "agent_id",
+      "label": "Agent ID",
+      "info": "Your unique Agent ID from Unik AI dashboard",
+      "default": ""
+    },
+    {
+      "type": "select",
+      "id": "lang",
+      "label": "Language",
+      "options": [
+        {"value": "en", "label": "English"},
+        {"value": "de", "label": "German"},
+        {"value": "al", "label": "Albanian"}
+      ],
+      "default": "en"
+    },
+    {
+      "type": "select",
+      "id": "theme",
+      "label": "Theme",
+      "options": [
+        {"value": "light", "label": "Light"},
+        {"value": "dark", "label": "Dark"}
+      ],
+      "default": "light"
+    },
+    {
+      "type": "text",
+      "id": "brand_color",
+      "label": "Brand Color",
+      "default": "#624CAB",
+      "info": "Hex color code (e.g., #624CAB)"
+    },
+    {
+      "type": "text",
+      "id": "greeting",
+      "label": "Greeting Message",
+      "default": "👋 Hello! How can I help you today?"
+    }
+  ],
+  "blocks": [],
+  "javascript": "{% if settings.agent_id != blank %}<script src=\"https://agent.unik.ai/widget.js\" data-agent-id=\"{{ settings.agent_id }}\" data-lang=\"{{ settings.lang }}\" data-theme=\"{{ settings.theme }}\" data-brand-color=\"{{ settings.brand_color }}\" data-greeting=\"{{ settings.greeting }}\" defer></script>{% endif %}"
+}
