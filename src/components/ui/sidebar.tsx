@@ -558,7 +558,7 @@ const SidebarMenuButton = React.forwardRef<
 
     const button = (
       <Comp
-        ref={ref}
+        ref={ref as any} // Added 'as any' to fix ref type conflict with Slot
         data-sidebar="menu-button"
         data-size={size}
         data-active={isActive}
