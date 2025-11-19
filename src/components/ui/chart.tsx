@@ -261,7 +261,8 @@ const ChartLegend = RechartsPrimitive.Legend
 const ChartLegendContent = React.forwardRef<
   HTMLDivElement,
   React.ComponentProps<"div"> &
-    Pick<RechartsPrimitive.LegendProps, "payload" | "verticalAlign"> & {
+    Pick<RechartsPrimitive.LegendProps, "verticalAlign"> & {
+      payload?: Array<any>
       hideIcon?: boolean
       nameKey?: string
     }
@@ -285,7 +286,7 @@ const ChartLegendContent = React.forwardRef<
           className
         )}
       >
-        {payload.map((item: any) => { // Added 'any' type to fix implicit any error
+        {payload.map((item: any) => {
           const key = `${nameKey || item.dataKey || "value"}`
           const itemConfig = getPayloadConfigFromPayload(config, item, key)
 
