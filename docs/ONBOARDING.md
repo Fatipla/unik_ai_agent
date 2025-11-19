@@ -39,11 +39,11 @@ Train from your existing website or documentation:
 1. Go to Dashboard → Knowledge Base
 2. Click "Train from URLs"
 3. Enter URLs (one per line):
-   ```
+   \`\`\`
    https://yoursite.com/faq
    https://yoursite.com/docs
    https://yoursite.com/about
-   ```
+   \`\`\`
 4. Click "Start Training"
 5. Wait for processing (usually 1-5 minutes)
 
@@ -83,20 +83,20 @@ Get your chat widget live on your website in under 60 seconds.
 2. Copy the script tag
 3. Paste before `</body>` in your HTML:
 
-```html
+\`\`\`html
 <script
   src="https://agent.unik.ai/widget.js"
   data-agent-id="YOUR_ID"
   defer
 ></script>
-```
+\`\`\`
 
 4. Save and refresh your site
 5. **Done!** The widget should appear in the bottom-right corner
 
 ### Method 2: NPM Package (For React/Vue)
 
-```bash
+\`\`\`bash
 # Install
 npm install @unik/agent-widget
 
@@ -109,7 +109,7 @@ initAgent({
   theme: 'light',
   tone: 'professional'
 });
-```
+\`\`\`
 
 ### Method 3: Google Tag Manager
 

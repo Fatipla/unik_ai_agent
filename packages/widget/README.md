@@ -4,15 +4,15 @@ Embeddable AI chat widget for Unik AI Agent platform.
 
 ## Installation
 
-```bash
+\`\`\`bash
 npm install @unik/agent-widget
-```
+\`\`\`
 
 ## Usage
 
 ### Basic Usage
 
-```javascript
+\`\`\`javascript
 import { initAgent } from '@unik/agent-widget';
 
 initAgent({
@@ -21,7 +21,7 @@ initAgent({
   theme: 'light',
   tone: 'professional'
 });
-```
+\`\`\`
 
 ### Configuration Options
 
@@ -39,7 +39,7 @@ initAgent({
 
 ### React Example
 
-```jsx
+\`\`\`jsx
 import { useEffect } from 'react';
 import { initAgent } from '@unik/agent-widget';
 
@@ -54,11 +54,11 @@ function App() {
 
   return <div>Your app...</div>;
 }
-```
+\`\`\`
 
 ### Vue Example
 
-```vue
+\`\`\`vue
 <script setup>
 import { onMounted } from 'vue';
 import { initAgent } from '@unik/agent-widget';
@@ -69,13 +69,13 @@ onMounted(() => {
   });
 });
 </script>
-```
+\`\`\`
 
 ## TypeScript Support
 
 Full TypeScript definitions included:
 
-```typescript
+\`\`\`typescript
 import { initAgent, AgentConfig } from '@unik/agent-widget';
 
 const config: AgentConfig = {
@@ -85,7 +85,7 @@ const config: AgentConfig = {
 };
 
 initAgent(config);
-```
+\`\`\`
 
 ## SSR Compatibility
 

@@ -11,25 +11,25 @@ Due to missing Vercel credentials in this environment, the application **cannot 
 ### 1. URLs (After Manual Deployment)
 
 **Production URLs** (Replace after your deployment):
-```
+\`\`\`
 PROD_URL (marketing): https://YOUR-PROJECT.vercel.app
 APP_URL (dashboard):  https://YOUR-PROJECT.vercel.app/dashboard
 API_BASE:             https://YOUR-PROJECT.vercel.app/api
 WIDGET_URL:           https://YOUR-PROJECT.vercel.app/widget.js
-```
+\`\`\`
 
 **Custom Domain** (After DNS configuration):
-```
+\`\`\`
 PROD_URL: https://agent.unik.ai
 APP_URL:  https://agent.unik.ai/dashboard
-```
+\`\`\`
 
 ---
 
 ### 2. Stripe Configuration
 
 **Webhook Endpoint:**
-```
+\`\`\`
 URL: https://YOUR-PROJECT.vercel.app/api/webhooks/stripe
 Events to subscribe:
   - checkout.session.completed
@@ -42,10 +42,10 @@ Events to subscribe:
 Implementation: /app/src/app/api/webhooks/stripe/route.ts
 ✅ Signature verification: Enabled
 ✅ Idempotency: payload_hash unique constraint
-```
+\`\`\`
 
 **Price IDs** (Create using script):
-```bash
+\`\`\`bash
 ./scripts/create-stripe-products.sh
 
 Output format:
@@ -55,19 +55,19 @@ STRIPE_PRICE_PRO_M=price_xxxxxxxxxxxxx
 STRIPE_PRICE_PRO_Y=price_xxxxxxxxxxxxx
 STRIPE_PRICE_ENT_M=price_xxxxxxxxxxxxx
 STRIPE_PRICE_ENT_Y=price_xxxxxxxxxxxxx
-```
+\`\`\`
 
 ---
 
 ### 3. Database Configuration
 
 **Connection String Format:**
-```
+\`\`\`
 postgresql://user:password@host:5432/dbname?sslmode=require
-```
+\`\`\`
 
 **Schema Applied:**
-```sql
+\`\`\`sql
 -- Tables created via: npm run db:push
 ✅ users_profile (with RLS)
 ✅ conversations (with RLS)
@@ -80,10 +80,10 @@ postgresql://user:password@host:5432/dbname?sslmode=require
 
 -- RLS Policies applied via:
 psql $POSTGRES_URL < /app/src/lib/security/rls-policies.sql
-```
+\`\`\`
 
 **Seed Data:**
-```bash
+\`\`\`bash
 npm run db:seed
 
 Demo Credentials:
@@ -91,14 +91,14 @@ Demo Credentials:
 ✅ free@test.com / Test1234! (Free plan)
 ✅ pro@test.com / Test1234! (Pro plan)
 ✅ enterprise@test.com / Test1234! (Enterprise plan)
-```
+\`\`\`
 
 ---
 
 ### 4. NPM Package
 
 **Package Details:**
-```json
+\`\`\`json
 {
   "name": "@unik/agent-widget",
   "version": "1.0.0",
@@ -106,16 +106,16 @@ Demo Credentials:
   "module": "dist/index.esm.js",
   "types": "dist/index.d.ts"
 }
-```
+\`\`\`
 
 **Location:** `/app/packages/widget/`
 
 **Publish Command:**
-```bash
+\`\`\`bash
 cd /app/packages/widget
 npm login
 npm publish --access public
-```
+\`\`\`
 
 **Registry URL:** https://www.npmjs.com/package/@unik/agent-widget
 
@@ -124,12 +124,12 @@ npm publish --access public
 ### 5. Widget Installer Templates
 
 **File Locations:**
-```
+\`\`\`
 ✅ GTM Template:     /app/packages/widget/gtm-template.json
 ✅ Shopify App:      /app/packages/widget/shopify-app-embed.json
 ✅ WordPress Plugin: /app/packages/widget/wordpress-plugin/unik-ai-agent.php
 ✅ Webflow Snippet:  /app/packages/widget/webflow-snippet.html
-```
+\`\`\`
 
 **Usage Examples:**
 
@@ -162,7 +162,7 @@ npm publish --access public
 **Template:** `/app/.env.production.example`
 
 **Required Variables:**
-```bash
+\`\`\`bash
 # Critical (App won't start without these)
 POSTGRES_URL=postgresql://...
 OPENAI_API_KEY=sk-proj-...
@@ -183,16 +183,16 @@ STRIPE_PRICE_ENT_Y=price_...
 WIDGET_ORIGIN=https://agent.unik.ai
 ALLOWED_ORIGINS=https://agent.unik.ai
 CRON_SECRET=[32-char random]
-```
+\`\`\`
 
 **Set in Vercel:**
-```bash
+\`\`\`bash
 # Via CLI
 vercel env add VARIABLE_NAME production
 
 # Or via Dashboard
 Settings → Environment Variables → Add New
-```
+\`\`\`
 
 ---
 
@@ -201,27 +201,27 @@ Settings → Environment Variables → Add New
 **GitHub Actions Workflow:** `/app/.github/workflows/ci.yml`
 
 **Jobs Configured:**
-```yaml
+\`\`\`yaml
 ✅ lint: ESLint + TypeScript checks
 ✅ build: Next.js production build
 ✅ lighthouse: Performance audit
 ✅ deploy-preview: PR preview deployments
 ✅ deploy-production: Main branch → production
-```
+\`\`\`
 
 **Required Secrets:**
-```
+\`\`\`
 VERCEL_TOKEN=...
 VERCEL_ORG_ID=...
 VERCEL_PROJECT_ID=...
-```
+\`\`\`
 
 **Get from Vercel:**
-```bash
+\`\`\`bash
 # Token: Dashboard → Settings → Tokens
 # Org ID: Settings → General → Organization ID
 # Project ID: Project Settings → General → Project ID
-```
+\`\`\`
 
 ---
 
@@ -232,24 +232,24 @@ VERCEL_PROJECT_ID=...
 **Tests to run after deployment:**
 
 1. **User Signup/Auth**
-```bash
+\`\`\`bash
 curl -X POST https://YOUR-PROJECT.vercel.app/api/auth/signup \
   -H "Content-Type: application/json" \
   -d '{"email":"test@verify.com","password":"Test1234!"}'
 # Expected: {"user":{...},"token":"eyJ..."}
-```
+\`\`\`
 
 2. **Chat API (Normal)**
-```bash
+\`\`\`bash
 curl -X POST https://YOUR-PROJECT.vercel.app/api/chat \
   -H "Authorization: Bearer $TOKEN" \
   -H "Content-Type: application/json" \
   -d '{"message":"Hello"}'
 # Expected: {"text":"...","tokensIn":10,"tokensOut":50,"costEur":0.0008}
-```
+\`\`\`
 
 3. **Cost Cap Block**
-```bash
+\`\`\`bash
 # Set user usage near cap
 psql $POSTGRES_URL -c "UPDATE users_profile SET usage_cost_eur = 9.9 WHERE email='test@verify.com';"
 
@@ -258,10 +258,10 @@ curl -X POST https://YOUR-PROJECT.vercel.app/api/chat \
   -H "Authorization: Bearer $TOKEN" \
   -d '{"message":"Test"}'
 # Expected: {"error":"...cap exceeded...","upsellHint":"..."}
-```
+\`\`\`
 
 4. **Free Plan 5/day**
-```bash
+\`\`\`bash
 # Make 6 requests as free user
 for i in {1..6}; do
   curl -X POST https://YOUR-PROJECT.vercel.app/api/chat \
@@ -269,57 +269,57 @@ for i in {1..6}; do
     -d "{\"message\":\"Test $i\"}"
 done
 # Expected: 1-5 succeed, 6th blocked with daily limit message
-```
+\`\`\`
 
 5. **Stripe Checkout**
-```bash
+\`\`\`bash
 curl -X POST https://YOUR-PROJECT.vercel.app/api/billing/checkout \
   -H "Authorization: Bearer $TOKEN" \
   -d '{"priceId":"price_std_m","interval":"monthly"}'
 # Expected: {"checkoutUrl":"https://checkout.stripe.com/..."}
-```
+\`\`\`
 
 6. **Widget Code**
-```bash
+\`\`\`bash
 curl https://YOUR-PROJECT.vercel.app/api/widget-code \
   -H "Authorization: Bearer $TOKEN"
 # Expected: {"agentId":"...","code":"<script src=..."}
-```
+\`\`\`
 
 7. **Voice Intent**
-```bash
+\`\`\`bash
 curl -X POST https://YOUR-PROJECT.vercel.app/api/voice/intent \
   -H "Authorization: Bearer $TOKEN" \
   -d '{"transcription":"book a meeting tomorrow"}'
 # Expected: {"intent":"booking","scheduleRequested":true}
-```
+\`\`\`
 
 8. **Webhook Idempotency**
-```bash
+\`\`\`bash
 # Send same Stripe event twice via Stripe CLI
 stripe trigger customer.subscription.created
 
 # Check DB
 psql $POSTGRES_URL -c "SELECT COUNT(*) FROM webhooks_log WHERE provider='stripe';"
 # Expected: 1 (duplicate ignored)
-```
+\`\`\`
 
 9. **Cron Jobs**
-```bash
+\`\`\`bash
 curl https://YOUR-PROJECT.vercel.app/api/cron/monthly-reset \
   -H "Authorization: Bearer $CRON_SECRET"
 # Expected: {"success":true,"updated":N}
-```
+\`\`\`
 
 10. **Lighthouse**
-```bash
+\`\`\`bash
 lighthouse https://YOUR-PROJECT.vercel.app --view
 # Expected:
 # Performance: ≥85
 # LCP: ≤2.3s
 # CLS: ≤0.1
 # TBT: ≤200ms
-```
+\`\`\`
 
 ---
 
@@ -343,22 +343,22 @@ lighthouse https://YOUR-PROJECT.vercel.app --view
 ### 10. Rollback Procedures
 
 **Vercel Deployment Rollback:**
-```bash
+\`\`\`bash
 # List deployments
 vercel ls
 
 # Promote previous
 vercel promote https://YOUR-PROJECT-xxx-previous.vercel.app
-```
+\`\`\`
 
 **Database Rollback:**
-```bash
+\`\`\`bash
 # Backup before changes
 pg_dump $POSTGRES_URL > backup-$(date +%Y%m%d-%H%M%S).sql
 
 # Restore
 psql $POSTGRES_URL < backup-YYYYMMDD-HHMMSS.sql
-```
+\`\`\`
 
 **Vercel via Dashboard:**
 1. Go to Deployments
@@ -451,15 +451,15 @@ Before marking deployment complete, verify:
 ## 📊 EXPECTED METRICS
 
 **Build Performance:**
-```
+\`\`\`
 Build time: 2-4 minutes
 Bundle size: <1MB (gzipped)
 TypeScript: 0 errors
 Linting: 0 errors
-```
+\`\`\`
 
 **Runtime Performance:**
-```
+\`\`\`
 Landing page:
   LCP: 1.2-1.8s
   FCP: 0.8-1.2s
@@ -470,15 +470,15 @@ Dashboard:
   Load time: <2s
   API response: <500ms
   Database query: <100ms
-```
+\`\`\`
 
 **Lighthouse Scores:**
-```
+\`\`\`
 Performance:    90-100
 Accessibility:  95-100
 Best Practices: 95-100
 SEO:           95-100
-```
+\`\`\`
 
 ---
 

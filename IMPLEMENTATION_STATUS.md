@@ -108,7 +108,7 @@
 ## 🔧 HOW TO CONTINUE
 
 ### Immediate Next Steps:
-```bash
+\`\`\`bash
 # 1. Set up database
 npm run db:push  # (need to add script)
 
@@ -127,13 +127,13 @@ curl -X POST http://localhost:9002/api/chat \\
   -H "Authorization: Bearer YOUR_TOKEN" \\
   -H "Content-Type: application/json" \\
   -d '{"message": "Hello"}'
-```
+\`\`\`
 
 ### Database Setup:
-```sql
+\`\`\`sql
 -- Run on your Vercel Postgres or Neon instance
 -- Tables will be created automatically via Drizzle
-```
+\`\`\`
 
 ### Feature Flag Usage:
 - Set `STRIPE_ENABLED=false` to develop without Stripe

@@ -12,7 +12,7 @@
 
 ### Option 1: Vercel CLI (Recommended)
 
-```bash
+\`\`\`bash
 # Install Vercel CLI
 npm i -g vercel
 
@@ -39,7 +39,7 @@ vercel env add STRIPE_SECRET_KEY
 
 # Deploy to production
 vercel --prod
-```
+\`\`\`
 
 ### Option 2: Vercel Dashboard
 
@@ -52,7 +52,7 @@ vercel --prod
    - **Output Directory**: `.next`
 
 4. Add Environment Variables:
-   ```
+   \`\`\`
    POSTGRES_URL=postgresql://...
    OPENAI_API_KEY=sk-...
    OPENAI_MODEL=gpt-4o-mini
@@ -61,7 +61,7 @@ vercel --prod
    STRIPE_ENABLED=true
    STRIPE_SECRET_KEY=sk_...
    (add all from .env.example)
-   ```
+   \`\`\`
 
 5. Click "Deploy"
 
@@ -69,7 +69,7 @@ vercel --prod
 
 ### Using Vercel Postgres
 
-```bash
+\`\`\`bash
 # Create database in Vercel Dashboard
 # Go to Storage > Create Database > Postgres
 
@@ -78,11 +78,11 @@ vercel --prod
 # Push schema
 npm run db:generate  # Generate migration
 npm run db:push      # Push to database
-```
+\`\`\`
 
 ### Using Neon
 
-```bash
+\`\`\`bash
 # Create project at https://neon.tech
 # Copy connection string
 
@@ -91,13 +91,13 @@ POSTGRES_URL=postgresql://user:pass@ep-xxx.neon.tech/dbname?sslmode=require
 
 # Push schema
 npm run db:push
-```
+\`\`\`
 
 ## Stripe Setup
 
 ### 1. Create Products and Prices
 
-```bash
+\`\`\`bash
 # Install Stripe CLI
 brew install stripe/stripe-cli/stripe
 # or download from https://stripe.com/docs/stripe-cli
@@ -115,11 +115,11 @@ stripe prices create --product=prod_xxx --unit-amount=1999 --currency=eur --recu
 STRIPE_PRICE_STD_M=price_...
 STRIPE_PRICE_STD_Y=price_...
 # ... etc
-```
+\`\`\`
 
 ### 2. Set up Webhook
 
-```bash
+\`\`\`bash
 # In Stripe Dashboard > Developers > Webhooks
 # Add endpoint: https://your-domain.vercel.app/api/webhooks/stripe
 
@@ -132,13 +132,13 @@ STRIPE_PRICE_STD_Y=price_...
 
 # Copy webhook signing secret
 STRIPE_WEBHOOK_SECRET=whsec_...
-```
+\`\`\`
 
 ## Post-Deployment Setup
 
 ### 1. Test the API
 
-```bash
+\`\`\`bash
 # Sign up
 curl -X POST https://your-domain.vercel.app/api/auth/signup \\
   -H "Content-Type: application/json" \\
@@ -158,23 +158,23 @@ curl -X POST https://your-domain.vercel.app/api/chat \\
   -H "Authorization: Bearer YOUR_TOKEN" \\
   -H "Content-Type: application/json" \\
   -d '{"message":"Hello, how are you?"}'
-```
+\`\`\`
 
 ### 2. Create Seed Data
 
-```bash
+\`\`\`bash
 # Run seed script (to be created)
 npm run seed
-```
+\`\`\`
 
 ### 3. Monitor Logs
 
-```bash
+\`\`\`bash
 # View real-time logs
 vercel logs --follow
 
 # Or in Vercel Dashboard > Deployments > View Logs
-```
+\`\`\`
 
 ## Domain Setup
 
@@ -183,16 +183,16 @@ vercel logs --follow
 1. Go to Vercel Dashboard > Project > Settings > Domains
 2. Add your domain: `agent.unik.ai`
 3. Configure DNS:
-   ```
+   \`\`\`
    CNAME  @  cname.vercel-dns.com
-   ```
+   \`\`\`
 4. Wait for DNS propagation (up to 24 hours)
 5. Update environment variables:
-   ```
+   \`\`\`
    NEXTAUTH_URL=https://agent.unik.ai
    WIDGET_ORIGIN=https://agent.unik.ai
    ALLOWED_ORIGINS=https://agent.unik.ai
-   ```
+   \`\`\`
 
 ## Continuous Deployment
 
@@ -204,19 +204,19 @@ Vercel automatically deploys:
 
 ### Manual Deployment
 
-```bash
+\`\`\`bash
 # Production
 vercel --prod
 
 # Preview
 vercel
-```
+\`\`\`
 
 ## Monitoring & Observability
 
 ### Vercel Analytics
 
-```bash
+\`\`\`bash
 # Add to package.json
 npm install @vercel/analytics
 
@@ -232,7 +232,7 @@ export default function RootLayout({ children }) {
     </html>
   );
 }
-```
+\`\`\`
 
 ### Error Tracking
 
@@ -258,7 +258,7 @@ Consider integrating:
 
 ### Build Fails
 
-```bash
+\`\`\`bash
 # Check logs
 vercel logs
 
@@ -266,21 +266,21 @@ vercel logs
 # - Missing environment variables
 # - TypeScript errors: npm run typecheck
 # - Database connection: check POSTGRES_URL
-```
+\`\`\`
 
 ### Database Connection Issues
 
-```bash
+\`\`\`bash
 # Test connection
 psql $POSTGRES_URL
 
 # Check SSL requirement (Neon needs sslmode=require)
 POSTGRES_URL=postgresql://...?sslmode=require
-```
+\`\`\`
 
 ### API Returns 500
 
-```bash
+\`\`\`bash
 # Check Vercel logs
 vercel logs --follow
 
@@ -288,17 +288,17 @@ vercel logs --follow
 # - Missing OPENAI_API_KEY
 # - Invalid POSTGRES_URL
 # - Stripe keys mismatch (test vs live)
-```
+\`\`\`
 
 ## Rollback
 
-```bash
+\`\`\`bash
 # List deployments
 vercel ls
 
 # Promote previous deployment
 vercel promote <deployment-url>
-```
+\`\`\`
 
 ## Cost Optimization
 

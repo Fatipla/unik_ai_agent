@@ -4,7 +4,7 @@
 
 Run this checklist before deploying:
 
-```bash
+\`\`\`bash
 # 1. Verify all files present
 ls -la /app/src/app/api/billing/
 ls -la /app/src/app/api/webhooks/stripe/
@@ -17,25 +17,25 @@ cat /app/package.json | grep -A 3 "scripts"
 cat /app/.env.example
 
 # All checks passed? Proceed below.
-```
+\`\`\`
 
 ---
 
 ## STEP 1: INSTALL VERCEL CLI
 
-```bash
+\`\`\`bash
 npm install -g vercel
 
 # Login
 vercel login
 # Follow browser authentication
-```
+\`\`\`
 
 ---
 
 ## STEP 2: DEPLOY TO VERCEL
 
-```bash
+\`\`\`bash
 cd /app
 
 # First deployment (creates project)
@@ -55,18 +55,18 @@ vercel --prod
 # Save URLs shown:
 # Production: https://unik-ai-agent.vercel.app
 # Dashboard: https://unik-ai-agent.vercel.app/dashboard
-```
+\`\`\`
 
 **EXPECTED OUTPUT:**
-```
+\`\`\`
 ✔ Production: https://unik-ai-agent-xxx.vercel.app [1m 23s]
-```
+\`\`\`
 
 ---
 
 ## STEP 3: SET ENVIRONMENT VARIABLES
 
-```bash
+\`\`\`bash
 # Database (Vercel Postgres)
 vercel env add POSTGRES_URL production
 # Paste: postgresql://user:pass@host:5432/db?sslmode=require
@@ -111,13 +111,13 @@ vercel env add CRON_SECRET production
 
 # Redeploy with env vars
 vercel --prod
-```
+\`\`\`
 
 ---
 
 ## STEP 4: SETUP DATABASE
 
-```bash
+\`\`\`bash
 # Push schema to database
 npm run db:push
 
@@ -129,10 +129,10 @@ npm run db:seed
 
 # Verify
 psql $POSTGRES_URL -c "SELECT email, plan FROM users_profile;"
-```
+\`\`\`
 
 **EXPECTED OUTPUT:**
-```
+\`\`\`
        email        |   plan   
 --------------------+----------
  demo@unik.ai       | standard
@@ -140,13 +140,13 @@ psql $POSTGRES_URL -c "SELECT email, plan FROM users_profile;"
  pro@test.com       | pro
  enterprise@test.com| enterprise
 (4 rows)
-```
+\`\`\`
 
 ---
 
 ## STEP 5: CONFIGURE STRIPE WEBHOOKS
 
-```bash
+\`\`\`bash
 # Option A: Via Stripe Dashboard
 # 1. Go to: https://dashboard.stripe.com/webhooks
 # 2. Click "Add endpoint"
@@ -165,40 +165,40 @@ stripe listen --forward-to https://unik-ai-agent-xxx.vercel.app/api/webhooks/str
 
 # Test webhook
 stripe trigger customer.subscription.created
-```
+\`\`\`
 
 **EXPECTED OUTPUT:**
-```
+\`\`\`
 ✔ Webhook endpoint created: https://unik-ai-agent-xxx.vercel.app/api/webhooks/stripe
 ✔ Signing secret: whsec_...
-```
+\`\`\`
 
 ---
 
 ## STEP 6: CREATE STRIPE PRODUCTS
 
-```bash
+\`\`\`bash
 chmod +x ./scripts/create-stripe-products.sh
 ./scripts/create-stripe-products.sh
 
 # Copy output price IDs to Vercel env vars
-```
+\`\`\`
 
 **EXPECTED OUTPUT:**
-```
+\`\`\`
 ✅ Standard Product: prod_...
 ✅ Pro Product: prod_...
 ✅ Enterprise Product: prod_...
 ✅ Standard Monthly: price_...
 ✅ Standard Yearly: price_...
 ...
-```
+\`\`\`
 
 ---
 
 ## STEP 7: PUBLISH NPM PACKAGE
 
-```bash
+\`\`\`bash
 cd /app/packages/widget
 
 # Login to NPM
@@ -209,13 +209,13 @@ npm publish --access public
 
 # Verify
 npm view @unik/agent-widget
-```
+\`\`\`
 
 **EXPECTED OUTPUT:**
-```
+\`\`\`
 @unik/agent-widget@1.0.0
 Published: 2024-11-19T09:00:00.000Z
-```
+\`\`\`
 
 ---
 
@@ -223,7 +223,7 @@ Published: 2024-11-19T09:00:00.000Z
 
 ### Test 1: User Signup & Auth
 
-```bash
+\`\`\`bash
 curl -X POST https://unik-ai-agent-xxx.vercel.app/api/auth/signup \
   -H "Content-Type: application/json" \
   -d '{"email":"test@verify.com","password":"Test1234!","displayName":"Test User"}'
@@ -232,22 +232,22 @@ curl -X POST https://unik-ai-agent-xxx.vercel.app/api/auth/signup \
 
 # Save token for next tests
 export TOKEN="eyJ..."
-```
+\`\`\`
 
 ### Test 2: Chat API (Normal)
 
-```bash
+\`\`\`bash
 curl -X POST https://unik-ai-agent-xxx.vercel.app/api/chat \
   -H "Authorization: Bearer $TOKEN" \
   -H "Content-Type: application/json" \
   -d '{"message":"Hello, how are you?"}'
 
 # Expected: {"text":"...","tokensIn":15,"tokensOut":120,"costEur":0.0012,...}
-```
+\`\`\`
 
 ### Test 3: Chat API (Cost Cap Block)
 
-```bash
+\`\`\`bash
 # First, manually update user's usage_cost_eur to near cap:
 psql $POSTGRES_URL -c "UPDATE users_profile SET usage_cost_eur = 9.9 WHERE email='test@verify.com';"
 
@@ -258,11 +258,11 @@ curl -X POST https://unik-ai-agent-xxx.vercel.app/api/chat \
   -d '{"message":"Test"}'
 
 # Expected: {"error":"Monthly AI cost limit would be exceeded","upsellHint":"..."}
-```
+\`\`\`
 
 ### Test 4: Free Plan 5/day Limit
 
-```bash
+\`\`\`bash
 # Sign up as free user
 curl -X POST https://unik-ai-agent-xxx.vercel.app/api/auth/signup \
   -H "Content-Type: application/json" \
@@ -285,11 +285,11 @@ curl -X POST https://unik-ai-agent-xxx.vercel.app/api/chat \
   -d '{"message":"Test 6"}'
 
 # Expected: {"error":"Daily chat limit reached","upsellHint":"..."}
-```
+\`\`\`
 
 ### Test 5: Stripe Checkout
 
-```bash
+\`\`\`bash
 curl -X POST https://unik-ai-agent-xxx.vercel.app/api/billing/checkout \
   -H "Authorization: Bearer $TOKEN" \
   -H "Content-Type: application/json" \
@@ -301,11 +301,11 @@ curl -X POST https://unik-ai-agent-xxx.vercel.app/api/billing/checkout \
 psql $POSTGRES_URL -c "SELECT email, plan, billing_interval FROM users_profile WHERE email='test@verify.com';"
 
 # Expected: plan=standard, billing_interval=monthly
-```
+\`\`\`
 
 ### Test 6: Widget Code
 
-```bash
+\`\`\`bash
 curl https://unik-ai-agent-xxx.vercel.app/api/widget-code \
   -H "Authorization: Bearer $TOKEN"
 
@@ -328,22 +328,22 @@ cat > /tmp/test-widget.html << 'EOF'
 EOF
 
 # Open in browser and verify widget appears
-```
+\`\`\`
 
 ### Test 7: Voice Intent
 
-```bash
+\`\`\`bash
 curl -X POST https://unik-ai-agent-xxx.vercel.app/api/voice/intent \
   -H "Authorization: Bearer $TOKEN" \
   -H "Content-Type: application/json" \
   -d '{"transcription":"I want to book a meeting tomorrow at 10am"}'
 
 # Expected: {"intent":"booking","scheduleRequested":true}
-```
+\`\`\`
 
 ### Test 8: Voice TTS
 
-```bash
+\`\`\`bash
 curl -X POST https://unik-ai-agent-xxx.vercel.app/api/voice/speak \
   -H "Authorization: Bearer $TOKEN" \
   -H "Content-Type: application/json" \
@@ -356,11 +356,11 @@ file /tmp/speech.mp3
 
 # Play
 mpg123 /tmp/speech.mp3
-```
+\`\`\`
 
 ### Test 9: Webhook Idempotency
 
-```bash
+\`\`\`bash
 # Send same Stripe event twice
 stripe trigger customer.subscription.created
 
@@ -368,11 +368,11 @@ stripe trigger customer.subscription.created
 psql $POSTGRES_URL -c "SELECT provider, status, COUNT(*) FROM webhooks_log WHERE provider='stripe' GROUP BY provider, status;"
 
 # Expected: Only 1 'processed' row (duplicate ignored)
-```
+\`\`\`
 
 ### Test 10: Cron Jobs
 
-```bash
+\`\`\`bash
 # Trigger monthly reset
 curl https://unik-ai-agent-xxx.vercel.app/api/cron/monthly-reset \
   -H "Authorization: Bearer $CRON_SECRET"
@@ -387,13 +387,13 @@ curl https://unik-ai-agent-xxx.vercel.app/api/cron/daily-reset \
   -H "Authorization: Bearer $CRON_SECRET"
 
 # Expected: {"success":true}
-```
+\`\`\`
 
 ---
 
 ## LIGHTHOUSE PRODUCTION AUDIT
 
-```bash
+\`\`\`bash
 # Install Lighthouse CI
 npm install -g @lhci/cli
 
@@ -402,10 +402,10 @@ lhci autorun --url=https://unik-ai-agent-xxx.vercel.app
 
 # Or use web version:
 # https://pagespeed.web.dev/analysis?url=https://unik-ai-agent-xxx.vercel.app
-```
+\`\`\`
 
 **EXPECTED SCORES:**
-```
+\`\`\`
 Performance: ≥85
 Accessibility: ≥90
 Best Practices: ≥90
@@ -415,7 +415,7 @@ Metrics:
 LCP: ≤2.3s
 CLS: ≤0.1
 TBT: ≤200ms
-```
+\`\`\`
 
 ---
 
@@ -423,7 +423,7 @@ TBT: ≤200ms
 
 ### 1. Domain Mapping
 
-```bash
+\`\`\`bash
 # In Vercel Dashboard → Settings → Domains
 # Add: agent.unik.ai
 # Configure DNS:
@@ -440,11 +440,11 @@ vercel env add ALLOWED_ORIGINS production
 # Enter: https://agent.unik.ai
 
 vercel --prod
-```
+\`\`\`
 
 ### 2. Verify SEO
 
-```bash
+\`\`\`bash
 # Sitemap
 curl https://agent.unik.ai/sitemap.xml
 
@@ -452,21 +452,21 @@ curl https://agent.unik.ai/sitemap.xml
 curl https://agent.unik.ai/robots.txt
 
 # Expected: Both return valid XML/text
-```
+\`\`\`
 
 ### 3. Enable Vercel Analytics
 
-```bash
+\`\`\`bash
 # In Vercel Dashboard → Analytics → Enable
 # Confirm tracking code added
-```
+\`\`\`
 
 ### 4. Setup Monitoring
 
-```bash
+\`\`\`bash
 # In Vercel Dashboard → Settings → Integrations
 # Add: Sentry (errors), Better Uptime (monitoring)
-```
+\`\`\`
 
 ---
 
@@ -516,7 +516,7 @@ After completing deployment, collect and document:
 
 ### Quick Rollback (Vercel)
 
-```bash
+\`\`\`bash
 # List deployments
 vercel ls
 
@@ -525,11 +525,11 @@ vercel promote https://unik-ai-agent-xxx-previous.vercel.app
 
 # Or via Dashboard:
 # Deployments → Previous → Promote to Production
-```
+\`\`\`
 
 ### Database Rollback
 
-```bash
+\`\`\`bash
 # Vercel Postgres doesn't have point-in-time recovery
 # Use manual backup/restore:
 
@@ -538,7 +538,7 @@ pg_dump $POSTGRES_URL > backup-$(date +%Y%m%d-%H%M%S).sql
 
 # Restore
 psql $POSTGRES_URL < backup-YYYYMMDD-HHMMSS.sql
-```
+\`\`\`
 
 ---
 
@@ -546,7 +546,7 @@ psql $POSTGRES_URL < backup-YYYYMMDD-HHMMSS.sql
 
 ### Build Fails
 
-```bash
+\`\`\`bash
 # Check logs
 vercel logs
 
@@ -560,21 +560,21 @@ vercel env ls
 
 # 3. Verify TypeScript
 npm run typecheck
-```
+\`\`\`
 
 ### Database Connection Error
 
-```bash
+\`\`\`bash
 # Test connection
 psql $POSTGRES_URL -c "SELECT 1"
 
 # Check SSL
 # Connection string must include: ?sslmode=require
-```
+\`\`\`
 
 ### Stripe Webhook Not Working
 
-```bash
+\`\`\`bash
 # Verify endpoint
 stripe webhooks list
 
@@ -586,7 +586,7 @@ stripe trigger customer.subscription.created
 
 # Check logs
 vercel logs --follow | grep webhook
-```
+\`\`\`
 
 ---
 

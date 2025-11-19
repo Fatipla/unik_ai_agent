@@ -13,7 +13,7 @@
 
 ### Option 1: Vercel CLI (Fastest)
 
-```bash
+\`\`\`bash
 # Install Vercel CLI
 npm i -g vercel
 
@@ -25,7 +25,7 @@ cd /app
 vercel --prod
 
 # Follow interactive prompts
-```
+\`\`\`
 
 ### Option 2: Vercel Dashboard
 
@@ -42,22 +42,22 @@ vercel --prod
 Set these in Vercel Dashboard → Settings → Environment Variables:
 
 ### Critical (App won't work without these)
-```bash
+\`\`\`bash
 POSTGRES_URL=postgresql://user:pass@host:5432/db
 OPENAI_API_KEY=sk-...
 NEXTAUTH_SECRET=generate-random-32-char-string
 NEXTAUTH_URL=https://your-app.vercel.app
-```
+\`\`\`
 
 ### Recommended
-```bash
+\`\`\`bash
 OPENAI_MODEL=gpt-4o-mini
 ALLOWED_ORIGINS=https://your-app.vercel.app,https://yourdomain.com
 CRON_SECRET=generate-random-string-for-cron-jobs
-```
+\`\`\`
 
 ### Optional (Enable features)
-```bash
+\`\`\`bash
 # Stripe
 STRIPE_ENABLED=true
 STRIPE_SECRET_KEY=sk_...
@@ -85,13 +85,13 @@ N8N_WEBHOOK_URL=https://n8n.yoursite.com/webhook/...
 
 # Widget
 WIDGET_ORIGIN=https://agent.unik.ai
-```
+\`\`\`
 
 ## DATABASE SETUP
 
 ### After First Deployment
 
-```bash
+\`\`\`bash
 # Generate SQL migration
 npm run db:generate
 
@@ -101,20 +101,20 @@ npm run db:push
 # Verify tables created
 # Connect to your database and run:
 # \dt (for Postgres)
-```
+\`\`\`
 
 ### Run RLS Policies
 
-```bash
+\`\`\`bash
 # Execute the RLS SQL file
 psql $POSTGRES_URL < src/lib/security/rls-policies.sql
-```
+\`\`\`
 
 ## VERIFICATION STEPS
 
 ### 1. Test API Endpoints
 
-```bash
+\`\`\`bash
 # Health check
 curl https://your-app.vercel.app/api/profile
 
@@ -133,11 +133,11 @@ curl -X POST https://your-app.vercel.app/api/chat \
   -H "Authorization: Bearer YOUR_TOKEN" \
   -H "Content-Type: application/json" \
   -d '{"message":"Hello!"}'
-```
+\`\`\`
 
 ### 2. Check Frontend
 
-```bash
+\`\`\`bash
 # Open in browser
 https://your-app.vercel.app
 
@@ -146,16 +146,16 @@ https://your-app.vercel.app
 - Sign up: /signup
 - Sign in: /signin
 - Dashboard: /dashboard (requires auth)
-```
+\`\`\`
 
 ### 3. Verify Logs
 
-```bash
+\`\`\`bash
 # View real-time logs
 vercel logs --follow
 
 # Or in Vercel Dashboard > Deployments > Logs
-```
+\`\`\`
 
 ## CUSTOM DOMAIN SETUP
 
@@ -164,31 +164,31 @@ vercel logs --follow
 1. Go to Project Settings → Domains
 2. Add your domain: `agent.unik.ai`
 3. Configure DNS:
-   ```
+   \`\`\`
    Type: CNAME
    Name: @
    Value: cname.vercel-dns.com
-   ```
+   \`\`\`
 
 ### 2. Update Environment Variables
 
-```bash
+\`\`\`bash
 NEXTAUTH_URL=https://agent.unik.ai
 WIDGET_ORIGIN=https://agent.unik.ai
 ALLOWED_ORIGINS=https://agent.unik.ai
-```
+\`\`\`
 
 ### 3. Redeploy
 
-```bash
+\`\`\`bash
 vercel --prod
-```
+\`\`\`
 
 ## STRIPE SETUP (Optional)
 
 ### 1. Create Products & Prices
 
-```bash
+\`\`\`bash
 # Install Stripe CLI
 brew install stripe/stripe-cli/stripe
 
@@ -207,16 +207,16 @@ stripe prices create \
   --recurring[interval]=month
 
 # Repeat for all plans (Standard Y, Pro M/Y, Enterprise M/Y)
-```
+\`\`\`
 
 ### 2. Set Price IDs
 
 Add to Vercel environment variables:
-```
+\`\`\`
 STRIPE_PRICE_STD_M=price_...
 STRIPE_PRICE_STD_Y=price_...
 # etc.
-```
+\`\`\`
 
 ### 3. Configure Webhook
 
@@ -246,17 +246,17 @@ Already enabled - view in Dashboard → Analytics
 
 ### Logs
 
-```bash
+\`\`\`bash
 # Real-time
 vercel logs --follow
 
 # Specific deployment
 vercel logs <deployment-url>
-```
+\`\`\`
 
 ### Database
 
-```bash
+\`\`\`bash
 # Connect to database
 psql $POSTGRES_URL
 
@@ -265,36 +265,36 @@ SELECT email, plan, usage_cost_eur FROM users_profile;
 
 # Check conversations
 SELECT COUNT(*) FROM conversations;
-```
+\`\`\`
 
 ## TROUBLESHOOTING
 
 ### Build Fails
 
-```bash
+\`\`\`bash
 # Clear cache
 rm -rf .next node_modules
 npm install
 npm run build
-```
+\`\`\`
 
 ### Database Connection Error
 
-```bash
+\`\`\`bash
 # Verify connection string format
 postgresql://user:pass@host:5432/db?sslmode=require
 
 # Test connection
 psql $POSTGRES_URL -c "SELECT 1"
-```
+\`\`\`
 
 ### OpenAI API Error
 
-```bash
+\`\`\`bash
 # Test API key
 curl https://api.openai.com/v1/models \
   -H "Authorization: Bearer $OPENAI_API_KEY"
-```
+\`\`\`
 
 ### Widget Not Loading
 
@@ -304,24 +304,24 @@ curl https://api.openai.com/v1/models \
 
 ## ROLLBACK
 
-```bash
+\`\`\`bash
 # List deployments
 vercel ls
 
 # Promote previous deployment
 vercel promote <deployment-url>
-```
+\`\`\`
 
 ## GITHUB SECRETS SETUP
 
 For CI/CD to work, add these secrets in GitHub:
 Settings → Secrets and variables → Actions
 
-```
+\`\`\`
 VERCEL_TOKEN=<your-vercel-token>
 VERCEL_ORG_ID=<your-org-id>
 VERCEL_PROJECT_ID=<your-project-id>
-```
+\`\`\`
 
 Get these from Vercel Dashboard → Settings → Tokens
 

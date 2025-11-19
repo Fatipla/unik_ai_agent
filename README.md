@@ -4,7 +4,7 @@
 
 ## ⚡ Quick Start
 
-```bash
+\`\`\`bash
 # 1. Install dependencies
 npm install
 
@@ -19,7 +19,7 @@ npm run db:push
 npm run dev
 
 # 5. Open http://localhost:9002
-```
+\`\`\`
 
 ## 🎯 Core Features
 
@@ -69,7 +69,7 @@ npm run dev
 
 ## 📁 Project Structure
 
-```
+\`\`\`
 /app
 ├── src/
 │   ├── app/
@@ -97,7 +97,7 @@ npm run dev
 ├── DEPLOY.md                  # Deployment guide
 ├── IMPLEMENTATION_STATUS.md   # Current status
 └── package.json
-```
+\`\`\`
 
 ## 🔑 Environment Variables
 
@@ -128,17 +128,17 @@ See `.env.example` for all required variables.
 - `POST /api/chat` - Send message with cost tracking
 
 **Request:**
-```json
+\`\`\`json
 {
   "message": "Hello, how can you help me?",
   "sessionId": "optional-conversation-id",
   "lang": "en",
   "tone": "professional"
 }
-```
+\`\`\`
 
 **Response:**
-```json
+\`\`\`json
 {
   "text": "AI response...",
   "conversationId": "uuid",
@@ -151,21 +151,21 @@ See `.env.example` for all required variables.
     "warning": false
   }
 }
-```
+\`\`\`
 
 **Cost Cap Enforcement:**
 If projected monthly cost would exceed 50% of plan revenue, returns 429:
-```json
+\`\`\`json
 {
   "error": "Monthly AI cost limit would be exceeded",
   "upsellHint": "This request would exceed your free plan's monthly AI cost limit. Upgrade to continue.",
   "upgradeUrl": "/dashboard/billing"
 }
-```
+\`\`\`
 
 ## 🧪 Testing
 
-```bash
+\`\`\`bash
 # Type check
 npm run typecheck
 
@@ -177,7 +177,7 @@ npm test
 
 # E2E tests (to be added)
 npm run test:e2e
-```
+\`\`\`
 
 ## 📊 Cost Management (CRITICAL FEATURE)
 
@@ -192,7 +192,7 @@ The platform enforces a **50% AI cost-to-revenue cap** per tenant per month:
 
 ### Cost Calculation Example
 
-```typescript
+\`\`\`typescript
 import { calculateChatCost, wouldExceedCap } from '@/lib/pricing';
 
 // User has spent €8 this month on Standard plan (cap: €9.995)
@@ -202,7 +202,7 @@ const newRequestCost = calculateChatCost('gpt-4o-mini', 100, 500); // €0.0003
 if (wouldExceedCap('standard', currentCost, newRequestCost)) {
   // Block request, show upgrade prompt
 }
-```
+\`\`\`
 
 ## 🔐 Security
 
@@ -220,7 +220,7 @@ See [DEPLOY.md](./DEPLOY.md) for complete deployment guide.
 
 ### Quick Deploy to Vercel
 
-```bash
+\`\`\`bash
 # Install Vercel CLI
 npm i -g vercel
 
@@ -230,7 +230,7 @@ vercel
 # Set environment variables in Vercel Dashboard
 # Deploy to production
 vercel --prod
-```
+\`\`\`
 
 ## 🎓 Development Guide
 
@@ -244,7 +244,7 @@ vercel --prod
 
 ### Adding Cost Tracking
 
-```typescript
+\`\`\`typescript
 import { calculateChatCost } from '@/lib/pricing';
 import { wouldExceedCap } from '@/lib/pricing';
 
@@ -260,7 +260,7 @@ if (wouldExceedCap(userPlan, currentMonthCost, cost)) {
 await db.update(usersProfile)
   .set({ usageCostEur: sql`${usersProfile.usageCostEur} + ${cost}` })
   .where(eq(usersProfile.userId, userId));
-```
+\`\`\`
 
 ## 📝 Implementation Status
 
@@ -277,25 +277,25 @@ See [IMPLEMENTATION_STATUS.md](./IMPLEMENTATION_STATUS.md) for details.
 ## 🐛 Troubleshooting
 
 ### Database Connection Error
-```bash
+\`\`\`bash
 # Check connection string format
 POSTGRES_URL=postgresql://user:pass@host/db?sslmode=require
 
 # Test connection
 npm run db:studio
-```
+\`\`\`
 
 ### OpenAI API Error
-```bash
+\`\`\`bash
 # Verify API key
 echo $OPENAI_API_KEY
 
 # Test endpoint
 curl https://api.openai.com/v1/models -H "Authorization: Bearer $OPENAI_API_KEY"
-```
+\`\`\`
 
 ### Build Fails
-```bash
+\`\`\`bash
 # Clear Next.js cache
 rm -rf .next
 
@@ -305,7 +305,7 @@ npm install
 
 # Type check
 npm run typecheck
-```
+\`\`\`
 
 ## 📞 Support
 
