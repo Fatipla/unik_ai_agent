@@ -3,8 +3,58 @@ import './globals.css';
 import { Toaster } from "@/components/ui/toaster"
 
 export const metadata: Metadata = {
-  title: 'Unik AI Agent Platform',
-  description: 'The Ultimate AI Agent Platform for Your Business',
+  metadataBase: new URL('https://agent.unik.ai'),
+  title: {
+    default: 'Unik AI Agent Platform - AI-Powered Chatbot & Voice Agent',
+    template: '%s | Unik AI Agent',
+  },
+  description: 'Enterprise-grade AI chatbot and voice agent platform with predictable pricing. Integrate in minutes, scale with confidence. 50% AI cost cap guarantee.',
+  keywords: ['AI chatbot', 'voice agent', 'chatbot platform', 'AI assistant', 'customer support automation', 'conversational AI'],
+  authors: [{ name: 'Unik AI' }],
+  creator: 'Unik AI',
+  publisher: 'Unik AI',
+  openGraph: {
+    type: 'website',
+    locale: 'en_US',
+    url: 'https://agent.unik.ai',
+    siteName: 'Unik AI Agent Platform',
+    title: 'Unik AI Agent Platform - AI-Powered Chatbot & Voice Agent',
+    description: 'Enterprise-grade AI chatbot and voice agent platform with predictable pricing. 50% AI cost cap guarantee.',
+    images: [
+      {
+        url: '/og-image.png',
+        width: 1200,
+        height: 630,
+        alt: 'Unik AI Agent Platform',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Unik AI Agent Platform - AI-Powered Chatbot & Voice Agent',
+    description: 'Enterprise-grade AI chatbot and voice agent platform with predictable pricing.',
+    images: ['/og-image.png'],
+    creator: '@unikai',
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
+  alternates: {
+    canonical: 'https://agent.unik.ai',
+    languages: {
+      'en': 'https://agent.unik.ai/en',
+      'de': 'https://agent.unik.ai/de',
+      'sq': 'https://agent.unik.ai/al',
+    },
+  },
 };
 
 export default function RootLayout({
