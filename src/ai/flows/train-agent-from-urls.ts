@@ -45,7 +45,7 @@ const trainAgentFromUrlsFlow = ai.defineFlow(
 
     return {
       jobId,
-      status: 'queued',
+      status: 'queued' as const,
     };
   }
 );
