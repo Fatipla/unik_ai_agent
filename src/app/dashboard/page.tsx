@@ -7,6 +7,9 @@ import {
 } from '@/components/ui/card';
 import { DollarSign, MessageCircle, Users, BarChart } from 'lucide-react';
 
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
+
 export default function DashboardPage() {
   return (
     <div className="space-y-8">
