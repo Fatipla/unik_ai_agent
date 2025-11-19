@@ -7,15 +7,12 @@ export const env = {
   OPENAI_API_KEY: process.env.OPENAI_API_KEY || '',
   OPENAI_MODEL: process.env.OPENAI_MODEL || 'gpt-4o-mini',
   
-  // Stripe
-  STRIPE_SECRET_KEY: process.env.STRIPE_SECRET_KEY || '',
-  STRIPE_WEBHOOK_SECRET: process.env.STRIPE_WEBHOOK_SECRET || '',
-  STRIPE_PRICE_STD_M: process.env.STRIPE_PRICE_STD_M || '',
-  STRIPE_PRICE_STD_Y: process.env.STRIPE_PRICE_STD_Y || '',
-  STRIPE_PRICE_PRO_M: process.env.STRIPE_PRICE_PRO_M || '',
-  STRIPE_PRICE_PRO_Y: process.env.STRIPE_PRICE_PRO_Y || '',
-  STRIPE_PRICE_ENT_M: process.env.STRIPE_PRICE_ENT_M || '',
-  STRIPE_PRICE_ENT_Y: process.env.STRIPE_PRICE_ENT_Y || '',
+  // Paddle
+  PADDLE_VENDOR_ID: process.env.PADDLE_VENDOR_ID || '',
+  PADDLE_CLIENT_ID: process.env.PADDLE_CLIENT_ID || '',
+  PADDLE_CLIENT_SECRET: process.env.PADDLE_CLIENT_SECRET || '',
+  PADDLE_WEBHOOK_SECRET: process.env.PADDLE_WEBHOOK_SECRET || '',
+  PADDLE_ENV: process.env.PADDLE_ENV || 'sandbox', // 'sandbox' | 'live'
   
   // Email
   POSTMARK_KEY: process.env.POSTMARK_KEY || '',
@@ -33,11 +30,14 @@ export const env = {
   // App
   NEXTAUTH_SECRET: process.env.NEXTAUTH_SECRET || 'dev-secret-change-in-production',
   NEXTAUTH_URL: process.env.NEXTAUTH_URL || 'http://localhost:9002',
-  WIDGET_ORIGIN: process.env.WIDGET_ORIGIN || 'https://agent.unik.ai',
-  ALLOWED_ORIGINS: process.env.ALLOWED_ORIGINS || 'http://localhost:9002,https://agent.unik.ai',
+  SITE_URL: process.env.SITE_URL || 'https://agent.unik-ks.com',
+  ROOT_DOMAIN: process.env.ROOT_DOMAIN || 'unik-ks.com',
+  WIDGET_ORIGIN: process.env.WIDGET_ORIGIN || 'https://agent.unik-ks.com',
+  ALLOWED_ORIGINS: process.env.ALLOWED_ORIGINS || 'http://localhost:9002,https://agent.unik-ks.com',
+  SUPPORT_EMAIL: process.env.SUPPORT_EMAIL || 'support@unik-ks.com',
   
   // Feature flags
-  STRIPE_ENABLED: process.env.STRIPE_ENABLED !== 'false',
+  PADDLE_ENABLED: process.env.PADDLE_ENABLED !== 'false',
   EMAIL_ENABLED: process.env.EMAIL_ENABLED !== 'false',
   VOICE_ENABLED: process.env.VOICE_ENABLED !== 'false',
   WHATSAPP_ENABLED: process.env.WHATSAPP_ENABLED !== 'false',

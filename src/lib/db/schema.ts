@@ -1,7 +1,7 @@
 import { pgTable, uuid, varchar, text, timestamp, jsonb, integer, decimal, boolean, pgEnum, uniqueIndex, index } from 'drizzle-orm/pg-core';
 
 // Enums
-export const planEnum = pgEnum('plan', ['free', 'standard', 'pro', 'enterprise']);
+export const planEnum = pgEnum('plan', ['free', 'starter', 'pro', 'business']);
 export const billingIntervalEnum = pgEnum('billing_interval', ['monthly', 'yearly']);
 export const sourceEnum = pgEnum('source', ['widget', 'voice', 'whatsapp', 'api']);
 export const roleEnum = pgEnum('role', ['user', 'assistant', 'tool']);
@@ -16,7 +16,7 @@ export const usersProfile = pgTable('users_profile', {
   passwordHash: varchar('password_hash', { length: 255 }),
   plan: planEnum('plan').default('free').notNull(),
   billingInterval: billingIntervalEnum('billing_interval').default('monthly'),
-  stripeCustomerId: varchar('stripe_customer_id', { length: 255 }),
+  paddleCustomerId: varchar('paddle_customer_id', { length: 255 }),
   activePriceId: varchar('active_price_id', { length: 255 }),
   activation: jsonb('activation').$type<string[]>().default([]),
   whatsappNumber: varchar('whatsapp_number', { length: 50 }),
@@ -82,20 +82,76 @@ export const emails = pgTable('emails', {
   userEmailIdx: index('email_user_idx').on(table.userId, table.email),
 }));
 
-// Stripe Customers
-export const stripeCustomers = pgTable('stripe_customers', {
+// Paddle Customers
+export const paddleCustomers = pgTable('paddle_customers', {
   userId: uuid('user_id').primaryKey().references(() => usersProfile.userId, { onDelete: 'cascade' }),
   customerId: varchar('customer_id', { length: 255 }).notNull(),
   subscriptionId: varchar('subscription_id', { length: 255 }),
   priceId: varchar('price_id', { length: 255 }),
   status: varchar('status', { length: 50 }),
   currentPeriodEnd: timestamp('current_period_end'),
+  cancelAt: timestamp('cancel_at'),
+  createdAt: timestamp('created_at').defaultNow(),
+  updatedAt: timestamp('updated_at').defaultNow(),
+});
+
+// Paddle Products
+export const paddleProducts = pgTable('paddle_products', {
+  id: uuid('id').primaryKey().defaultRandom(),
+  productId: varchar('product_id', { length: 255 }).notNull().unique(),
+  name: varchar('name', { length: 255 }).notNull(),
+  description: text('description'),
+  createdAt: timestamp('created_at').defaultNow(),
+});
+
+// Paddle Prices
+export const paddlePrices = pgTable('paddle_prices', {
+  id: uuid('id').primaryKey().defaultRandom(),
+  priceId: varchar('price_id', { length: 255 }).notNull().unique(),
+  productId: varchar('product_id', { length: 255 }).notNull(),
+  planName: varchar('plan_name', { length: 50 }).notNull(), // starter, pro, business
+  amount: integer('amount').notNull(), // in cents
+  currency: varchar('currency', { length: 3 }).default('EUR').notNull(),
+  interval: billingIntervalEnum('interval').notNull(),
+  trialDays: integer('trial_days').default(7),
+  createdAt: timestamp('created_at').defaultNow(),
+}, (table) => ({
+  priceIdx: uniqueIndex('price_idx').on(table.priceId),
+}));
+
+// Paddle Invoices
+export const paddleInvoices = pgTable('paddle_invoices', {
+  id: uuid('id').primaryKey().defaultRandom(),
+  userId: uuid('user_id').notNull().references(() => usersProfile.userId, { onDelete: 'cascade' }),
+  invoiceId: varchar('invoice_id', { length: 255 }).notNull().unique(),
+  invoiceNumber: varchar('invoice_number', { length: 100 }),
+  amount: integer('amount').notNull(),
+  currency: varchar('currency', { length: 3 }).default('EUR'),
+  status: varchar('status', { length: 50 }),
+  invoiceUrl: text('invoice_url'),
+  paidAt: timestamp('paid_at'),
+  createdAt: timestamp('created_at').defaultNow(),
+}, (table) => ({
+  userIdx: index('invoice_user_idx').on(table.userId),
+}));
+
+// Paddle Payments
+export const paddlePayments = pgTable('paddle_payments', {
+  id: uuid('id').primaryKey().defaultRandom(),
+  userId: uuid('user_id').notNull().references(() => usersProfile.userId, { onDelete: 'cascade' }),
+  paymentId: varchar('payment_id', { length: 255 }).notNull().unique(),
+  subscriptionId: varchar('subscription_id', { length: 255 }),
+  amount: integer('amount').notNull(),
+  currency: varchar('currency', { length: 3 }).default('EUR'),
+  status: varchar('status', { length: 50 }),
+  createdAt: timestamp('created_at').defaultNow(),
 });
 
 // Webhooks Log
 export const webhooksLog = pgTable('webhooks_log', {
   id: uuid('id').primaryKey().defaultRandom(),
   provider: varchar('provider', { length: 50 }).notNull(),
+  eventType: varchar('event_type', { length: 100 }),
   payloadHash: varchar('payload_hash', { length: 64 }).notNull().unique(),
   status: varchar('status', { length: 50 }),
   retries: integer('retries').default(0),
@@ -133,3 +189,8 @@ export const voiceCalls = pgTable('voice_calls', {
 export type UsersProfile = typeof usersProfile.$inferSelect;
 export type Conversation = typeof conversations.$inferSelect;
 export type Message = typeof messages.$inferSelect;
+export type PaddleCustomer = typeof paddleCustomers.$inferSelect;
+export type PaddleProduct = typeof paddleProducts.$inferSelect;
+export type PaddlePrice = typeof paddlePrices.$inferSelect;
+export type PaddleInvoice = typeof paddleInvoices.$inferSelect;
+export type PaddlePayment = typeof paddlePayments.$inferSelect;

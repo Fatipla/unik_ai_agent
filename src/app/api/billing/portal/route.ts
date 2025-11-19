@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getUserFromHeaders } from '@/lib/auth';
-import { stripe } from '@/lib/stripe';
+import { paddle } from '@/lib/paddle';
 import { db, usersProfile } from '@/lib/db';
 import { eq } from 'drizzle-orm';
 import { env } from '@/lib/env';
@@ -11,41 +11,43 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
 
-  if (!env.STRIPE_ENABLED || !stripe) {
+  if (!env.PADDLE_ENABLED || !paddle) {
     return NextResponse.json({
-      portalUrl: 'https://billing.stripe.com/demo',
+      portalUrl: 'https://billing.paddle.com/demo',
       stubbed: true,
-      message: 'Stripe not enabled.',
+      message: 'Paddle not enabled.',
     });
   }
 
   try {
-    // Get user profile with Stripe customer ID
+    // Get user profile with Paddle customer ID
     const [profile] = await db.select()
       .from(usersProfile)
       .where(eq(usersProfile.userId, user.userId))
       .limit(1);
 
-    if (!profile || !profile.stripeCustomerId) {
+    if (!profile || !profile.paddleCustomerId) {
       return NextResponse.json(
         { error: 'No billing account found' },
         { status: 404 }
       );
     }
 
-    // Create portal session
-    const session = await stripe.billingPortal.sessions.create({
-      customer: profile.stripeCustomerId,
-      return_url: `${env.NEXTAUTH_URL}/dashboard/billing`,
-    });
+    // Generate customer portal session
+    const portalSession = await paddle.customers.getPortalSession(
+      profile.paddleCustomerId,
+      {
+        returnUrl: `${env.SITE_URL}/dashboard/billing`,
+      }
+    );
 
     return NextResponse.json({
-      portalUrl: session.url,
+      portalUrl: portalSession.urls.overview,
     });
   } catch (error: any) {
-    console.error('Portal error:', error);
+    console.error('[Paddle Portal Error]:', error);
     return NextResponse.json(
-      { error: 'Failed to create portal session' },
+      { error: 'Failed to create portal session', details: error.message },
       { status: 500 }
     );
   }

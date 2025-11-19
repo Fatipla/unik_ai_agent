@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getUserFromHeaders } from '@/lib/auth';
-import { stripe, STRIPE_PRICES } from '@/lib/stripe';
+import { paddle } from '@/lib/paddle';
+import { db, usersProfile, paddlePrices, paddleCustomers } from '@/lib/db';
+import { eq } from 'drizzle-orm';
 import { env } from '@/lib/env';
 
 export async function POST(request: NextRequest) {
@@ -9,61 +11,82 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
 
-  if (!env.STRIPE_ENABLED || !stripe) {
+  if (!env.PADDLE_ENABLED || !paddle) {
     return NextResponse.json({
-      checkoutUrl: 'https://stripe.com/checkout/demo',
+      checkoutUrl: 'https://paddle.com/checkout/demo',
       stubbed: true,
-      message: 'Stripe not enabled. Set STRIPE_ENABLED=true and add API keys.',
+      message: 'Paddle not enabled. Set PADDLE_ENABLED=true and add API keys.',
     });
   }
 
   try {
-    const { priceId, interval } = await request.json();
+    const { priceId } = await request.json();
 
     if (!priceId) {
       return NextResponse.json({ error: 'Price ID required' }, { status: 400 });
     }
 
-    // Create or retrieve Stripe customer
-    const customer = await stripe.customers.create({
-      email: user.email,
-      metadata: {
-        userId: user.userId,
-      },
-    });
+    // Get user profile
+    const [profile] = await db.select()
+      .from(usersProfile)
+      .where(eq(usersProfile.userId, user.userId))
+      .limit(1);
 
-    // Create checkout session with 7-day trial for Standard plan
-    const isStandard = priceId === STRIPE_PRICES.standard_monthly || priceId === STRIPE_PRICES.standard_yearly;
+    if (!profile) {
+      return NextResponse.json({ error: 'Profile not found' }, { status: 404 });
+    }
+
+    // Get price details from database
+    const [price] = await db.select()
+      .from(paddlePrices)
+      .where(eq(paddlePrices.priceId, priceId))
+      .limit(1);
+
+    if (!price) {
+      return NextResponse.json({ error: 'Invalid price ID' }, { status: 400 });
+    }
+
+    // Create or get Paddle customer
+    let customerId = profile.paddleCustomerId;
     
-    const session = await stripe.checkout.sessions.create({
-      customer: customer.id,
-      mode: 'subscription',
-      payment_method_types: ['card'],
-      line_items: [
+    if (!customerId) {
+      // Create new Paddle customer
+      const customer = await paddle.customers.create({
+        email: user.email,
+        name: profile.displayName || undefined,
+      });
+      
+      customerId = customer.id;
+      
+      // Update user profile with customer ID
+      await db.update(usersProfile)
+        .set({ paddleCustomerId: customerId })
+        .where(eq(usersProfile.userId, user.userId));
+    }
+
+    // Create checkout transaction with trial
+    const transaction = await paddle.transactions.create({
+      items: [
         {
-          price: priceId,
+          priceId: priceId,
           quantity: 1,
         },
       ],
-      subscription_data: isStandard ? {
-        trial_period_days: 7,
-      } : undefined,
-      success_url: `${env.NEXTAUTH_URL}/dashboard?checkout=success`,
-      cancel_url: `${env.NEXTAUTH_URL}/dashboard/billing?checkout=cancelled`,
-      metadata: {
+      customerId: customerId,
+      customData: {
         userId: user.userId,
-        interval,
       },
+      discountId: undefined, // Add discount logic if needed
     });
 
     return NextResponse.json({
-      checkoutUrl: session.url,
-      sessionId: session.id,
+      checkoutUrl: transaction.checkoutUrl,
+      transactionId: transaction.id,
     });
   } catch (error: any) {
-    console.error('Checkout error:', error);
+    console.error('[Paddle Checkout Error]:', error);
     return NextResponse.json(
-      { error: 'Failed to create checkout session' },
+      { error: 'Failed to create checkout session', details: error.message },
       { status: 500 }
     );
   }
