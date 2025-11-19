@@ -1,0 +1,27 @@
+{
+  "common": {
+    "getStarted": "Get Started",
+    "learnMore": "Learn More",
+    "signIn": "Sign In",
+    "signUp": "Sign Up",
+    "pricing": "Pricing",
+    "features": "Features",
+    "installation": "Installation"
+  },
+  "hero": {
+    "title": "The Ultimate AI Agent Platform for Your Business",
+    "subtitle": "Integrate a powerful Chatbot and Voice Agent in minutes. Boost conversions, automate support, and manage costs with predictable pricing.",
+    "cta": "Get Started for Free"
+  },
+  "pricing": {
+    "title": "Simple, predictable pricing",
+    "subtitle": "Choose the perfect plan for your business. All plans include our 50% AI cost cap guarantee.",
+    "free": "Free",
+    "standard": "Standard",
+    "pro": "Pro",
+    "enterprise": "Enterprise",
+    "perMonth": "/month",
+    "perYear": "/year",
+    "save30": "Save 30%"
+  }
+}
