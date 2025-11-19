@@ -11,6 +11,9 @@ import { Badge } from "@/components/ui/badge";
 import { CircleCheckBig } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
 
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
+
 const plans = [
     {
       name: "Standard",
