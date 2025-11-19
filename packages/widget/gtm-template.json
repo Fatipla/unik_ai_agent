@@ -1,0 +1,78 @@
+{
+  "templateType": "TAG",
+  "name": "Unik AI Agent Widget",
+  "description": "Embeds the Unik AI chatbot widget on your website",
+  "version": "1.0.0",
+  "fields": [
+    {
+      "name": "agentId",
+      "displayName": "Agent ID",
+      "type": "TEXT",
+      "isRequired": true,
+      "help": "Your unique Agent ID from Unik AI dashboard"
+    },
+    {
+      "name": "lang",
+      "displayName": "Language",
+      "type": "SELECT",
+      "defaultValue": "en",
+      "selectItems": [
+        {"value": "en", "displayValue": "English"},
+        {"value": "de", "displayValue": "German"},
+        {"value": "al", "displayValue": "Albanian"}
+      ]
+    },
+    {
+      "name": "theme",
+      "displayName": "Theme",
+      "type": "SELECT",
+      "defaultValue": "light",
+      "selectItems": [
+        {"value": "light", "displayValue": "Light"},
+        {"value": "dark", "displayValue": "Dark"}
+      ]
+    },
+    {
+      "name": "tone",
+      "displayName": "Tone",
+      "type": "SELECT",
+      "defaultValue": "professional",
+      "selectItems": [
+        {"value": "professional", "displayValue": "Professional"},
+        {"value": "friendly", "displayValue": "Friendly"},
+        {"value": "casual", "displayValue": "Casual"}
+      ]
+    },
+    {
+      "name": "brandColor",
+      "displayName": "Brand Color",
+      "type": "TEXT",
+      "defaultValue": "#624CAB",
+      "help": "Hex color code for widget branding"
+    },
+    {
+      "name": "position",
+      "displayName": "Position",
+      "type": "SELECT",
+      "defaultValue": "bottom-right",
+      "selectItems": [
+        {"value": "bottom-right", "displayValue": "Bottom Right"},
+        {"value": "bottom-left", "displayValue": "Bottom Left"}
+      ]
+    },
+    {
+      "name": "greeting",
+      "displayName": "Greeting Message",
+      "type": "TEXT",
+      "defaultValue": "👋 Hello! How can I help you today?"
+    },
+    {
+      "name": "proactiveDelay",
+      "displayName": "Proactive Popup Delay (seconds)",
+      "type": "TEXT",
+      "defaultValue": "0",
+      "help": "Delay before auto-opening widget. 0 = disabled"
+    }
+  ],
+  "sandboxedCode": "(function(){var s=document.createElement('script');s.src='https://agent.unik.ai/widget.js';s.setAttribute('data-agent-id',data.agentId);s.setAttribute('data-lang',data.lang);s.setAttribute('data-theme',data.theme);s.setAttribute('data-tone',data.tone);s.setAttribute('data-brand-color',data.brandColor);s.setAttribute('data-position',data.position);s.setAttribute('data-greeting',data.greeting);s.setAttribute('data-proactive-delay',data.proactiveDelay);s.defer=true;document.body.appendChild(s);data.gtmOnSuccess();})();"
+}
