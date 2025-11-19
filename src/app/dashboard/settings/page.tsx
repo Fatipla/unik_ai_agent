@@ -18,6 +18,9 @@ import {
 } from "@/components/ui/select";
 import { Switch } from "@/components/ui/switch";
 
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
+
 export default function SettingsPage() {
   return (
     <div className="space-y-8 max-w-2xl">
