@@ -1,0 +1,48 @@
+<!-- Unik AI Agent Widget for Webflow -->
+<!-- 
+  INSTALLATION:
+  1. In Webflow Designer, go to Project Settings
+  2. Click Custom Code tab
+  3. Paste this code in "Footer Code" section
+  4. Replace YOUR_AGENT_ID with your actual Agent ID from dashboard
+  5. Customize data-* attributes as needed
+  6. Publish your site
+-->
+
+<script
+  src="https://agent.unik.ai/widget.js"
+  data-agent-id="YOUR_AGENT_ID"
+  data-lang="en"
+  data-theme="light"
+  data-tone="professional"
+  data-brand-color="#624CAB"
+  data-position="bottom-right"
+  data-greeting="👋 Hello! How can I help you today?"
+  data-proactive-delay="0"
+  data-collect-email="true"
+  defer
+></script>
+
+<!-- 
+  CUSTOMIZATION OPTIONS:
+  
+  data-agent-id: Your unique Agent ID (required)
+  data-lang: Language - "en", "de", or "al" (default: "en")
+  data-theme: Theme - "light" or "dark" (default: "light")
+  data-tone: Tone - "professional", "friendly", or "casual" (default: "professional")
+  data-brand-color: Hex color for branding (default: "#624CAB")
+  data-position: Widget position - "bottom-right" or "bottom-left" (default: "bottom-right")
+  data-greeting: Initial greeting message (default: "👋 Hello! How can I help you today?")
+  data-proactive-delay: Auto-open delay in seconds, 0 = disabled (default: 0)
+  data-collect-email: Collect visitor email - "true" or "false" (default: "true")
+
+  EXAMPLE - Dark theme with German language:
+  <script
+    src="https://agent.unik.ai/widget.js"
+    data-agent-id="abc123xyz"
+    data-lang="de"
+    data-theme="dark"
+    data-brand-color="#FF6B6B"
+    defer
+  ></script>
+-->
