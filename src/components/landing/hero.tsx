@@ -35,18 +35,22 @@ export function Hero() {
             </div>
           </div>
           
-          <div>
-            {heroImage && (
+          <div className="relative">
+            <div className="relative rounded-2xl overflow-hidden shadow-2xl shadow-primary/30">
               <Image
-                src={heroImage.imageUrl}
-                alt={heroImage.description}
+                src="/images/hero-ai-dashboard.jpg"
+                alt="Hyper-realistic AI Agent dashboard with analytics, chatbot, and voice agent controls"
                 width={1200}
                 height={900}
-                className="rounded-xl shadow-2xl shadow-primary/40"
+                className="w-full h-auto"
                 priority
-                data-ai-hint={heroImage.imageHint}
               />
-            )}
+              {/* Gradient overlay for depth */}
+              <div className="absolute inset-0 bg-gradient-to-t from-background/20 to-transparent pointer-events-none" />
+            </div>
+            
+            {/* Decorative glow effect */}
+            <div className="absolute -inset-4 bg-gradient-to-r from-primary/20 via-purple-500/20 to-blue-500/20 blur-3xl -z-10 opacity-50" />
           </div>
 
         </div>
