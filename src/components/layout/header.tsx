@@ -1,9 +1,10 @@
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { Menu } from "lucide-react";
+import { Menu } from 'lucide-react';
 import { Logo } from "@/components/logo";
 import { cn } from "@/lib/utils";
+import { ThemeToggle } from "@/components/theme-toggle";
 
 export function Header({ className }: { className?: string }) {
   const navLinks = [
@@ -37,6 +38,7 @@ export function Header({ className }: { className?: string }) {
         </nav>
 
         <div className="hidden items-center space-x-2 md:flex">
+          <ThemeToggle />
           <Button variant="link" asChild>
             <Link href="/dashboard">Log In</Link>
           </Button>
@@ -47,6 +49,7 @@ export function Header({ className }: { className?: string }) {
 
         {/* Mobile Nav */}
         <div className="flex items-center gap-4 md:hidden">
+          <ThemeToggle />
           <Sheet>
             <SheetTrigger asChild>
               <Button variant="ghost" size="icon">

@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { CircleCheckBig } from "lucide-react";
+import { CircleCheckBig } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -12,7 +12,6 @@ const plans = [
       "500 conversations/mo",
       "Chatbot Widget & API",
       "Knowledge Base Training",
-      "OpenAI Cost Cap: €9.99",
       "Basic Analytics",
       "7-Day Free Trial",
     ],
@@ -27,7 +26,6 @@ const plans = [
       "Everything in Standard",
       "Voice Agent (TTS/Whisper)",
       "n8n Integration",
-      "OpenAI Cost Cap: €14.99",
       "Advanced Analytics",
     ],
     cta: "Choose Pro",
@@ -41,7 +39,6 @@ const plans = [
       "Everything in Pro",
       "Dedicated Support",
       "Custom Integrations",
-      "OpenAI Cost Cap: €19.99",
       "Full Audit Logs",
     ],
     cta: "Contact Sales",
@@ -58,13 +55,13 @@ export function Pricing() {
             Simple, predictable pricing
           </h2>
           <p className="mt-6 text-lg leading-8 text-muted-foreground">
-            Choose the perfect plan for your business. All plans include our 50% OpenAI cost cap guarantee. Save 30% with yearly billing.
+            Choose the perfect plan for your business. Save 30% with yearly billing.
           </p>
         </div>
         <div className="mx-auto mt-16 grid max-w-lg grid-cols-1 gap-8 lg:max-w-none lg:grid-cols-3">
           {plans.map((plan) => (
             <Card key={plan.name} className={`flex flex-col ${plan.popular ? 'border-primary ring-2 ring-primary' : ''}`}>
-               {plan.popular && <Badge className="absolute -top-3 self-center">Most Popular</Badge>}
+              {plan.popular && <Badge className="absolute -top-3 self-center">Most Popular</Badge>}
               <CardHeader>
                 <CardTitle className="font-headline tracking-normal">{plan.name}</CardTitle>
                 <CardDescription>
