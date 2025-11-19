@@ -2,7 +2,7 @@ import Stripe from 'stripe';
 import { env } from './env';
 
 export const stripe = env.STRIPE_SECRET_KEY
-  ? new Stripe(env.STRIPE_SECRET_KEY, { apiVersion: '2024-12-18.acacia' })
+  ? new Stripe(env.STRIPE_SECRET_KEY, { apiVersion: '2025-11-17.clover' as any })
   : null;
 
 export const STRIPE_PRICES = {
