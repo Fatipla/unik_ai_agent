@@ -1,0 +1,27 @@
+{
+  "common": {
+    "getStarted": "Fillo",
+    "learnMore": "Mëso më shumë",
+    "signIn": "Hyr",
+    "signUp": "Regjistrohu",
+    "pricing": "Çmimet",
+    "features": "Karakteristikat",
+    "installation": "Instalimi"
+  },
+  "hero": {
+    "title": "Platforma Përfundimtare e Agjentit AI për Biznesin Tuaj",
+    "subtitle": "Integroni një Chatbot dhe Agjent Zëri të fuqishëm në minuta. Rritni konvertimet, automatizoni mbështetjen dhe menaxhoni kostot me çmime të parashikueshme.",
+    "cta": "Fillo Falas"
+  },
+  "pricing": {
+    "title": "Çmime të thjeshta dhe të parashikueshme",
+    "subtitle": "Zgjidhni planin perfekt për biznesin tuaj. Të gjitha planet përfshijnë garancine tonë 50% të kufizimit të kostos AI.",
+    "free": "Falas",
+    "standard": "Standard",
+    "pro": "Pro",
+    "enterprise": "Enterprise",
+    "perMonth": "/muaj",
+    "perYear": "/vit",
+    "save30": "Kurseni 30%"
+  }
+}
