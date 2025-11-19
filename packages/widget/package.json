@@ -1,0 +1,36 @@
+{
+  "name": "@unik/agent-widget",
+  "version": "1.0.0",
+  "description": "Embeddable AI chat widget for Unik AI Agent",
+  "main": "dist/index.js",
+  "module": "dist/index.esm.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "rollup -c",
+    "dev": "rollup -c -w"
+  },
+  "keywords": [
+    "chat",
+    "widget",
+    "ai",
+    "chatbot",
+    "unik"
+  ],
+  "author": "Unik AI",
+  "license": "MIT",
+  "peerDependencies": {
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0"
+  },
+  "peerDependenciesMeta": {
+    "react": {
+      "optional": true
+    },
+    "react-dom": {
+      "optional": true
+    }
+  }
+}
