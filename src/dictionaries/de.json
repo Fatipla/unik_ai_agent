@@ -1,0 +1,27 @@
+{
+  "common": {
+    "getStarted": "Loslegen",
+    "learnMore": "Mehr erfahren",
+    "signIn": "Anmelden",
+    "signUp": "Registrieren",
+    "pricing": "Preise",
+    "features": "Funktionen",
+    "installation": "Installation"
+  },
+  "hero": {
+    "title": "Die ultimative KI-Agenten-Plattform für Ihr Unternehmen",
+    "subtitle": "Integrieren Sie einen leistungsstarken Chatbot und Sprachagenten in Minuten. Steigern Sie Konversionen, automatisieren Sie Support und verwalten Sie Kosten mit vorhersehbarer Preisgestaltung.",
+    "cta": "Kostenlos starten"
+  },
+  "pricing": {
+    "title": "Einfache, vorhersehbare Preise",
+    "subtitle": "Wählen Sie den perfekten Plan für Ihr Unternehmen. Alle Pläne beinhalten unsere 50% KI-Kosten-Obergrenze-Garantie.",
+    "free": "Kostenlos",
+    "standard": "Standard",
+    "pro": "Pro",
+    "enterprise": "Enterprise",
+    "perMonth": "/Monat",
+    "perYear": "/Jahr",
+    "save30": "30% sparen"
+  }
+}
