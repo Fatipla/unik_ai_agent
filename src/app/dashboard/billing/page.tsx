@@ -1,3 +1,5 @@
+'use client';
+
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -10,9 +12,7 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { CircleCheckBig } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
-
-export const dynamic = "force-dynamic";
-export const revalidate = 0;
+import { useState } from "react";
 
 const plans = [
     {
