@@ -3,7 +3,7 @@ import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/auth-config';
 import { db } from '@/src/lib/db';
 import { eq } from 'drizzle-orm';
-import { subscriptions, customers } from '@/src/lib/db/schema';
+import { subscriptions, customers } from '@/src/lib/db/schema-billing';
 
 export async function GET() {
   try {
