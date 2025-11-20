@@ -65,12 +65,12 @@ async function seed() {
       },
     ]);
 
-    const [conv2] = await db.insert(conversations).values({
+    const [conv2] = await db.insert(conversations).values([{
       userId: demoUser.userId,
       source: 'widget',
       lang: 'en',
       tone: 'professional',
-      planSnapshot: 'standard',
+      planSnapshot: normalizePlan('standard'),
       tokensIn: 180,
       tokensOut: 500,
       costEur: '0.10',
