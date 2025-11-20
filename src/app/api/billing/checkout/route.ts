@@ -93,8 +93,11 @@ export async function POST(request: NextRequest) {
       discountId: couponCode || undefined,
     });
 
+    // Get checkout URL from transaction
+    const checkoutUrl = transaction.checkout?.url || `https://checkout.paddle.com/transaction/${transaction.id}`;
+    
     return NextResponse.json({
-      checkoutUrl: transaction.checkoutUrl,
+      checkoutUrl,
       transactionId: transaction.id,
     });
   } catch (error: any) {
