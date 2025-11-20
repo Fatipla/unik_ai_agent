@@ -31,7 +31,7 @@ function verifyPaddleWebhook(signature: string, rawBody: string): boolean {
 
 export async function POST(req: Request) {
   try {
-    const headersList = headers();
+    const headersList = await headers();
     const signature = headersList.get('paddle-signature') || '';
     const rawBody = await req.text();
 
