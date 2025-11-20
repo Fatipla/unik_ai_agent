@@ -5,6 +5,12 @@ import { db, usersProfile, paddlePrices, paddleCustomers } from '@/lib/db';
 import { eq } from 'drizzle-orm';
 import { env } from '@/lib/env';
 
+// Price ID mapping helper
+function getPriceId(planKey: string, period: 'M' | 'Y'): string | null {
+  const key = `PRICE_${planKey}_${period}` as keyof typeof env;
+  return env[key] || null;
+}
+
 export async function POST(request: NextRequest) {
   const user = getUserFromHeaders(request.headers);
   if (!user) {
@@ -20,10 +26,25 @@ export async function POST(request: NextRequest) {
   }
 
   try {
-    const { priceId } = await request.json();
+    const { planKey, period, couponCode } = await request.json();
+
+    // Validate inputs
+    if (!planKey || !period) {
+      return NextResponse.json({ error: 'planKey and period required' }, { status: 400 });
+    }
+
+    if (!['M', 'Y'].includes(period)) {
+      return NextResponse.json({ error: 'period must be M or Y' }, { status: 400 });
+    }
+
+    // Map planKey + period to PRICE_* env var
+    const priceId = getPriceId(planKey, period);
 
     if (!priceId) {
-      return NextResponse.json({ error: 'Price ID required' }, { status: 400 });
+      return NextResponse.json(
+        { error: `Price ID not configured for ${planKey}_${period}` },
+        { status: 400 }
+      );
     }
 
     // Get user profile
