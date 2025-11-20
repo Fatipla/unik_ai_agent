@@ -147,8 +147,12 @@ export default function BillingPage() {
                </ul>
              </CardContent>
              <CardFooter>
-               <Button className="w-full" disabled={plan.current}>
-                {plan.current ? 'Your Current Plan' : 'Upgrade to ' + plan.name}
+               <Button 
+                 className="w-full" 
+                 disabled={plan.current || loading}
+                 onClick={() => handleUpgrade(plan.name, `paddle_price_${plan.name.toLowerCase()}_monthly`)}
+               >
+                {loading ? 'Processing...' : plan.current ? 'Your Current Plan' : 'Upgrade to ' + plan.name}
                </Button>
              </CardFooter>
            </Card>
