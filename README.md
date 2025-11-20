@@ -64,7 +64,7 @@ npm run dev
 - **ORM**: Drizzle ORM
 - **Auth**: JWT (bcrypt)
 - **AI**: OpenAI (GPT-4o-mini, Whisper, TTS)
-- **Payments**: Stripe Subscriptions
+- **Payments**: Paddle Billing (EU VAT compliant)
 - **Deployment**: Vercel
 
 ## 📁 Project Structure
