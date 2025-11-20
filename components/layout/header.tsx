@@ -1,1 +1,1 @@
-export { Header } from '@/components/layout/header';
+export { Header } from '@/src/components/layout/header';
