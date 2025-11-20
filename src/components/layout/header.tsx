@@ -1,16 +1,30 @@
+'use client';
+
 import Link from "next/link";
+import { useSession, signOut } from "next-auth/react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { Menu } from 'lucide-react';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { Menu, User, LogOut } from 'lucide-react';
 import { Logo } from "@/components/logo";
 import { cn } from "@/lib/utils";
 import { ThemeToggle } from "@/components/theme-toggle";
 
 export function Header({ className }: { className?: string }) {
+  const { data: session, status } = useSession();
+  const isAuthenticated = status === 'authenticated';
+
   const navLinks = [
-    { href: "#features", label: "Features" },
+    { href: "/#features", label: "Features" },
     { href: "/pricing", label: "Pricing" },
-    { href: "#install", label: "Installation" },
+    { href: "/#installation", label: "Installation" },
     { href: "/contact", label: "Contact" },
   ];
 
@@ -40,12 +54,41 @@ export function Header({ className }: { className?: string }) {
 
         <div className="hidden items-center space-x-2 md:flex">
           <ThemeToggle />
-          <Button variant="link" asChild>
-            <Link href="/dashboard">Log In</Link>
-          </Button>
-          <Button asChild>
-            <Link href="/dashboard">Sign Up</Link>
-          </Button>
+          {!isAuthenticated ? (
+            <>
+              <Button variant="link" asChild>
+                <Link href="/login">Log In</Link>
+              </Button>
+              <Button asChild>
+                <Link href="/signup">Sign Up</Link>
+              </Button>
+            </>
+          ) : (
+            <>
+              <Button variant="outline" asChild>
+                <Link href="/dashboard">Dashboard</Link>
+              </Button>
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button variant="ghost" size="icon">
+                    <User className="h-5 w-5" />
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end">
+                  <DropdownMenuLabel>{session?.user?.email}</DropdownMenuLabel>
+                  <DropdownMenuSeparator />
+                  <DropdownMenuItem asChild>
+                    <Link href="/dashboard">Dashboard</Link>
+                  </DropdownMenuItem>
+                  <DropdownMenuSeparator />
+                  <DropdownMenuItem onClick={() => signOut({ callbackUrl: '/' })}>
+                    <LogOut className="mr-2 h-4 w-4" />
+                    Logout
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+            </>
+          )}
         </div>
 
         {/* Mobile Nav */}
@@ -71,12 +114,26 @@ export function Header({ className }: { className?: string }) {
                     </Link>
                   ))}
                    <div className="flex flex-col space-y-2 pt-4">
-                     <Button variant="link" asChild className="justify-start px-0">
-                        <Link href="/dashboard">Log In</Link>
-                     </Button>
-                     <Button asChild>
-                        <Link href="/dashboard">Sign Up</Link>
-                      </Button>
+                     {!isAuthenticated ? (
+                       <>
+                         <Button variant="link" asChild className="justify-start px-0">
+                            <Link href="/login">Log In</Link>
+                         </Button>
+                         <Button asChild>
+                            <Link href="/signup">Sign Up</Link>
+                          </Button>
+                       </>
+                     ) : (
+                       <>
+                         <Button variant="outline" asChild>
+                            <Link href="/dashboard">Dashboard</Link>
+                         </Button>
+                         <Button variant="outline" onClick={() => signOut({ callbackUrl: '/' })}>
+                           <LogOut className="mr-2 h-4 w-4" />
+                           Logout
+                         </Button>
+                       </>
+                     )}
                    </div>
                 </div>
               </div>
