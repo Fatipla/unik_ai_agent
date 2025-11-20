@@ -86,8 +86,10 @@ export async function POST(request: NextRequest) {
       customerId: customerId,
       customData: {
         userId: user.userId,
+        planKey,
+        period,
       },
-      discountId: undefined, // Add discount logic if needed
+      discountId: couponCode || undefined,
     });
 
     return NextResponse.json({
