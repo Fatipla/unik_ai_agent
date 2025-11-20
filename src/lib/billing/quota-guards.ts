@@ -22,10 +22,11 @@ export async function checkConversationQuota(userId: string): Promise<{ allowed:
 
   // Check plan limits
   const limits = PLAN_LIMITS[profile.plan as keyof typeof PLAN_LIMITS];
-  if (profile.usagePrompts >= limits.maxPrompts) {
+  const maxConversations = limits?.maxConversations ?? limits?.maxPrompts ?? 500;
+  if (profile.usagePrompts >= maxConversations) {
     return {
       allowed: false,
-      message: `Monthly limit of ${limits.maxPrompts} conversations reached. Upgrade to continue.`
+      message: `Monthly limit of ${maxConversations} conversations reached. Upgrade to continue.`
     };
   }
 
