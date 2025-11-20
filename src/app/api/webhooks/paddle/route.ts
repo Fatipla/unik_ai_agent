@@ -149,10 +149,11 @@ export async function POST(request: NextRequest) {
     console.error('[Paddle Webhook] Processing error:', error);
     
     // Mark as failed and increment retry counter
+    const retries = (webhookLog.retries ?? 0) + 1;
     await db.update(webhooksLog)
       .set({ 
         status: 'failed',
-        retries: webhookLog.retries + 1
+        retries
       })
       .where(eq(webhooksLog.id, webhookLog.id));
 
