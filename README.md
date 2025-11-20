@@ -47,14 +47,21 @@ npm run dev
 
 ## 💰 Pricing & Plans
 
-| Plan | Price | Conversations | AI Cost Cap | Voice |
-|------|-------|---------------|-------------|-------|
-| **Free** | €0 | 5/day (~150/mo) | N/A | ❌ |
-| **Standard** | €19.99/mo | 500/mo | €9.995 | ❌ |
-| **Pro** | €29.99/mo | 1,500/mo | €14.995 | ✅ |
-| **Enterprise** | €39.99/mo | Unlimited | €19.995 | ✅ |
+Platform offers **3 product types** (Chatbot, Voice, Both) with **3 tiers** each (Standard, Pro, Enterprise).
 
-*Yearly plans: -30% discount*
+### Pricing Matrix
+
+| Product | Standard | Pro | Enterprise |
+|---------|----------|-----|------------|
+| **Chatbot** | €19.99/mo | €29.99/mo | €39.99/mo |
+| **Voice** | €24.99/mo | €34.99/mo | €49.99/mo |
+| **Both (Bundle)** | €39.99/mo | €59.99/mo | €79.99/mo |
+
+*Yearly plans: **-20% discount** (billed annually)*
+
+**Visit `/pricing` for interactive pricing page with product switcher and billing toggle.**
+
+See [PRICING_SETUP.md](./docs/PRICING_SETUP.md) for full details.
 
 ## 🏗️ Tech Stack
 
