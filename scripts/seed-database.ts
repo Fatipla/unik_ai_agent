@@ -2,12 +2,19 @@ import { db, usersProfile, conversations, messages, trainingJobs } from '../src/
 import { hashPassword } from '../src/lib/auth';
 import { getCurrentMonthString } from '../src/lib/pricing';
 
+// Helper to normalize plan names (standard->starter, enterprise->business)
+function normalizePlan(plan: string): string {
+  if (plan === 'standard') return 'starter';
+  if (plan === 'enterprise') return 'business';
+  return plan;
+}
+
 async function seed() {
   console.log('🌱 Seeding database...');
 
   try {
     // Create demo user (Standard plan with 7-day trial)
-    const [demoUser] = await db.insert(usersProfile).values({
+    const [demoUser] = await db.insert(usersProfile).values([{
       email: 'demo@unik.ai',
       displayName: 'Demo User',
       passwordHash: await hashPassword('Demo1234!'),
