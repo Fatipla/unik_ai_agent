@@ -11,9 +11,15 @@ export default function Home() {
       <Header />
       <main className="flex-1">
         <Hero />
-        <Features />
-        <Pricing />
-        <InstallationGuide />
+        <section id="features">
+          <Features />
+        </section>
+        <section id="pricing">
+          <Pricing />
+        </section>
+        <section id="installation">
+          <InstallationGuide />
+        </section>
       </main>
       <Footer />
     </div>
