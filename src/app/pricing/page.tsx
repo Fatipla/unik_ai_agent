@@ -236,7 +236,7 @@ export default function PricingPage() {
             <div>
               <h3 className="font-semibold mb-2">What payment methods do you accept?</h3>
               <p className="text-muted-foreground">
-                We accept all major credit cards (Visa, Mastercard, American Express) via Stripe.
+                We accept all major credit cards (Visa, Mastercard, American Express) and PayPal via Paddle.
                 Enterprise customers can request invoice billing.
               </p>
             </div>
