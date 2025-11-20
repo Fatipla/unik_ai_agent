@@ -65,22 +65,28 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: 'Invalid signature' }, { status: 400 });
   }
 
-  const payloadHash = createHash('sha256').update(body).digest('hex');
+  // Strict idempotency: check event_id (Paddle's unique identifier)
+  const eventId = event.event_id || event.id;
+  if (!eventId) {
+    console.error('[Paddle Webhook] Missing event_id');
+    return NextResponse.json({ error: 'Missing event_id' }, { status: 400 });
+  }
+
   const [existing] = await db.select()
     .from(webhooksLog)
-    .where(eq(webhooksLog.payloadHash, payloadHash))
+    .where(eq(webhooksLog.payloadHash, eventId))
     .limit(1);
 
   if (existing) {
-    console.log('[Paddle Webhook] Duplicate event:', event.event_id);
+    console.log('[Paddle Webhook] Duplicate event (idempotent skip):', eventId);
     return NextResponse.json({ received: true, duplicate: true });
   }
 
-  // Log webhook
+  // Log webhook (use event_id as dedupe key)
   const [webhookLog] = await db.insert(webhooksLog).values({
     provider: 'paddle',
     eventType: event.event_type,
-    payloadHash,
+    payloadHash: eventId, // Use event_id for strict idempotency
     status: 'processing',
     retries: 0,
   }).returning();
