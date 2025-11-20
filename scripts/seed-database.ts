@@ -103,7 +103,7 @@ async function seed() {
       tokensOut: 350,
       costEur: '0.07',
       leadEmail: 'potential@customer.com',
-    }).returning();
+    }]).returning();
 
     await db.insert(messages).values([
       {
