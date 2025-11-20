@@ -47,24 +47,10 @@ export async function reconcilePaddleData() {
 
       // Sync plan if mismatch
       const priceId = subscription.items[0]?.price?.id;
-      if (priceId !== profile.activePriceId) {
-        // Fetch plan info from database
-        const [priceInfo] = await db.select()
-          .from(paddlePrices)
-          .where(eq(paddlePrices.priceId, priceId))
-          .limit(1);
-
-        if (priceInfo) {
-          await db.update(usersProfile)
-            .set({
-              plan: priceInfo.planName as any,
-              activePriceId: priceId,
-              updatedAt: new Date(),
-            })
-            .where(eq(usersProfile.userId, profile.userId));
-
-          console.log(`[Reconcile] Updated plan for ${profile.email}: ${priceInfo.planName}`);
-        }
+      if (priceId && priceId !== profile.activePriceId) {
+        // TODO: Fetch plan info from database when paddlePrices table is available
+        // For now, prices are resolved via PRICE_* env mapping
+        console.log(`[Reconcile] Price mismatch for ${profile.email}: ${priceId}`);
       }
     } catch (error: any) {
       console.error(`[Reconcile] Error for user ${profile.email}:`, error.message);
