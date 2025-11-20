@@ -87,10 +87,14 @@ export const paddleCustomers = pgTable('paddle_customers', {
   userId: uuid('user_id').primaryKey().references(() => usersProfile.userId, { onDelete: 'cascade' }),
   customerId: varchar('customer_id', { length: 255 }).notNull(),
   subscriptionId: varchar('subscription_id', { length: 255 }),
+  planKey: varchar('plan_key', { length: 100 }), // CHATBOT_STANDARD, VOICE_PRO, BUNDLE_ENTERPRISE
   priceId: varchar('price_id', { length: 255 }),
-  status: varchar('status', { length: 50 }),
+  status: varchar('status', { length: 50 }), // active, trialing, past_due, canceled
+  currentPeriodStart: timestamp('current_period_start'),
   currentPeriodEnd: timestamp('current_period_end'),
   cancelAt: timestamp('cancel_at'),
+  cancelAtPeriodEnd: boolean('cancel_at_period_end').default(false),
+  overLimit: boolean('over_limit').default(false),
   createdAt: timestamp('created_at').defaultNow(),
   updatedAt: timestamp('updated_at').defaultNow(),
 });
