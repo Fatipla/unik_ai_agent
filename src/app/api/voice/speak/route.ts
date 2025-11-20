@@ -6,6 +6,9 @@ import { db, usersProfile } from '@/lib/db';
 import { eq, sql } from 'drizzle-orm';
 import { env } from '@/lib/env';
 
+// Force Node.js runtime for Buffer support
+export const runtime = 'nodejs';
+
 export async function POST(request: NextRequest) {
   const user = getUserFromHeaders(request.headers);
   if (!user) {
