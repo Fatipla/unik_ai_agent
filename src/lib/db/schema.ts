@@ -151,7 +151,7 @@ export const paddlePayments = pgTable('paddle_payments', {
   createdAt: timestamp('created_at').defaultNow(),
 });
 
-// Webhooks Log
+// Webhooks Log (legacy - kept for backward compat)
 export const webhooksLog = pgTable('webhooks_log', {
   id: uuid('id').primaryKey().defaultRandom(),
   provider: varchar('provider', { length: 50 }).notNull(),
@@ -162,6 +162,18 @@ export const webhooksLog = pgTable('webhooks_log', {
   createdAt: timestamp('created_at').defaultNow(),
 }, (table) => ({
   hashIdx: uniqueIndex('webhook_hash_idx').on(table.payloadHash),
+}));
+
+// Webhook Events (new - proper dedupe with event_id)
+export const webhookEvents = pgTable('webhook_events', {
+  id: uuid('id').primaryKey().defaultRandom(),
+  eventId: varchar('event_id', { length: 255 }).notNull().unique(), // Paddle event_id for dedupe
+  type: varchar('type', { length: 100 }).notNull(),
+  payload: jsonb('payload').notNull(),
+  processed: boolean('processed').default(false),
+  createdAt: timestamp('created_at').defaultNow(),
+}, (table) => ({
+  eventIdIdx: uniqueIndex('webhook_event_id_idx').on(table.eventId),
 }));
 
 // Training Jobs
