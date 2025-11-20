@@ -26,7 +26,7 @@ export default function PrivacyPage() {
           We do not sell your personal information. We share data only with:
         </p>
         <ul>
-          <li>Service providers (Stripe for payments, OpenAI for AI processing)</li>
+          <li>Service providers (Paddle for payments, OpenAI for AI processing)</li>
           <li>Law enforcement when required by law</li>
         </ul>
 
