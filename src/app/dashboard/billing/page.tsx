@@ -50,11 +50,57 @@ const plans = [
   ];
 
 export default function BillingPage() {
+  const [loading, setLoading] = useState(false);
+
+  const handleManageBilling = async () => {
+    try {
+      setLoading(true);
+      const response = await fetch('/api/billing/portal', {
+        method: 'POST',
+      });
+      const data = await response.json();
+      
+      if (data.portalUrl) {
+        window.location.href = data.portalUrl;
+      } else if (data.stubbed) {
+        alert('Paddle is not configured. Please add your Paddle credentials to enable billing.');
+      }
+    } catch (error) {
+      console.error('Error opening billing portal:', error);
+      alert('Failed to open billing portal');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleUpgrade = async (planName: string, priceId: string) => {
+    try {
+      setLoading(true);
+      const response = await fetch('/api/billing/checkout', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ priceId }),
+      });
+      const data = await response.json();
+      
+      if (data.checkoutUrl) {
+        window.location.href = data.checkoutUrl;
+      } else if (data.stubbed) {
+        alert('Paddle is not configured. Please add your Paddle credentials to enable billing.');
+      }
+    } catch (error) {
+      console.error('Error creating checkout:', error);
+      alert('Failed to create checkout');
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <div className="space-y-8">
        <div>
         <h1 className="text-3xl font-headline font-bold">Billing</h1>
-        <p className="text-muted-foreground">Manage your subscription and billing details.</p>
+        <p className="text-muted-foreground">Manage your subscription and billing details with Paddle.</p>
       </div>
 
       <Card>
@@ -66,7 +112,9 @@ export default function BillingPage() {
             <p className="text-muted-foreground">Your subscription will renew on July 30, 2024.</p>
         </CardContent>
         <CardFooter>
-            <Button>Manage in Stripe Portal</Button>
+            <Button onClick={handleManageBilling} disabled={loading}>
+              {loading ? 'Loading...' : 'Manage in Paddle Portal'}
+            </Button>
         </CardFooter>
       </Card>
       
