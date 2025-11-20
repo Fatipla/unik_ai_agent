@@ -51,6 +51,10 @@ export const env = {
   TWILIO_AUTH_TOKEN: process.env.TWILIO_AUTH_TOKEN || '',
   WHATSAPP_SENDER_ID: process.env.WHATSAPP_SENDER_ID || '',
   
+  // Paddle Domain Verification (optional)
+  PADDLE_DOMAIN_TOKEN: process.env.PADDLE_DOMAIN_TOKEN || '',
+  PADDLE_DOMAIN_TXT: process.env.PADDLE_DOMAIN_TXT || '',
+  
   // App
   NEXTAUTH_SECRET: process.env.NEXTAUTH_SECRET || 'dev-secret-change-in-production',
   NEXTAUTH_URL: process.env.NEXTAUTH_URL || 'http://localhost:9002',
