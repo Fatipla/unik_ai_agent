@@ -9,3 +9,7 @@ build/
 node_modules/
 **/*.log
 .DS_Store
+-e 
+# Environment files
+*.env
+*.env.*
