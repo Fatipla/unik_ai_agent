@@ -1,1 +1,1 @@
-export { Pricing } from '@/components/landing/pricing';
+export { Pricing } from '@/src/components/landing/pricing';
