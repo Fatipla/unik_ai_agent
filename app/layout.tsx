@@ -33,6 +33,7 @@ export default function RootLayout({
           {children}
           <Analytics />
         </ThemeProvider>
+        {/* BUILD_MARKER: EMERGENT_APPLIED_v1 */}
       </body>
     </html>
   )
