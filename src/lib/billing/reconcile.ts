@@ -13,8 +13,7 @@ export async function reconcilePaddleData() {
 
   // Get all users with Paddle customer IDs
   const profiles = await db.select()
-    .from(usersProfile)
-    .where(eq(usersProfile.paddleCustomerId, null));
+    .from(usersProfile);
 
   for (const profile of profiles) {
     if (!profile.paddleCustomerId) continue;
