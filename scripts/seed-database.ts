@@ -36,12 +36,12 @@ async function seed() {
     console.log('✅ Created demo user:', demoUser.email);
 
     // Create sample conversations
-    const [conv1] = await db.insert(conversations).values({
+    const [conv1] = await db.insert(conversations).values([{
       userId: demoUser.userId,
       source: 'widget',
       lang: 'en',
       tone: 'professional',
-      planSnapshot: 'standard',
+      planSnapshot: normalizePlan('standard'),
       tokensIn: 150,
       tokensOut: 400,
       costEur: '0.08',
