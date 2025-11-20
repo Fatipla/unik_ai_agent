@@ -6,11 +6,13 @@ if (typeof window !== 'undefined') {
   throw new Error('paddle.ts must only be imported on the server');
 }
 
-// Initialize Paddle client (singleton)
-export const paddle = env.PADDLE_CLIENT_ID && env.PADDLE_CLIENT_SECRET
-  ? new Paddle(env.PADDLE_CLIENT_ID, {
-      environment: env.PADDLE_ENV === 'live' ? Environment.production : Environment.sandbox,
+// Initialize Paddle client (singleton) - v3 SDK
+export const paddle = env.PADDLE_VENDOR_ID && env.PADDLE_CLIENT_ID && env.PADDLE_CLIENT_SECRET
+  ? new Paddle({
+      vendorId: env.PADDLE_VENDOR_ID,
+      clientId: env.PADDLE_CLIENT_ID,
       clientSecret: env.PADDLE_CLIENT_SECRET,
+      environment: env.PADDLE_ENV === 'live' ? 'live' : 'sandbox',
     })
   : null;
 
