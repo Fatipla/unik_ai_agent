@@ -392,6 +392,19 @@ export default function PricingPage() {
           </div>
         )}
 
+        {/* Pricing Disclaimers */}
+        <div className="mt-12 max-w-3xl mx-auto bg-muted/30 border border-border rounded-lg p-6 space-y-3 text-sm text-muted-foreground">
+          <p>
+            <strong className="text-foreground">Provë falas 7 ditë.</strong> Pas provës, plani rinovohet automatikisht sipas periudhës së zgjedhur (mujor ose vjetor) derisa ta anulosh.
+          </p>
+          <p>
+            Anulo kur të duash nga "Manage billing" (portali i faturimit).
+          </p>
+          <p>
+            Çmimet janë pa TVSH; taksat llogariten nga Paddle në checkout.
+          </p>
+        </div>
+
         {/* FAQ Section */}
         <div className="mt-32 max-w-3xl mx-auto">
           <h2 className="text-3xl font-bold text-center mb-12">
