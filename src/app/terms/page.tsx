@@ -39,7 +39,7 @@ export default function TermsPage() {
 
         <h2>5. Billing and Payments</h2>
         <ul>
-          <li>Payments processed via Stripe</li>
+          <li>Payments processed via Paddle</li>
           <li>Subscriptions auto-renew unless cancelled</li>
           <li>Refunds available within 7 days of purchase</li>
           <li>AI costs are capped at 50% of plan revenue</li>
