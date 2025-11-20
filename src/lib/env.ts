@@ -14,6 +14,30 @@ export const env = {
   PADDLE_WEBHOOK_SECRET: process.env.PADDLE_WEBHOOK_SECRET || '',
   PADDLE_ENV: process.env.PADDLE_ENV || 'sandbox', // 'sandbox' | 'live'
   
+  // Paddle Price IDs - Chatbot
+  PRICE_CHATBOT_STANDARD_M: process.env.PRICE_CHATBOT_STANDARD_M || '',
+  PRICE_CHATBOT_STANDARD_Y: process.env.PRICE_CHATBOT_STANDARD_Y || '',
+  PRICE_CHATBOT_PRO_M: process.env.PRICE_CHATBOT_PRO_M || '',
+  PRICE_CHATBOT_PRO_Y: process.env.PRICE_CHATBOT_PRO_Y || '',
+  PRICE_CHATBOT_ENTERPRISE_M: process.env.PRICE_CHATBOT_ENTERPRISE_M || '',
+  PRICE_CHATBOT_ENTERPRISE_Y: process.env.PRICE_CHATBOT_ENTERPRISE_Y || '',
+  
+  // Paddle Price IDs - Voice
+  PRICE_VOICE_STANDARD_M: process.env.PRICE_VOICE_STANDARD_M || '',
+  PRICE_VOICE_STANDARD_Y: process.env.PRICE_VOICE_STANDARD_Y || '',
+  PRICE_VOICE_PRO_M: process.env.PRICE_VOICE_PRO_M || '',
+  PRICE_VOICE_PRO_Y: process.env.PRICE_VOICE_PRO_Y || '',
+  PRICE_VOICE_ENTERPRISE_M: process.env.PRICE_VOICE_ENTERPRISE_M || '',
+  PRICE_VOICE_ENTERPRISE_Y: process.env.PRICE_VOICE_ENTERPRISE_Y || '',
+  
+  // Paddle Price IDs - Bundle (Both)
+  PRICE_BUNDLE_STANDARD_M: process.env.PRICE_BUNDLE_STANDARD_M || '',
+  PRICE_BUNDLE_STANDARD_Y: process.env.PRICE_BUNDLE_STANDARD_Y || '',
+  PRICE_BUNDLE_PRO_M: process.env.PRICE_BUNDLE_PRO_M || '',
+  PRICE_BUNDLE_PRO_Y: process.env.PRICE_BUNDLE_PRO_Y || '',
+  PRICE_BUNDLE_ENTERPRISE_M: process.env.PRICE_BUNDLE_ENTERPRISE_M || '',
+  PRICE_BUNDLE_ENTERPRISE_Y: process.env.PRICE_BUNDLE_ENTERPRISE_Y || '',
+  
   // Email
   POSTMARK_KEY: process.env.POSTMARK_KEY || '',
   SENDGRID_KEY: process.env.SENDGRID_KEY || '',
