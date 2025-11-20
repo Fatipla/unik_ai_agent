@@ -6,9 +6,10 @@ import { eq } from 'drizzle-orm';
 import { env } from '@/lib/env';
 
 // Price ID mapping helper
-function getPriceId(planKey: string, period: 'M' | 'Y'): string | null {
+function getPriceId(planKey: string, period: 'M' | 'Y'): string {
   const key = `PRICE_${planKey}_${period}` as keyof typeof env;
-  return env[key] || null;
+  const priceId = env[key];
+  return typeof priceId === 'string' ? priceId : '';
 }
 
 export async function POST(request: NextRequest) {
