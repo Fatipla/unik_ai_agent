@@ -27,19 +27,23 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Profile not found' }, { status: 404 });
     }
 
-    // Cancel Stripe subscription if exists
-    if (profile.stripeCustomerId && stripe) {
+    // Cancel Paddle subscription if exists
+    if (profile.paddleCustomerId && paddle) {
       try {
-        const subscriptions = await stripe.subscriptions.list({
-          customer: profile.stripeCustomerId,
-          status: 'active',
-        });
+        // Get customer's subscriptions from Paddle
+        const paddleCustomer = await db.select()
+          .from(paddleCustomers)
+          .where(eq(paddleCustomers.userId, user.userId))
+          .limit(1);
 
-        for (const subscription of subscriptions.data) {
-          await stripe.subscriptions.cancel(subscription.id);
+        if (paddleCustomer.length > 0 && paddleCustomer[0].subscriptionId) {
+          // Cancel the subscription via Paddle API
+          await paddle.subscriptions.cancel(paddleCustomer[0].subscriptionId, {
+            effectiveFrom: 'immediately',
+          });
         }
       } catch (error) {
-        console.error('Error canceling Stripe subscription:', error);
+        console.error('Error canceling Paddle subscription:', error);
       }
     }
 
@@ -47,7 +51,7 @@ export async function POST(request: NextRequest) {
     // Order matters due to foreign keys
     await db.delete(voiceCalls).where(eq(voiceCalls.userId, user.userId));
     await db.delete(trainingJobs).where(eq(trainingJobs.userId, user.userId));
-    await db.delete(stripeCustomers).where(eq(stripeCustomers.userId, user.userId));
+    await db.delete(paddleCustomers).where(eq(paddleCustomers.userId, user.userId));
     await db.delete(emails).where(eq(emails.userId, user.userId));
     
     // Delete messages through conversations
