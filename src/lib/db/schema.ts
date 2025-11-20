@@ -186,6 +186,18 @@ export const voiceCalls = pgTable('voice_calls', {
   createdAt: timestamp('created_at').defaultNow(),
 });
 
+// System has migrated to Paddle, but this table remains for existing Stripe webhooks
+export const stripeCustomers = pgTable('stripe_customers', {
+  userId: uuid('user_id').primaryKey().references(() => usersProfile.userId, { onDelete: 'cascade' }),
+  customerId: varchar('customer_id', { length: 255 }).notNull(),
+  subscriptionId: varchar('subscription_id', { length: 255 }),
+  priceId: varchar('price_id', { length: 255 }),
+  status: varchar('status', { length: 50 }),
+  currentPeriodEnd: timestamp('current_period_end'),
+  createdAt: timestamp('created_at').defaultNow(),
+  updatedAt: timestamp('updated_at').defaultNow(),
+});
+
 export type UsersProfile = typeof usersProfile.$inferSelect;
 export type Conversation = typeof conversations.$inferSelect;
 export type Message = typeof messages.$inferSelect;
@@ -194,3 +206,4 @@ export type PaddleProduct = typeof paddleProducts.$inferSelect;
 export type PaddlePrice = typeof paddlePrices.$inferSelect;
 export type PaddleInvoice = typeof paddleInvoices.$inferSelect;
 export type PaddlePayment = typeof paddlePayments.$inferSelect;
+export type StripeCustomer = typeof stripeCustomers.$inferSelect;

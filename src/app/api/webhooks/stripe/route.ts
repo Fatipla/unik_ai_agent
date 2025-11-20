@@ -6,9 +6,21 @@ import { createHash } from 'crypto';
 import { env } from '@/lib/env';
 import { getCurrentMonthString } from '@/lib/pricing';
 
+// This endpoint returns 410 Gone to indicate the resource is no longer available
 export async function POST(request: NextRequest) {
   if (!env.STRIPE_ENABLED || !stripe) {
-    return NextResponse.json({ received: true, stubbed: true });
+    return NextResponse.json(
+      { 
+        error: 'Stripe webhooks are no longer supported',
+        message: 'This system has migrated to Paddle billing. Please configure Paddle webhooks at /api/webhooks/paddle',
+        migration: {
+          from: 'Stripe',
+          to: 'Paddle',
+          webhook_endpoint: '/api/webhooks/paddle'
+        }
+      },
+      { status: 410 } // 410 Gone - resource permanently removed
+    );
   }
 
   const body = await request.text();
@@ -165,4 +177,16 @@ export async function POST(request: NextRequest) {
       { status: 500 }
     );
   }
+}
+
+// Also handle GET requests
+export async function GET() {
+  return NextResponse.json(
+    { 
+      status: 'deprecated',
+      message: 'Stripe integration has been replaced with Paddle',
+      active_endpoint: '/api/webhooks/paddle'
+    },
+    { status: 410 }
+  );
 }

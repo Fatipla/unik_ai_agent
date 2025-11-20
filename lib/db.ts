@@ -5,7 +5,14 @@ export {
   messages,
   emails,
   stripeCustomers,
+  paddleCustomers,
+  paddleSubscriptions,
+  paddlePrices,
+  paddleProducts,
+  paddleInvoices,
+  paddlePayments,
+  webhookEvents,
   trainingJobs,
   voiceCalls,
   webhooksLog,
-} from '@/lib/db';
+} from "@/lib/db"

@@ -1,28 +1,31 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Bot, Phone, DollarSign, Puzzle } from "lucide-react";
+import { Bot, Phone, DollarSign, Puzzle } from "lucide-react"
 
 const features = [
   {
     icon: <Bot className="h-8 w-8 text-primary" />,
     title: "Chatbot Web Widget",
-    description: "Integrate a customizable chatbot widget on your website for instant customer support and lead generation.",
+    description:
+      "Integrate a customizable chatbot widget on your website for instant customer support and lead generation.",
   },
   {
     icon: <Phone className="h-8 w-8 text-primary" />,
     title: "Voice Agent with n8n",
-    description: "Handle voice calls, transcribe them, determine intent, and use TTS for responses. Orchestrate complex workflows with n8n.",
+    description:
+      "Handle voice calls, transcribe them, determine intent, and use TTS for responses. Orchestrate complex workflows with n8n.",
   },
   {
     icon: <DollarSign className="h-8 w-8 text-primary" />,
-    title: "Predictable Cost Management",
-    description: "Strictly monitor and cap your OpenAI costs at 50% of your plan's revenue, ensuring predictable, risk-free scaling.",
+    title: "Transparent Pricing",
+    description:
+      "Simple, predictable pricing with no hidden fees. Scale confidently with clear limits and usage tracking in your dashboard.",
   },
   {
     icon: <Puzzle className="h-8 w-8 text-primary" />,
     title: "1-Minute Installation",
-    description: "Get started in seconds with a simple 1-line script, NPM package, GTM template, or our dedicated Shopify/WordPress plugins.",
+    description:
+      "Get started in seconds with a simple 1-line script, NPM package, GTM template, or our dedicated Shopify/WordPress plugins.",
   },
-];
+]
 
 export function Features() {
   return (
@@ -33,7 +36,8 @@ export function Features() {
             Everything you need. Nothing you don't.
           </h2>
           <p className="mt-6 text-lg leading-8 text-muted-foreground">
-            Unik AI Agent provides a comprehensive suite of tools to automate customer interactions and drive growth, all with transparent pricing and effortless setup.
+            Unik AI Agent provides a comprehensive suite of tools to automate customer interactions and drive growth,
+            all with transparent pricing and effortless setup.
           </p>
         </div>
         <div className="mx-auto mt-16 max-w-2xl sm:mt-20 lg:mt-24 lg:max-w-none">
@@ -53,5 +57,5 @@ export function Features() {
         </div>
       </div>
     </section>
-  );
+  )
 }

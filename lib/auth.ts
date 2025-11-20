@@ -2,4 +2,5 @@ export {
   getUserFromHeaders,
   hashPassword,
   generateToken,
-} from '@/lib/auth';
+  verifyPassword,
+} from "@/lib/auth"

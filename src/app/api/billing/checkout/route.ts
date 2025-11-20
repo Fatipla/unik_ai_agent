@@ -1,70 +1,91 @@
-import { NextRequest, NextResponse } from 'next/server';
-import { getUserFromHeaders } from '@/lib/auth';
-import { paddle } from '@/lib/paddle';
-import { db, usersProfile, paddlePrices, paddleCustomers } from '@/lib/db';
-import { eq } from 'drizzle-orm';
-import { env } from '@/lib/env';
+import { type NextRequest, NextResponse } from "next/server"
+import { createClient } from "@/lib/supabase/server"
+import { paddle } from "@/lib/paddle"
+import { env } from "@/lib/env"
 
 export async function POST(request: NextRequest) {
-  const user = getUserFromHeaders(request.headers);
-  if (!user) {
-    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+  const supabase = await createClient()
+
+  const {
+    data: { user },
+    error: authError,
+  } = await supabase.auth.getUser()
+
+  if (authError || !user) {
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
   }
 
   if (!env.PADDLE_ENABLED || !paddle) {
     return NextResponse.json({
-      checkoutUrl: 'https://paddle.com/checkout/demo',
+      checkoutUrl: "https://paddle.com/checkout/demo",
       stubbed: true,
-      message: 'Paddle not enabled. Set PADDLE_ENABLED=true and add API keys.',
-    });
+      message: "Paddle not enabled. Set PADDLE_ENABLED=true and add API keys.",
+    })
   }
 
   try {
-    const { priceId } = await request.json();
+    const { planKey, period, couponCode } = await request.json()
+
+    if (!planKey || !period) {
+      return NextResponse.json({ error: "planKey and period required" }, { status: 400 })
+    }
+
+    const priceIdMap: Record<string, string> = {
+      CHATBOT_STANDARD_M: env.PRICE_CHATBOT_STANDARD_M,
+      CHATBOT_STANDARD_Y: env.PRICE_CHATBOT_STANDARD_Y,
+      CHATBOT_PRO_M: env.PRICE_CHATBOT_PRO_M,
+      CHATBOT_PRO_Y: env.PRICE_CHATBOT_PRO_Y,
+      CHATBOT_ENTERPRISE_M: env.PRICE_CHATBOT_ENTERPRISE_M,
+      CHATBOT_ENTERPRISE_Y: env.PRICE_CHATBOT_ENTERPRISE_Y,
+      VOICE_STANDARD_M: env.PRICE_VOICE_STANDARD_M,
+      VOICE_STANDARD_Y: env.PRICE_VOICE_STANDARD_Y,
+      VOICE_PRO_M: env.PRICE_VOICE_PRO_M,
+      VOICE_PRO_Y: env.PRICE_VOICE_PRO_Y,
+      VOICE_ENTERPRISE_M: env.PRICE_VOICE_ENTERPRISE_M,
+      VOICE_ENTERPRISE_Y: env.PRICE_VOICE_ENTERPRISE_Y,
+      BUNDLE_STANDARD_M: env.PRICE_BUNDLE_STANDARD_M,
+      BUNDLE_STANDARD_Y: env.PRICE_BUNDLE_STANDARD_Y,
+      BUNDLE_PRO_M: env.PRICE_BUNDLE_PRO_M,
+      BUNDLE_PRO_Y: env.PRICE_BUNDLE_PRO_Y,
+      BUNDLE_ENTERPRISE_M: env.PRICE_BUNDLE_ENTERPRISE_M,
+      BUNDLE_ENTERPRISE_Y: env.PRICE_BUNDLE_ENTERPRISE_Y,
+    }
+
+    const priceKey = `${planKey}_${period}`
+    const priceId = priceIdMap[priceKey]
 
     if (!priceId) {
-      return NextResponse.json({ error: 'Price ID required' }, { status: 400 });
+      return NextResponse.json({ error: `Invalid plan: ${priceKey}` }, { status: 400 })
     }
 
-    // Get user profile
-    const [profile] = await db.select()
-      .from(usersProfile)
-      .where(eq(usersProfile.userId, user.userId))
-      .limit(1);
+    let { data: customer } = await supabase.from("customers").select("*").eq("user_id", user.id).single()
 
-    if (!profile) {
-      return NextResponse.json({ error: 'Profile not found' }, { status: 404 });
-    }
+    let paddleCustomerId = customer?.paddle_customer_id
 
-    // Get price details from database
-    const [price] = await db.select()
-      .from(paddlePrices)
-      .where(eq(paddlePrices.priceId, priceId))
-      .limit(1);
-
-    if (!price) {
-      return NextResponse.json({ error: 'Invalid price ID' }, { status: 400 });
-    }
-
-    // Create or get Paddle customer
-    let customerId = profile.paddleCustomerId;
-    
-    if (!customerId) {
+    if (!paddleCustomerId) {
       // Create new Paddle customer
-      const customer = await paddle.customers.create({
-        email: user.email,
-        name: profile.displayName || undefined,
-      });
-      
-      customerId = customer.id;
-      
-      // Update user profile with customer ID
-      await db.update(usersProfile)
-        .set({ paddleCustomerId: customerId })
-        .where(eq(usersProfile.userId, user.userId));
+      const paddleCustomer = await paddle.customers.create({
+        email: user.email!,
+        name: user.user_metadata?.full_name || undefined,
+      })
+
+      paddleCustomerId = paddleCustomer.id
+
+      // Store in Supabase
+      const { data: newCustomer } = await supabase
+        .from("customers")
+        .insert({
+          user_id: user.id,
+          paddle_customer_id: paddleCustomerId,
+          email: user.email!,
+        })
+        .select()
+        .single()
+
+      customer = newCustomer
     }
 
-    // Create checkout transaction with trial
+    // Create checkout transaction
     const transaction = await paddle.transactions.create({
       items: [
         {
@@ -72,22 +93,19 @@ export async function POST(request: NextRequest) {
           quantity: 1,
         },
       ],
-      customerId: customerId,
+      customerId: paddleCustomerId,
       customData: {
-        userId: user.userId,
+        userId: user.id,
       },
-      discountId: undefined, // Add discount logic if needed
-    });
+      ...(couponCode && { discountCode: couponCode }),
+    })
 
     return NextResponse.json({
       checkoutUrl: transaction.checkoutUrl,
       transactionId: transaction.id,
-    });
+    })
   } catch (error: any) {
-    console.error('[Paddle Checkout Error]:', error);
-    return NextResponse.json(
-      { error: 'Failed to create checkout session', details: error.message },
-      { status: 500 }
-    );
+    console.error("[v0] Paddle Checkout Error:", error)
+    return NextResponse.json({ error: "Failed to create checkout session", details: error.message }, { status: 500 })
   }
 }
