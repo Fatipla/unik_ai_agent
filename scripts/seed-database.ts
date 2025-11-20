@@ -74,7 +74,7 @@ async function seed() {
       tokensIn: 180,
       tokensOut: 500,
       costEur: '0.10',
-    }).returning();
+    }]).returning();
 
     await db.insert(messages).values([
       {
