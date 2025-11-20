@@ -1,8 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { db, usersProfile, conversations, messages, emails, stripeCustomers, trainingJobs, voiceCalls } from '@/lib/db';
+import { db, usersProfile, conversations, messages, emails, paddleCustomers, trainingJobs, voiceCalls } from '@/lib/db';
 import { getUserFromHeaders } from '@/lib/auth';
 import { eq } from 'drizzle-orm';
-import { stripe } from '@/lib/stripe';
+import { paddle } from '@/lib/paddle';
 
 export async function POST(request: NextRequest) {
   const user = getUserFromHeaders(request.headers);
