@@ -57,16 +57,6 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Profile not found' }, { status: 404 });
     }
 
-    // Get price details from database
-    const [price] = await db.select()
-      .from(paddlePrices)
-      .where(eq(paddlePrices.priceId, priceId))
-      .limit(1);
-
-    if (!price) {
-      return NextResponse.json({ error: 'Invalid price ID' }, { status: 400 });
-    }
-
     // Create or get Paddle customer
     let customerId = profile.paddleCustomerId;
     
