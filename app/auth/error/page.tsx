@@ -1,5 +1,6 @@
 'use client';
 
+import { Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
@@ -19,7 +20,7 @@ const errorMessages: Record<string, string> = {
   default: 'Dicka shkoi keq.',
 };
 
-export default function AuthErrorPage() {
+function ErrorContent() {
   const searchParams = useSearchParams();
   const error = searchParams.get('error');
   const errorMessage = error ? errorMessages[error] || errorMessages.default : errorMessages.default;
