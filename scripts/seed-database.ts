@@ -45,7 +45,7 @@ async function seed() {
       tokensIn: 150,
       tokensOut: 400,
       costEur: '0.08',
-    }).returning();
+    }]).returning();
 
     // Add messages to conversation
     await db.insert(messages).values([
