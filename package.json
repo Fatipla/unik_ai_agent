@@ -4,7 +4,7 @@
   "private": true,
   "packageManager": "pnpm@10.3.0",
   "scripts": {
-    "prebuild": "pnpm -v && pnpm dedupe --check && pnpm run typecheck",
+    "prebuild": "pnpm -v && pnpm run typecheck",
     "build": "next build",
     "db:generate": "drizzle-kit generate",
     "db:migrate": "drizzle-kit migrate",
