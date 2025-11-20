@@ -145,15 +145,15 @@ async function seed() {
     console.log('✅ Created training jobs');
 
     // Create test users for different plans
-    const [freeUser] = await db.insert(usersProfile).values({
+    const [freeUser] = await db.insert(usersProfile).values([{
       email: 'free@test.com',
       displayName: 'Free User',
       passwordHash: await hashPassword('Test1234!'),
       plan: 'free',
       usageMonth: getCurrentMonthString(),
-    }).returning();
+    }]).returning();
 
-    const [proUser] = await db.insert(usersProfile).values({
+    const [proUser] = await db.insert(usersProfile).values([{
       email: 'pro@test.com',
       displayName: 'Pro User',
       passwordHash: await hashPassword('Test1234!'),
@@ -162,13 +162,13 @@ async function seed() {
       usageMonth: getCurrentMonthString(),
       activation: ['widget', 'voice', 'whatsapp'],
       aiVoiceEnabled: true,
-    }).returning();
+    }]).returning();
 
-    const [entUser] = await db.insert(usersProfile).values({
+    const [entUser] = await db.insert(usersProfile).values([{
       email: 'enterprise@test.com',
       displayName: 'Enterprise User',
       passwordHash: await hashPassword('Test1234!'),
-      plan: 'enterprise',
+      plan: normalizePlan('enterprise'),
       billingInterval: 'yearly',
       usageMonth: getCurrentMonthString(),
       activation: ['widget', 'voice', 'whatsapp'],
