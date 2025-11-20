@@ -31,7 +31,7 @@ async function seed() {
       usageTokensIn: 850,
       usageTokensOut: 3200,
       usageCostEur: '0.45',
-    }).returning();
+    }]).returning();
 
     console.log('✅ Created demo user:', demoUser.email);
 
