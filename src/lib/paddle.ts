@@ -43,13 +43,13 @@ export function getPlanFromPaddlePriceId(priceId: string, plans: PaddlePlan[]): 
 
 export async function getPaddlePlans(): Promise<PaddlePlan[]> {
   // In production, fetch from database (paddle_prices table)
-  // For now, use environment variables
+  // Prices are resolved via PRICE_* env mapping in checkout API
   return [
     {
       name: 'starter',
       displayName: 'Starter',
-      priceId: env.PADDLE_PRICE_STARTER || 'pri_01j...',
-      productId: env.PADDLE_PRODUCT_STARTER || 'pro_01j...',
+      priceId: 'pri_placeholder_starter', // Resolved via PRICE_CHATBOT_STANDARD_M etc
+      productId: 'pro_placeholder_starter',
       amount: 1999, // €19.99
       currency: 'EUR',
       interval: 'month',
@@ -66,8 +66,8 @@ export async function getPaddlePlans(): Promise<PaddlePlan[]> {
     {
       name: 'pro',
       displayName: 'Pro',
-      priceId: env.PADDLE_PRICE_PRO || 'pri_01j...',
-      productId: env.PADDLE_PRODUCT_PRO || 'pro_01j...',
+      priceId: 'pri_placeholder_pro',
+      productId: 'pro_placeholder_pro',
       amount: 2999, // €29.99
       currency: 'EUR',
       interval: 'month',
@@ -84,8 +84,8 @@ export async function getPaddlePlans(): Promise<PaddlePlan[]> {
     {
       name: 'business',
       displayName: 'Business',
-      priceId: env.PADDLE_PRICE_BUSINESS || 'pri_01j...',
-      productId: env.PADDLE_PRODUCT_BUSINESS || 'pro_01j...',
+      priceId: 'pri_placeholder_business',
+      productId: 'pro_placeholder_business',
       amount: 3999, // €39.99
       currency: 'EUR',
       interval: 'month',
