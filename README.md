@@ -109,7 +109,7 @@ See `.env.example` for all required variables.
 - `NEXTAUTH_SECRET` - JWT secret (32+ characters)
 
 **Optional (with fallbacks):**
-- `STRIPE_SECRET_KEY` - Stripe integration
+- `PADDLE_CLIENT_ID` & `PADDLE_CLIENT_SECRET` - Paddle billing (see `/docs/PADDLE_SETUP.md`)
 - `POSTMARK_KEY` or `SENDGRID_KEY` - Email
 - `N8N_SIGNING_SECRET` - n8n webhooks
 - `TWILIO_*` - WhatsApp/Voice
