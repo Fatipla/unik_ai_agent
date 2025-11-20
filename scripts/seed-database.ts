@@ -173,7 +173,7 @@ async function seed() {
       usageMonth: getCurrentMonthString(),
       activation: ['widget', 'voice', 'whatsapp'],
       aiVoiceEnabled: true,
-    }).returning();
+    }]).returning();
 
     console.log('✅ Created test users for all plans');
 
