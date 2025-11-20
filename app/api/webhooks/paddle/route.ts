@@ -2,7 +2,8 @@ import { NextResponse } from 'next/server';
 import { headers } from 'next/headers';
 import crypto from 'crypto';
 import { db } from '@/src/lib/db';
-import { webhookEvents, customers, subscriptions } from '@/src/lib/db/schema';
+import { webhookEvents } from '@/src/lib/db/schema';
+import { customers, subscriptions } from '@/src/lib/db/schema-billing';
 import { eq } from 'drizzle-orm';
 
 const PADDLE_WEBHOOK_SECRET = process.env.PADDLE_WEBHOOK_SECRET || '';
