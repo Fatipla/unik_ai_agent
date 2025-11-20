@@ -33,16 +33,12 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Generate customer portal session
-    const portalSession = await paddle.customers.getPortalSession(
-      profile.paddleCustomerId,
-      {
-        returnUrl: `${env.SITE_URL}/dashboard/billing`,
-      }
-    );
+    // Generate customer portal URL
+    // Paddle Billing automatically provides portal access at:
+    const portalUrl = `https://customer-portal.paddle.com/${profile.paddleCustomerId}`;
 
     return NextResponse.json({
-      portalUrl: portalSession.urls.overview,
+      portalUrl,
     });
   } catch (error: any) {
     console.error('[Paddle Portal Error]:', error);
