@@ -18,7 +18,7 @@ async function seed() {
       email: 'demo@unik.ai',
       displayName: 'Demo User',
       passwordHash: await hashPassword('Demo1234!'),
-      plan: 'standard',
+      plan: normalizePlan('standard'),
       billingInterval: 'monthly',
       usageMonth: getCurrentMonthString(),
       activation: ['widget'],
