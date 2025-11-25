@@ -296,50 +296,51 @@ export default function PricingPage() {
             {plans.map((plan) => {
               const price = isYearly ? plan.yearlyPrice : plan.monthlyPrice;
               const priceId = isYearly ? plan.priceIdYearly : plan.priceIdMonthly;
+              const isEnterprise = plan.id.includes('enterprise');
 
               return (
                 <Card
                   key={plan.id}
-                  className={plan.popular ? 'border-primary shadow-lg scale-105' : ''}
+                  className={`flex flex-col ${plan.popular ? 'border-primary shadow-lg' : ''}`}
                 >
                   {plan.popular && (
-                    <div className="bg-primary text-primary-foreground text-center py-2 text-sm font-semibold">
+                    <div className="bg-primary text-primary-foreground text-center py-2 text-sm font-semibold rounded-t-lg">
                       Më i Popullarizuar
                     </div>
                   )}
-                  <CardHeader>
+                  <CardHeader className="pb-4">
                     <CardTitle className="text-2xl">{plan.title}</CardTitle>
-                    <CardDescription>
+                    <CardDescription className="mt-4">
                       <span className="text-4xl font-bold text-foreground">
                         €{price.toFixed(2)}
                       </span>
-                      <span className="text-muted-foreground">
+                      <span className="text-muted-foreground text-base">
                         /{isYearly ? 'vit' : 'muaj'}
                       </span>
                     </CardDescription>
                   </CardHeader>
-                  <CardContent>
-                    <ul className="space-y-3">
+                  <CardContent className="flex-1">
+                    <ul className="space-y-3 min-h-[280px]">
                       {plan.features.map((feature) => (
                         <li key={feature} className="flex items-start gap-2">
                           <Check className="h-5 w-5 text-primary flex-shrink-0 mt-0.5" />
-                          <span className="text-sm">{feature}</span>
+                          <span className="text-sm leading-relaxed">{feature}</span>
                         </li>
                       ))}
                     </ul>
                   </CardContent>
-                  <CardFooter>
-                    {plan.id === 'enterprise' ? (
-                      <Button asChild className="w-full" variant="outline">
-                        <Link href="/contact">{plan.cta}</Link>
+                  <CardFooter className="pt-6">
+                    {isEnterprise ? (
+                      <Button asChild className="w-full h-11" variant="outline">
+                        <Link href="/contact">Zgjidhni Planin</Link>
                       </Button>
                     ) : (
                       <Button
-                        className="w-full"
+                        className="w-full h-11"
                         variant={plan.popular ? 'default' : 'outline'}
                         onClick={() => handleCheckout(priceId)}
                       >
-                        {plan.cta}
+                        Zgjidhni Planin
                       </Button>
                     )}
                   </CardFooter>
