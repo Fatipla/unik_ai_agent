@@ -8,7 +8,8 @@ import { Header } from '@/src/components/layout/header';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Progress } from '@/components/ui/progress';
-import { User, CreditCard, TrendingUp, ArrowUpRight } from 'lucide-react';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { User, CreditCard, TrendingUp, ArrowUpRight, MessageSquare, Phone, Clock } from 'lucide-react';
 
 interface UsageData {
   promptsMonth: number;
