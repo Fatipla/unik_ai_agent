@@ -228,18 +228,49 @@ export default function PricingPage() {
     }
   };
 
+  const currentProduct = productConfig[selectedProduct];
+  const plans = currentProduct.plans;
+  const ProductIcon = currentProduct.icon;
+
   return (
     <div className="flex min-h-screen flex-col bg-background">
       <Header />
       <main className="flex-1">
         <div className="container mx-auto px-4 py-16">
-          <div className="mx-auto max-w-4xl text-center">
+          <div className="mx-auto max-w-5xl text-center">
             <h1 className="text-4xl font-bold tracking-tight sm:text-5xl">
               Çmime të thjeshta dhe transparente
             </h1>
             <p className="mt-4 text-lg text-muted-foreground">
-              Zgjidhni planin që përshtatet më mirë me nevojat tuaja. Anuloni në çdo kohë.
+              Zgjidhni produktin dhe planin që përshtaten më mirë me nevojat tuaja. Anuloni në çdo kohë.
             </p>
+
+            {/* Product Selector */}
+            <div className="mt-10">
+              <Tabs value={selectedProduct} onValueChange={(v) => setSelectedProduct(v as ProductType)} className="w-full">
+                <TabsList className="grid w-full max-w-2xl mx-auto grid-cols-3 h-auto p-1">
+                  <TabsTrigger value="chatbot" className="flex flex-col items-center gap-2 py-3">
+                    <MessageSquare className="h-5 w-5" />
+                    <span className="text-sm font-medium">Chatbot</span>
+                  </TabsTrigger>
+                  <TabsTrigger value="voice" className="flex flex-col items-center gap-2 py-3">
+                    <Mic className="h-5 w-5" />
+                    <span className="text-sm font-medium">Voice Agent</span>
+                  </TabsTrigger>
+                  <TabsTrigger value="bundle" className="flex flex-col items-center gap-2 py-3 relative">
+                    <Package className="h-5 w-5" />
+                    <span className="text-sm font-medium">Bundle</span>
+                    <span className="absolute -top-1 -right-1 bg-primary text-primary-foreground text-[10px] px-1.5 py-0.5 rounded-full">
+                      SAVE
+                    </span>
+                  </TabsTrigger>
+                </TabsList>
+              </Tabs>
+              <p className="mt-4 text-sm text-muted-foreground flex items-center justify-center gap-2">
+                <ProductIcon className="h-4 w-4" />
+                {currentProduct.description}
+              </p>
+            </div>
 
             {/* Monthly/Yearly Toggle */}
             <div className="mt-8 flex items-center justify-center gap-4">
@@ -261,7 +292,7 @@ export default function PricingPage() {
           </div>
 
           {/* Pricing Cards */}
-          <div className="mt-12 grid gap-8 md:grid-cols-3">
+          <div className="mt-12 grid gap-8 md:grid-cols-3 max-w-6xl mx-auto">
             {plans.map((plan) => {
               const price = isYearly ? plan.yearlyPrice : plan.monthlyPrice;
               const priceId = isYearly ? plan.priceIdYearly : plan.priceIdMonthly;
