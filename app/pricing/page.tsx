@@ -50,7 +50,7 @@ const productConfig = {
           'Advanced Analytics',
           'Priority Support',
         ],
-        cta: 'Choose Pro',
+        
         popular: true,
       },
       {
@@ -67,7 +67,7 @@ const productConfig = {
           'Custom Integrations',
           'Full Audit Logs',
         ],
-        cta: 'Contact Sales',
+        
         popular: false,
       },
     ],
@@ -91,7 +91,7 @@ const productConfig = {
           'Call Recording',
           '7-Day Free Trial',
         ],
-        cta: 'Start 7-Day Trial',
+        
         popular: false,
       },
       {
@@ -108,7 +108,7 @@ const productConfig = {
           'Call Analytics',
           'Priority Support',
         ],
-        cta: 'Choose Pro',
+        
         popular: true,
       },
       {
@@ -125,7 +125,7 @@ const productConfig = {
           'Custom Integrations',
           'Full Call Audit Logs',
         ],
-        cta: 'Contact Sales',
+        
         popular: false,
       },
     ],
@@ -151,7 +151,7 @@ const productConfig = {
           '7-Day Free Trial',
           '💰 Kurseni 12% vs. blerja e veçantë',
         ],
-        cta: 'Start 7-Day Trial',
+        
         popular: false,
       },
       {
@@ -170,7 +170,7 @@ const productConfig = {
           'Priority Support',
           '💰 Kurseni 17% vs. blerja e veçantë',
         ],
-        cta: 'Choose Pro',
+        
         popular: true,
       },
       {
@@ -189,7 +189,7 @@ const productConfig = {
           'White-label Solution',
           '💰 Kurseni 12% vs. blerja e veçantë',
         ],
-        cta: 'Contact Sales',
+        
         popular: false,
       },
     ],
