@@ -34,7 +34,6 @@ const productConfig = {
           'Basic Analytics',
           '7-Day Free Trial',
         ],
-        cta: 'Start 7-Day Trial',
         popular: false,
       },
       {
