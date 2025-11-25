@@ -52,6 +52,8 @@ export default function DashboardPage() {
   const router = useRouter();
   const [usage, setUsage] = useState<UsageData | null>(null);
   const [subscription, setSubscription] = useState<SubscriptionData | null>(null);
+  const [conversations, setConversations] = useState<Conversation[]>([]);
+  const [voiceCalls, setVoiceCalls] = useState<VoiceCall[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
