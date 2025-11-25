@@ -173,48 +173,160 @@ export default function DashboardPage() {
             </Card>
           </div>
 
-          {/* Usage Details */}
-          <Card className="mt-6">
-            <CardHeader>
-              <CardTitle>Detajet e Përdorimit</CardTitle>
-              <CardDescription>
-                Shikoni limitin tuaj mujor dhe statistikat e përdorimit
-              </CardDescription>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              <div>
-                <div className="flex items-center justify-between mb-2">
-                  <span className="text-sm font-medium">Conversations Mujore</span>
-                  <span className="text-sm text-muted-foreground">
-                    {usagePercentage.toFixed(1)}%
-                  </span>
-                </div>
-                <Progress value={usagePercentage} className="h-2" />
-              </div>
+          {/* Tabs: Usage, Conversations, Voice Calls */}
+          <div className="mt-8">
+            <Tabs defaultValue="usage" className="w-full">
+              <TabsList className="grid w-full grid-cols-3">
+                <TabsTrigger value="usage">
+                  <TrendingUp className="mr-2 h-4 w-4" />
+                  Përdorimi
+                </TabsTrigger>
+                <TabsTrigger value="conversations">
+                  <MessageSquare className="mr-2 h-4 w-4" />
+                  Biseda ({conversations.length})
+                </TabsTrigger>
+                <TabsTrigger value="voice">
+                  <Phone className="mr-2 h-4 w-4" />
+                  Thirrje ({voiceCalls.length})
+                </TabsTrigger>
+              </TabsList>
 
-              {planTier === 'Free' || planTier === 'STANDARD' ? (
-                <div className="rounded-lg border border-primary/20 bg-primary/5 p-4">
-                  <h3 className="font-semibold mb-2">Përmirëso planin tënd</h3>
-                  <p className="text-sm text-muted-foreground mb-4">
-                    Hap akses në më shumë conversations dhe veçori të avancuara
-                  </p>
-                  <Button asChild>
-                    <Link href="/pricing">
-                      Shiko Planet
-                      <ArrowUpRight className="ml-2 h-4 w-4" />
-                    </Link>
-                  </Button>
-                </div>
-              ) : (
-                <div className="rounded-lg border bg-muted/50 p-4">
-                  <p className="text-sm text-muted-foreground">
-                    Ju jeni në planin <strong>{subscription?.plan}</strong>.
-                    {planTier === 'ENTERPRISE' && ' Gëzoni përdorim të pakufizuar!'}
-                  </p>
-                </div>
-              )}
-            </CardContent>
-          </Card>
+              {/* Usage Tab */}
+              <TabsContent value="usage">
+                <Card>
+                  <CardHeader>
+                    <CardTitle>Detajet e Përdorimit</CardTitle>
+                    <CardDescription>
+                      Shikoni limitin tuaj mujor dhe statistikat e përdorimit
+                    </CardDescription>
+                  </CardHeader>
+                  <CardContent className="space-y-4">
+                    <div>
+                      <div className="flex items-center justify-between mb-2">
+                        <span className="text-sm font-medium">Conversations Mujore</span>
+                        <span className="text-sm text-muted-foreground">
+                          {usagePercentage.toFixed(1)}%
+                        </span>
+                      </div>
+                      <Progress value={usagePercentage} className="h-2" />
+                    </div>
+
+                    {planTier === 'Free' || planTier === 'STANDARD' ? (
+                      <div className="rounded-lg border border-primary/20 bg-primary/5 p-4">
+                        <h3 className="font-semibold mb-2">Përmirëso planin tënd</h3>
+                        <p className="text-sm text-muted-foreground mb-4">
+                          Hap akses në më shumë conversations dhe veçori të avancuara
+                        </p>
+                        <Button asChild>
+                          <Link href="/pricing">
+                            Shiko Planet
+                            <ArrowUpRight className="ml-2 h-4 w-4" />
+                          </Link>
+                        </Button>
+                      </div>
+                    ) : (
+                      <div className="rounded-lg border bg-muted/50 p-4">
+                        <p className="text-sm text-muted-foreground">
+                          Ju jeni në planin <strong>{subscription?.plan}</strong>.
+                          {planTier === 'ENTERPRISE' && ' Gëzoni përdorim të pakufizuar!'}
+                        </p>
+                      </div>
+                    )}
+                  </CardContent>
+                </Card>
+              </TabsContent>
+
+              {/* Conversations Tab */}
+              <TabsContent value="conversations">
+                <Card>
+                  <CardHeader>
+                    <CardTitle>Historiku i Bisedave</CardTitle>
+                    <CardDescription>
+                      Të gjitha komunikimet tuaja përmes Chatbot AI
+                    </CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    {conversations.length === 0 ? (
+                      <div className="text-center py-8 text-muted-foreground">
+                        <MessageSquare className="mx-auto h-12 w-12 mb-4 opacity-20" />
+                        <p>Asnjë bisedë ende. Filloni një bisedë me AI Chatbot!</p>
+                      </div>
+                    ) : (
+                      <div className="space-y-4">
+                        {conversations.map((conv) => (
+                          <div key={conv.id} className="border rounded-lg p-4 space-y-2">
+                            <div className="flex items-start justify-between">
+                              <div className="flex-1">
+                                <p className="text-sm font-medium mb-1">Ju:</p>
+                                <p className="text-sm text-muted-foreground mb-3">{conv.message}</p>
+                                <p className="text-sm font-medium mb-1">AI:</p>
+                                <p className="text-sm">{conv.response}</p>
+                              </div>
+                            </div>
+                            <div className="flex items-center justify-between text-xs text-muted-foreground border-t pt-2">
+                              <span className="flex items-center gap-1">
+                                <Clock className="h-3 w-3" />
+                                {new Date(conv.createdAt).toLocaleString('sq-AL')}
+                              </span>
+                              <span>{conv.tokensUsed} tokens</span>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                  </CardContent>
+                </Card>
+              </TabsContent>
+
+              {/* Voice Calls Tab */}
+              <TabsContent value="voice">
+                <Card>
+                  <CardHeader>
+                    <CardTitle>Historiku i Thirrjeve</CardTitle>
+                    <CardDescription>
+                      Të gjitha thirrjet tuaja përmes Voice Agent AI
+                    </CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    {voiceCalls.length === 0 ? (
+                      <div className="text-center py-8 text-muted-foreground">
+                        <Phone className="mx-auto h-12 w-12 mb-4 opacity-20" />
+                        <p>Asnjë thirrje ende. Aktivizoni Voice Agent për të filluar!</p>
+                      </div>
+                    ) : (
+                      <div className="space-y-4">
+                        {voiceCalls.map((call) => (
+                          <div key={call.id} className="border rounded-lg p-4">
+                            <div className="flex items-center justify-between mb-2">
+                              <div className="flex items-center gap-2">
+                                <Phone className="h-4 w-4 text-primary" />
+                                <span className="font-medium">Thirrje</span>
+                              </div>
+                              <span
+                                className={`text-xs px-2 py-1 rounded-full ${\n                                  call.status === 'completed'\n                                    ? 'bg-green-500/10 text-green-500'\n                                    : 'bg-yellow-500/10 text-yellow-500'\n                                }`}
+                              >
+                                {call.status}
+                              </span>
+                            </div>
+                            {call.transcript && (
+                              <p className="text-sm text-muted-foreground mb-2">{call.transcript}</p>
+                            )}
+                            <div className="flex items-center justify-between text-xs text-muted-foreground border-t pt-2">
+                              <span className="flex items-center gap-1">
+                                <Clock className="h-3 w-3" />
+                                {new Date(call.createdAt).toLocaleString('sq-AL')}
+                              </span>
+                              <span>{Math.floor(call.duration / 60)}:{(call.duration % 60).toString().padStart(2, '0')} min</span>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                  </CardContent>
+                </Card>
+              </TabsContent>
+            </Tabs>
+          </div>
         </div>
       </main>
     </div>
