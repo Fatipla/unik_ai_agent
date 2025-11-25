@@ -303,7 +303,11 @@ export default function DashboardPage() {
                                 <span className="font-medium">Thirrje</span>
                               </div>
                               <span
-                                className={`text-xs px-2 py-1 rounded-full ${\n                                  call.status === 'completed'\n                                    ? 'bg-green-500/10 text-green-500'\n                                    : 'bg-yellow-500/10 text-yellow-500'\n                                }`}
+                                className={`text-xs px-2 py-1 rounded-full ${
+                                  call.status === 'completed'
+                                    ? 'bg-green-500/10 text-green-500'
+                                    : 'bg-yellow-500/10 text-yellow-500'
+                                }`}
                               >
                                 {call.status}
                               </span>
