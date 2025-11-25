@@ -69,9 +69,11 @@ export default function DashboardPage() {
 
   const fetchData = async () => {
     try {
-      const [usageRes, subRes] = await Promise.all([
+      const [usageRes, subRes, convsRes, callsRes] = await Promise.all([
         fetch('/api/usage'),
         fetch('/api/subscription'),
+        fetch('/api/conversations?limit=10'),
+        fetch('/api/voice-calls?limit=10'),
       ]);
 
       if (usageRes.ok) {
@@ -82,6 +84,16 @@ export default function DashboardPage() {
       if (subRes.ok) {
         const subData = await subRes.json();
         setSubscription(subData);
+      }
+
+      if (convsRes.ok) {
+        const convsData = await convsRes.json();
+        setConversations(convsData.conversations || []);
+      }
+
+      if (callsRes.ok) {
+        const callsData = await callsRes.json();
+        setVoiceCalls(callsData.voiceCalls || []);
       }
     } catch (error) {
       console.error('Failed to fetch dashboard data:', error);
