@@ -65,6 +65,26 @@ export async function POST(req: Request) {
     });
 
     const response = completion.choices[0]?.message?.content || 'Sorry, I could not generate a response.';
+    const tokensUsed = completion.usage?.total_tokens || 0;
+
+    // Save conversation to database
+    try {
+      await fetch(`${process.env.NEXTAUTH_URL}/api/conversations`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Cookie': req.headers.get('cookie') || '',
+        },
+        body: JSON.stringify({
+          message,
+          response,
+          tokensUsed,
+        }),
+      });
+    } catch (saveError) {
+      console.error('Failed to save conversation:', saveError);
+      // Continue even if save fails
+    }
 
     // Increment usage
     await incrementUsage((session.user as any).id);
