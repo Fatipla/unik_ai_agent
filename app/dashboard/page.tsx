@@ -24,6 +24,22 @@ interface SubscriptionData {
   currentPeriodEnd?: string;
 }
 
+interface Conversation {
+  id: string;
+  message: string;
+  response: string;
+  createdAt: string;
+  tokensUsed: number;
+}
+
+interface VoiceCall {
+  id: string;
+  duration: number;
+  status: string;
+  transcript?: string;
+  createdAt: string;
+}
+
 const PLAN_LIMITS: Record<string, number> = {
   STANDARD: 500,
   PRO: 1500,
