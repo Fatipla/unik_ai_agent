@@ -9,65 +9,198 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Switch } from '@/components/ui/switch';
 import { Label } from '@/components/ui/label';
-import { Check } from 'lucide-react';
+import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { Check, MessageSquare, Mic, Package } from 'lucide-react';
 
-const plans = [
-  {
-    id: 'standard',
-    title: 'Standard',
-    monthlyPrice: 19.99,
-    yearlyPrice: 19.99 * 12 * 0.8, // 20% discount
-    priceIdMonthly: process.env.NEXT_PUBLIC_PADDLE_PRICE_STANDARD_M || 'pri_standard_m',
-    priceIdYearly: process.env.NEXT_PUBLIC_PADDLE_PRICE_STANDARD_Y || 'pri_standard_y',
-    features: [
-      '500 conversations/month',
-      'Widget & API access',
-      'Knowledge Base training',
-      'Basic Analytics',
-      '7-Day Free Trial',
+type ProductType = 'chatbot' | 'voice' | 'bundle';
+
+const productConfig = {
+  chatbot: {
+    name: 'Chatbot',
+    icon: MessageSquare,
+    description: 'AI Chatbot për website dhe aplikacione',
+    plans: [
+      {
+        id: 'chatbot-standard',
+        title: 'Standard',
+        monthlyPrice: 19.99,
+        yearlyPrice: 19.99 * 12 * 0.8,
+        priceIdMonthly: process.env.NEXT_PUBLIC_PADDLE_PRICE_CHATBOT_STANDARD_M || 'pri_chatbot_standard_m',
+        priceIdYearly: process.env.NEXT_PUBLIC_PADDLE_PRICE_CHATBOT_STANDARD_Y || 'pri_chatbot_standard_y',
+        features: [
+          '500 conversations/month',
+          'Widget & API access',
+          'Knowledge Base training',
+          'Basic Analytics',
+          '7-Day Free Trial',
+        ],
+        cta: 'Start 7-Day Trial',
+        popular: false,
+      },
+      {
+        id: 'chatbot-pro',
+        title: 'Pro',
+        monthlyPrice: 29.99,
+        yearlyPrice: 29.99 * 12 * 0.8,
+        priceIdMonthly: process.env.NEXT_PUBLIC_PADDLE_PRICE_CHATBOT_PRO_M || 'pri_chatbot_pro_m',
+        priceIdYearly: process.env.NEXT_PUBLIC_PADDLE_PRICE_CHATBOT_PRO_Y || 'pri_chatbot_pro_y',
+        features: [
+          '1,500 conversations/month',
+          'Everything in Standard',
+          'n8n Integration',
+          'Advanced Analytics',
+          'Priority Support',
+        ],
+        cta: 'Choose Pro',
+        popular: true,
+      },
+      {
+        id: 'chatbot-enterprise',
+        title: 'Enterprise',
+        monthlyPrice: 39.99,
+        yearlyPrice: 39.99 * 12 * 0.8,
+        priceIdMonthly: process.env.NEXT_PUBLIC_PADDLE_PRICE_CHATBOT_ENTERPRISE_M || 'pri_chatbot_enterprise_m',
+        priceIdYearly: process.env.NEXT_PUBLIC_PADDLE_PRICE_CHATBOT_ENTERPRISE_Y || 'pri_chatbot_enterprise_y',
+        features: [
+          'Unlimited conversations',
+          'Everything in Pro',
+          'Dedicated Support',
+          'Custom Integrations',
+          'Full Audit Logs',
+        ],
+        cta: 'Contact Sales',
+        popular: false,
+      },
     ],
-    cta: 'Start 7-Day Trial',
-    popular: false,
   },
-  {
-    id: 'pro',
-    title: 'Pro',
-    monthlyPrice: 29.99,
-    yearlyPrice: 29.99 * 12 * 0.8,
-    priceIdMonthly: process.env.NEXT_PUBLIC_PADDLE_PRICE_PRO_M || 'pri_pro_m',
-    priceIdYearly: process.env.NEXT_PUBLIC_PADDLE_PRICE_PRO_Y || 'pri_pro_y',
-    features: [
-      '1,500 conversations/month',
-      'Everything in Standard',
-      'Voice AI (TTS/Whisper)',
-      'n8n Integration',
-      'Advanced Analytics',
+  voice: {
+    name: 'Voice Agent',
+    icon: Mic,
+    description: 'AI Voice Agent për thirrje automatike',
+    plans: [
+      {
+        id: 'voice-standard',
+        title: 'Standard',
+        monthlyPrice: 19.99,
+        yearlyPrice: 19.99 * 12 * 0.8,
+        priceIdMonthly: process.env.NEXT_PUBLIC_PADDLE_PRICE_VOICE_STANDARD_M || 'pri_voice_standard_m',
+        priceIdYearly: process.env.NEXT_PUBLIC_PADDLE_PRICE_VOICE_STANDARD_Y || 'pri_voice_standard_y',
+        features: [
+          '500 voice calls/month',
+          'Text-to-Speech (TTS)',
+          'Speech-to-Text (Whisper)',
+          'Call Recording',
+          '7-Day Free Trial',
+        ],
+        cta: 'Start 7-Day Trial',
+        popular: false,
+      },
+      {
+        id: 'voice-pro',
+        title: 'Pro',
+        monthlyPrice: 29.99,
+        yearlyPrice: 29.99 * 12 * 0.8,
+        priceIdMonthly: process.env.NEXT_PUBLIC_PADDLE_PRICE_VOICE_PRO_M || 'pri_voice_pro_m',
+        priceIdYearly: process.env.NEXT_PUBLIC_PADDLE_PRICE_VOICE_PRO_Y || 'pri_voice_pro_y',
+        features: [
+          '1,500 voice calls/month',
+          'Everything in Standard',
+          'Custom Voice Training',
+          'Call Analytics',
+          'Priority Support',
+        ],
+        cta: 'Choose Pro',
+        popular: true,
+      },
+      {
+        id: 'voice-enterprise',
+        title: 'Enterprise',
+        monthlyPrice: 39.99,
+        yearlyPrice: 39.99 * 12 * 0.8,
+        priceIdMonthly: process.env.NEXT_PUBLIC_PADDLE_PRICE_VOICE_ENTERPRISE_M || 'pri_voice_enterprise_m',
+        priceIdYearly: process.env.NEXT_PUBLIC_PADDLE_PRICE_VOICE_ENTERPRISE_Y || 'pri_voice_enterprise_y',
+        features: [
+          'Unlimited voice calls',
+          'Everything in Pro',
+          'Dedicated Support',
+          'Custom Integrations',
+          'Full Call Audit Logs',
+        ],
+        cta: 'Contact Sales',
+        popular: false,
+      },
     ],
-    cta: 'Choose Pro',
-    popular: true,
   },
-  {
-    id: 'enterprise',
-    title: 'Enterprise',
-    monthlyPrice: 39.99,
-    yearlyPrice: 39.99 * 12 * 0.8,
-    priceIdMonthly: process.env.NEXT_PUBLIC_PADDLE_PRICE_ENTERPRISE_M || 'pri_enterprise_m',
-    priceIdYearly: process.env.NEXT_PUBLIC_PADDLE_PRICE_ENTERPRISE_Y || 'pri_enterprise_y',
-    features: [
-      'Unlimited conversations',
-      'Everything in Pro',
-      'Dedicated Support',
-      'Custom Integrations',
-      'Full Audit Logs',
+  bundle: {
+    name: 'Bundle (Chatbot + Voice)',
+    icon: Package,
+    description: 'Zgjidhja e plotë - Chatbot dhe Voice Agent',
+    plans: [
+      {
+        id: 'bundle-standard',
+        title: 'Standard',
+        monthlyPrice: 34.99,
+        yearlyPrice: 34.99 * 12 * 0.8,
+        priceIdMonthly: process.env.NEXT_PUBLIC_PADDLE_PRICE_BUNDLE_STANDARD_M || 'pri_bundle_standard_m',
+        priceIdYearly: process.env.NEXT_PUBLIC_PADDLE_PRICE_BUNDLE_STANDARD_Y || 'pri_bundle_standard_y',
+        features: [
+          '500 conversations + 500 calls/month',
+          'Chatbot Widget & API',
+          'Voice Agent (TTS/Whisper)',
+          'Knowledge Base Training',
+          'Basic Analytics',
+          '7-Day Free Trial',
+          '💰 Kurseni 12% vs. blerja e veçantë',
+        ],
+        cta: 'Start 7-Day Trial',
+        popular: false,
+      },
+      {
+        id: 'bundle-pro',
+        title: 'Pro',
+        monthlyPrice: 49.99,
+        yearlyPrice: 49.99 * 12 * 0.8,
+        priceIdMonthly: process.env.NEXT_PUBLIC_PADDLE_PRICE_BUNDLE_PRO_M || 'pri_bundle_pro_m',
+        priceIdYearly: process.env.NEXT_PUBLIC_PADDLE_PRICE_BUNDLE_PRO_Y || 'pri_bundle_pro_y',
+        features: [
+          '1,500 conversations + 1,500 calls/month',
+          'Everything in Standard',
+          'n8n Integration',
+          'Custom Voice Training',
+          'Advanced Analytics',
+          'Priority Support',
+          '💰 Kurseni 17% vs. blerja e veçantë',
+        ],
+        cta: 'Choose Pro',
+        popular: true,
+      },
+      {
+        id: 'bundle-enterprise',
+        title: 'Enterprise',
+        monthlyPrice: 69.99,
+        yearlyPrice: 69.99 * 12 * 0.8,
+        priceIdMonthly: process.env.NEXT_PUBLIC_PADDLE_PRICE_BUNDLE_ENTERPRISE_M || 'pri_bundle_enterprise_m',
+        priceIdYearly: process.env.NEXT_PUBLIC_PADDLE_PRICE_BUNDLE_ENTERPRISE_Y || 'pri_bundle_enterprise_y',
+        features: [
+          'Unlimited conversations + calls',
+          'Everything in Pro',
+          'Dedicated Support',
+          'Custom Integrations',
+          'Full Audit Logs',
+          'White-label Solution',
+          '💰 Kurseni 12% vs. blerja e veçantë',
+        ],
+        cta: 'Contact Sales',
+        popular: false,
+      },
     ],
-    cta: 'Contact Sales',
-    popular: false,
   },
-];
+};
 
 export default function PricingPage() {
   const { data: session } = useSession();
   const [isYearly, setIsYearly] = useState(false);
+  const [selectedProduct, setSelectedProduct] = useState<ProductType>('bundle');
 
   const handleCheckout = async (priceId: string) => {
     if (!session) {
