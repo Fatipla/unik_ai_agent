@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
-import { PlaceHolderImages } from '@/lib/placeholder-images';
+import { PlaceHolderImages } from '@/src/lib/placeholder-images';
 
 export function Hero() {
   const heroImage = PlaceHolderImages.find((p) => p.id === 'hero-dashboard-v2');
