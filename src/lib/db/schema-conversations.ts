@@ -20,6 +20,7 @@ export const conversations = pgTable('conversations', {
   lang: varchar('lang', { length: 5 }).default('en'),
   tone: varchar('tone', { length: 50 }),
   createdAt: timestamp('created_at', { mode: 'date' }).defaultNow(),
+  updatedAt: timestamp('updated_at', { mode: 'date' }).defaultNow(),
 });
 
 // Voice Calls table
