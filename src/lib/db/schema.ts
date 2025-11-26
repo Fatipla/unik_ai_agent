@@ -17,6 +17,7 @@ export const usersProfile = pgTable('users_profile', {
   plan: planEnum('plan').default('free').notNull(),
   billingInterval: billingIntervalEnum('billing_interval').default('monthly'),
   paddleCustomerId: varchar('paddle_customer_id', { length: 255 }),
+  stripeCustomerId: varchar('stripe_customer_id', { length: 255 }),
   activePriceId: varchar('active_price_id', { length: 255 }),
   activation: jsonb('activation').$type<string[]>().default([]),
   whatsappNumber: varchar('whatsapp_number', { length: 50 }),
