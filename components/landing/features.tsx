@@ -1,1 +1,1 @@
-export { Features } from '@/src/components/landing/features';
+export { Features } from '@/components/landing/features';

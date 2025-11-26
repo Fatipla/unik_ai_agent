@@ -1,1 +1,1 @@
-export { InstallationGuide } from '@/src/components/landing/installation-guide';
+export { InstallationGuide } from '@/components/landing/installation-guide';
