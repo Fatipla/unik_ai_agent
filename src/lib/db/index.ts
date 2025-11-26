@@ -4,9 +4,10 @@ import * as schema from './schema';
 import * as authSchema from './schema-nextauth';
 import * as billingSchema from './schema-billing';
 import * as conversationsSchema from './schema-conversations';
+import * as plansSchema from './schema-plans';
 
 // Combine schemas
-const fullSchema = { ...schema, ...authSchema, ...billingSchema, ...conversationsSchema };
+const fullSchema = { ...schema, ...authSchema, ...billingSchema, ...conversationsSchema, ...plansSchema };
 
 // Initialize Drizzle with Vercel Postgres
 export const db = drizzle(vercelSql, { schema: fullSchema });
@@ -15,3 +16,4 @@ export * from './schema';
 export * from './schema-nextauth';
 export * from './schema-billing';
 export * from './schema-conversations';
+export * from './schema-plans';
