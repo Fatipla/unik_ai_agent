@@ -1,5 +1,5 @@
-import { Header } from '@/src/components/layout/header';
-import { Footer } from '@/src/components/layout/footer';
+import { Header } from '@/components/layout/header';
+import { Footer } from '@/components/layout/footer';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { MessageSquare, Mic, Database, BarChart, Zap, Shield } from 'lucide-react';
 

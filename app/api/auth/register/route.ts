@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
-import { db } from '@/src/lib/db';
-import { users, usage } from '@/src/lib/db/schema-nextauth';
+import { db } from '@/lib/db';
+import { users, usage } from '@/lib/db/schema-nextauth';
 import { eq } from 'drizzle-orm';
 import bcrypt from 'bcryptjs';
 

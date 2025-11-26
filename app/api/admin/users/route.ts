@@ -1,10 +1,10 @@
 import { NextResponse } from 'next/server';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/auth-config';
-import { db } from '@/src/lib/db';
-import { users } from '@/src/lib/db/schema-nextauth';
-import { adminUsers } from '@/src/lib/db/schema-conversations';
-import { customers, subscriptions } from '@/src/lib/db/schema-billing';
+import { db } from '@/lib/db';
+import { users } from '@/lib/db/schema-nextauth';
+import { adminUsers } from '@/lib/db/schema-conversations';
+import { customers, subscriptions } from '@/lib/db/schema-billing';
 import { eq, desc } from 'drizzle-orm';
 
 export async function GET(req: Request) {

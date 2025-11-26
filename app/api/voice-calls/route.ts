@@ -1,8 +1,8 @@
 import { NextResponse } from 'next/server';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/auth-config';
-import { db } from '@/src/lib/db';
-import { voiceCalls } from '@/src/lib/db/schema-conversations';
+import { db } from '@/lib/db';
+import { voiceCalls } from '@/lib/db/schema-conversations';
 import { eq, desc } from 'drizzle-orm';
 
 export async function GET(req: Request) {

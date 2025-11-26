@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
-import { db } from '@/src/lib/db';
-import { users } from '@/src/lib/db/schema-nextauth';
-import { adminUsers } from '@/src/lib/db/schema-conversations';
+import { db } from '@/lib/db';
+import { users } from '@/lib/db/schema-nextauth';
+import { adminUsers } from '@/lib/db/schema-conversations';
 import { eq } from 'drizzle-orm';
 import bcrypt from 'bcryptjs';
 

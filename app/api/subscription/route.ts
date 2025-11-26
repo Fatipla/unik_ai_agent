@@ -1,9 +1,9 @@
 import { NextResponse } from 'next/server';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/auth-config';
-import { db } from '@/src/lib/db';
+import { db } from '@/lib/db';
 import { eq } from 'drizzle-orm';
-import { subscriptions, customers } from '@/src/lib/db/schema-billing';
+import { subscriptions, customers } from '@/lib/db/schema-billing';
 
 export async function GET() {
   try {

@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/auth-config';
-import { paddle } from '@/src/lib/paddle';
+import { paddle } from '@/lib/paddle';
 
 export async function POST(req: Request) {
   try {
