@@ -14,6 +14,11 @@ export const conversations = pgTable('conversations', {
   response: text('response').notNull(),
   type: varchar('type', { length: 50 }).default('chatbot'),
   tokensUsed: integer('tokens_used').default(0),
+  tokensIn: integer('tokens_in').default(0),
+  tokensOut: integer('tokens_out').default(0),
+  costEur: decimal('cost_eur', { precision: 10, scale: 4 }).default('0'),
+  lang: varchar('lang', { length: 5 }).default('en'),
+  tone: varchar('tone', { length: 50 }),
   createdAt: timestamp('created_at', { mode: 'date' }).defaultNow(),
 });
 
