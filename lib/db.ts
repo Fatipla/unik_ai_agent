@@ -1,7 +1,7 @@
 export { 
   db,
   usersProfile,
-  messagesLegacy as messages,
+  messages,
   emails,
   paddleCustomers,
   paddleProducts,
@@ -10,8 +10,8 @@ export {
   paddlePayments,
   trainingJobs,
   webhooksLog,
-  webhookEventsLegacy as webhookEvents,
-  subscriptionsLegacy as paddleSubscriptions,
-  conversationsLegacy as conversations,
-  voiceCallsLegacy as voiceCalls,
+  webhookEvents,
+  paddleSubscriptions,
+  conversations,
+  voiceCalls,
 } from '@/lib/db';
