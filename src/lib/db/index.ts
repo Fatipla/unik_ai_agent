@@ -45,11 +45,11 @@ export {
 } from './schema-conversations';
 
 export {
-  customers as paddleCustomers,
+  customers,
   subscriptions as paddleSubscriptions,
-  invoices as paddleInvoices,
-  payments as paddlePayments,
-  entitlements as paddleEntitlements,
+  invoices,
+  payments,
+  entitlements,
   webhookEvents as paddleWebhookEvents,
 } from './schema-billing';
 
