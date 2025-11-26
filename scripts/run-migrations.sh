@@ -24,9 +24,11 @@ MIGRATIONS_DIR="./supabase/migrations"
 
 # Array of migration files in order
 # NOTE: 100_master_schema.sql creates the new unified architecture
+# 101_seed_plans.sql seeds the plans table with all products/tiers
 # Old migrations (001-009) are kept for backward compatibility
 MIGRATIONS=(
   "100_master_schema.sql"
+  "101_seed_plans.sql"
 )
 
 # Run each migration
