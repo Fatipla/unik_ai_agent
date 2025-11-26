@@ -13,7 +13,5 @@ export {
   webhookEventsLegacy as webhookEvents,
   subscriptionsLegacy as paddleSubscriptions,
   conversationsLegacy as conversations,
-  conversationsLegacy,
   voiceCallsLegacy as voiceCalls,
-  voiceCallsLegacy,
 } from '@/lib/db';
