@@ -1,12 +1,17 @@
+// Re-export from src/lib/db for backward compatibility
+export { db } from '@/src/lib/db';
+
+// Export legacy schemas with their new names
 export {
-  db,
   usersProfile,
-  conversations,
-  messages,
+  messagesLegacy as messages,
   emails,
   paddleCustomers,
   paddlePrices,
   trainingJobs,
-  voiceCalls,
+  voiceCallsLegacy as voiceCalls,
   webhooksLog,
-} from '@/lib/db';
+  webhookEventsLegacy as webhookEvents,
+  conversationsLegacy as conversations,
+  subscriptionsLegacy as paddleSubscriptions,
+} from '@/src/lib/db';
