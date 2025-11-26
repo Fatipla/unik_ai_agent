@@ -27,15 +27,15 @@ export async function POST(req: Request) {
     const transaction = await paddle.transactions.create({
       items: [
         {
-          price_id: priceId,
+          priceId,
           quantity: 1,
         },
       ],
-      custom_data: {
-        user_id: (session.user as any).id,
+      customData: {
+        userId: (session.user as any).id,
         email: session.user.email,
       },
-      customer_email: session.user.email,
+      customerEmail: session.user.email,
     });
 
     return NextResponse.json({ url: transaction.checkout?.url || '' });
