@@ -50,7 +50,6 @@ export {
   invoices,
   payments,
   entitlements,
-  webhookEvents as paddleWebhookEvents,
 } from './schema-billing';
 
 export {
