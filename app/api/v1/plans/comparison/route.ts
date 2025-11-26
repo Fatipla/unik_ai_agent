@@ -34,9 +34,9 @@ export async function GET() {
         ...plan.limits,
       };
 
-      const productType = plan.productType;
-      const tier = plan.tier;
-      const billingPeriod = plan.billingPeriod;
+      const productType = plan.productType as keyof typeof comparison;
+      const tier = plan.tier as keyof typeof comparison.monthly;
+      const billingPeriod = plan.billingPeriod as 'monthly' | 'yearly';
 
       if (comparison[productType] && comparison[productType][tier]) {
         comparison[productType][tier][billingPeriod] = transformed;
