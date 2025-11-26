@@ -24,28 +24,21 @@ export async function POST(req: Request) {
       );
     }
 
-    // Create checkout session
-    const checkout = await paddle.checkouts.create({
+    const transaction = await paddle.transactions.create({
       items: [
         {
-          priceId,
+          price_id: priceId,
           quantity: 1,
         },
       ],
-      customData: {
-        userId: (session.user as any).id,
+      custom_data: {
+        user_id: (session.user as any).id,
         email: session.user.email,
       },
-      customer: {
-        email: session.user.email,
-      },
-      settings: {
-        successUrl: `${process.env.NEXTAUTH_URL}/dashboard?checkout=success`,
-        cancelUrl: `${process.env.NEXTAUTH_URL}/pricing?checkout=cancelled`,
-      },
+      customer_email: session.user.email,
     });
 
-    return NextResponse.json({ url: checkout.url });
+    return NextResponse.json({ url: transaction.checkout?.url || '' });
   } catch (error: any) {
     console.error('Paddle checkout error:', error);
     return NextResponse.json(
