@@ -1,1 +1,1 @@
-export { Hero } from '@/src/components/landing/hero';
+export { Hero } from '@/components/landing/hero';
