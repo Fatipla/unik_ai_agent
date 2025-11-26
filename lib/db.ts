@@ -1,6 +1,5 @@
-export { db } from '@/lib/db';
-
-export {
+export { 
+  db,
   usersProfile,
   messagesLegacy as messages,
   emails,
@@ -15,4 +14,6 @@ export {
   webhookEventsLegacy as webhookEvents,
   conversationsLegacy as conversations,
   subscriptionsLegacy as paddleSubscriptions,
+  conversationsLegacy,
+  voiceCallsLegacy,
 } from '@/lib/db';
