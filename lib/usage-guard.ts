@@ -1,6 +1,6 @@
-import { db } from '@/src/lib/db';
-import { usage } from '@/src/lib/db/schema-nextauth';
-import { subscriptions, customers } from '@/src/lib/db/schema-billing';
+import { db } from '@/lib/db';
+import { usage } from '@/lib/db/schema-nextauth';
+import { subscriptions, customers } from '@/lib/db/schema-billing';
 import { eq } from 'drizzle-orm';
 
 const PLAN_LIMITS: Record<string, number> = {
