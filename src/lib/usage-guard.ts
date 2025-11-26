@@ -75,7 +75,8 @@ export async function canUsePrompt(userId: string): Promise<{
     }
 
     // Check if user has exceeded limit
-    if (userUsage.promptsMonth >= limit) {
+    const promptsMonth = userUsage.promptsMonth || 0;
+    if (promptsMonth >= limit) {
       return {
         allowed: false,
         reason: `Monthly limit of ${limit} prompts reached. Upgrade your plan to continue.`,
@@ -85,7 +86,7 @@ export async function canUsePrompt(userId: string): Promise<{
 
     return {
       allowed: true,
-      remaining: limit - userUsage.promptsMonth,
+      remaining: limit - promptsMonth,
     };
   } catch (error) {
     console.error('Usage guard error:', error);
@@ -111,8 +112,8 @@ export async function incrementUsage(userId: string): Promise<void> {
     await db
       .update(usage)
       .set({
-        promptsMonth: userUsage.promptsMonth + 1,
-        promptsDay: userUsage.promptsDay + 1,
+        promptsMonth: (userUsage.promptsMonth || 0) + 1,
+        promptsDay: (userUsage.promptsDay || 0) + 1,
         updatedAt: new Date(),
       })
       .where(eq(usage.userId, userId));
