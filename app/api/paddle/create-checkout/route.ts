@@ -35,7 +35,6 @@ export async function POST(req: Request) {
         userId: (session.user as any).id,
         email: session.user.email,
       },
-      customerEmail: session.user.email,
     });
 
     return NextResponse.json({ url: transaction.checkout?.url || '' });
