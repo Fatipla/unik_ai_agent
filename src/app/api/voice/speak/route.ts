@@ -41,7 +41,7 @@ export async function POST(request: NextRequest) {
       .where(eq(usersProfile.userId, user.userId));
 
     // Return audio
-    return new NextResponse(audioBuffer, {
+    return new NextResponse(Buffer.from(audioBuffer), {
       headers: {
         'Content-Type': 'audio/mpeg',
         'Content-Length': audioBuffer.length.toString(),
