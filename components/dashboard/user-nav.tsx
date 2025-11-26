@@ -1,1 +1,1 @@
-export { UserNav } from '@/components/dashboard/user-nav';
+export { UserNav } from '@/src/components/dashboard/user-nav';
