@@ -33,7 +33,7 @@ export async function canUsePrompt(userId: string): Promise<{
 
     // Check if we need to reset monthly usage
     const now = new Date();
-    const lastReset = new Date(userUsage.lastResetMonth);
+    const lastReset = userUsage.lastResetMonth ? new Date(userUsage.lastResetMonth) : new Date(0);
     if (
       now.getMonth() !== lastReset.getMonth() ||
       now.getFullYear() !== lastReset.getFullYear()
