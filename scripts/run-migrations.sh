@@ -23,16 +23,10 @@ echo ""
 MIGRATIONS_DIR="./supabase/migrations"
 
 # Array of migration files in order
+# NOTE: 100_master_schema.sql creates the new unified architecture
+# Old migrations (001-009) are kept for backward compatibility
 MIGRATIONS=(
-  "001_create_billing_schema.sql"
-  "002_enable_rls.sql"
-  "003_create_rpc_functions.sql"
-  "004_seed_entitlements.sql"
-  "005_nextauth_schema.sql"
-  "006_conversations_and_calls.sql"
-  "007_organizations_and_plans.sql"
-  "008_seed_plans.sql"
-  "009_seed_voice_bundle_plans.sql"
+  "100_master_schema.sql"
 )
 
 # Run each migration
