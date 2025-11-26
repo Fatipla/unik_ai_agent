@@ -39,6 +39,12 @@
     ".next",
     "tests",
     "**/*.spec.ts",
-    "**/*.spec.tsx"
+    "**/*.spec.tsx",
+    "src/lib/stripe.ts",
+    "src/lib/billing",
+    "scripts/seed-database.ts",
+    "src/app/api/webhooks/stripe",
+    "src/app/api/billing",
+    "src/ai"
   ]
 }
