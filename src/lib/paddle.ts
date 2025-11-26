@@ -7,12 +7,9 @@ if (typeof window !== 'undefined') {
 }
 
 // Initialize Paddle client (singleton) - v3 SDK
-export const paddle = env.PADDLE_VENDOR_ID && env.PADDLE_CLIENT_ID && env.PADDLE_CLIENT_SECRET
-  ? new Paddle({
-      vendorId: env.PADDLE_VENDOR_ID,
-      clientId: env.PADDLE_CLIENT_ID,
-      clientSecret: env.PADDLE_CLIENT_SECRET,
-      environment: env.PADDLE_ENV === 'live' ? 'live' : 'sandbox',
+export const paddle = env.PADDLE_CLIENT_SECRET
+  ? new Paddle(env.PADDLE_CLIENT_SECRET, {
+      environment: env.PADDLE_ENV === 'live' ? Environment.production : Environment.sandbox,
     })
   : null;
 
