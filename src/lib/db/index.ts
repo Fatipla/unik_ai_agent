@@ -65,8 +65,8 @@ export {
 export {
   // From schema-conversations.ts
   conversations as conversationsLegacy, // Renamed to avoid conflict
-  messages as conversationMessagesLegacy, // Renamed to avoid conflict
   voiceCalls as conversationVoiceCallsLegacy, // Renamed to avoid conflict
+  // Note: messages export removed as it doesn't exist in schema-conversations
 } from './schema-conversations';
 
 export {
