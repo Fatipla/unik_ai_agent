@@ -9,11 +9,11 @@ export {
   paddleInvoices,
   paddlePayments,
   trainingJobs,
-  voiceCallsLegacy as voiceCalls,
   webhooksLog,
   webhookEventsLegacy as webhookEvents,
-  conversationsLegacy as conversations,
   subscriptionsLegacy as paddleSubscriptions,
+  conversationsLegacy as conversations,
   conversationsLegacy,
+  voiceCallsLegacy as voiceCalls,
   voiceCallsLegacy,
 } from '@/lib/db';
